@@ -1,0 +1,78 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* cách đều 3 phần: logo - links - buttons */
+  padding: 10px 20px;
+  background-color: #f8f8f8;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-logo .logo {
+  height: 100px; 
+  width: 200px;/* hoặc tùy kích thước logo bạn muốn */
+}
+
+.navbar-links {
+  display: flex;
+  gap: 20px; /* khoảng cách giữa các link */
+  font-size: 25px;
+  color: #333;
+  cursor: pointer;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+
+.navbar-link a{
+  text-decoration: none;
+}
+
+.navbar-link:hover {
+  color: #220ecf;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 10px;
+}
+
+.navbar-menu button {
+  padding: 6px 12px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.navbar-menu button:hover {
+  background-color: #043569;
+}
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .navbar-links {
+      position: absolute;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background-color: black;
+      flex-direction: column;
+      align-items: center;
+      display: none;
+    }
+  
+    .navbar-links.open {
+      display: flex;
+      padding: 20px 0;
+    }
+  
+    .navbar-toggle {
+      display: block;
+    }
+  }
+  
