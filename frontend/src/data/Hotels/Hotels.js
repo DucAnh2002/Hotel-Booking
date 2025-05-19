@@ -74,7 +74,7 @@ const Hotels = [
   {
     id: 12,
     image: "/img/hotels/12.jpg",
-    roomType: "Phòng Tiêu Chuẩn 1 Giường",
+    roomType: "Phòng Tiêu Chuẩn ",
     rating: 3,
     address: "12 Trần Phú, Nha Trang",
     price: 1100000,

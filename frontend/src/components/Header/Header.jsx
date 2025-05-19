@@ -11,16 +11,7 @@ const Header = () => {
           Unparalleled luxury and comfort await at the world's most exclusive
           hotels and resorts. Start your journey today.
         </p>
-        <div className="search-form">
-          <div className="form-group">
-            <label>Destination</label>
-            <select>
-              <option>Type here</option>
-              <option>Hà Nội</option>
-              <option>Hồ Chí Minh</option>
-              <option>Đà Nẵng</option>
-            </select>
-          </div>
+        {/* <div className="search-form">
           <div className="form-group">
             <label>Check in</label>
             <input type="date" />
@@ -37,7 +28,7 @@ const Header = () => {
           </div>
 
           <button className="search-button">🔍 Search</button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
