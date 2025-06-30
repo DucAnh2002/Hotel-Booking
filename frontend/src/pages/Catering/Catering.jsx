@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./Catering.css";
 import foodItems from "../../data/Foods/Foods.js";
-import { useNavigate } from "react-router-dom";
-
+// import { useNavigate } from "react-router-dom";
+import FloatingCart from "../../components/FloatingCart/FloatingCart.jsx";
 const Catering = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [cart, setCart] = useState({});
 
   const handleAddToCart = (foodId) => {
@@ -54,16 +54,7 @@ const Catering = () => {
           </div>
         ))}
       </div>
-
-      {/* Giỏ hàng nổi */}
-      <div className="floating-cart" onClick={() => navigate("/cart")}>
-        🛒
-        {Object.keys(cart).length > 0 && (
-          <span className="cart-badge">
-            {Object.values(cart).reduce((a, b) => a + b)}
-          </span>
-        )}
-      </div>
+      <FloatingCart cart={cart} />
     </div>
   );
 };

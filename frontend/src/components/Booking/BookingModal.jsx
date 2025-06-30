@@ -12,12 +12,14 @@ const BookingModal = ({ hotel, onClose }) => {
     if (checkIn && checkOut) {
       const checkInDate = new Date(checkIn);
       const checkOutDate = new Date(checkOut);
-      const diffDays = Math.ceil(checkOutDate - checkInDate);
-      const days = Math.ceil(diffDays / (1000 * 60 * 60 * 24));
-      if (diffDays > 0) {
+      const timeDiff = checkOutDate - checkInDate;
+      const days = timeDiff / (1000 * 60 * 60 * 24); // chính xác số ngày
+
+      if (days > 0) {
         setTotalPrice(days * hotel.pricePerNight * guests);
+      } else {
+        setTotalPrice(0); // reset nếu nhập sai
       }
-      setTotalPrice(days * hotel.pricePerNight * guests);
     }
   }, [checkIn, checkOut, guests, hotel.pricePerNight]);
 
@@ -26,20 +28,22 @@ const BookingModal = ({ hotel, onClose }) => {
 
     const checkInDate = new Date(checkIn);
     const checkOutDate = new Date(checkOut);
-    const diffDays = Math.ceil(checkOutDate - checkInDate);
-    if (diffDays <= 0) {
+    const days = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
+
+    if (days <= 0) {
       alert("Ngày check-out phải sau ngày check-in.");
       return;
     }
+
     alert(`
       Đặt phòng: ${hotel.roomType}
       Check-in: ${checkIn}
       Check-out: ${checkOut}
       Số khách: ${guests}
-      Số đêm: ${diffDays}
+      Số đêm: ${days}
       Tổng giá: ${totalPrice.toLocaleString()} VND
     `);
-    onClose(); // close modal after booking
+    onClose();
   };
 
   return (
@@ -70,7 +74,7 @@ const BookingModal = ({ hotel, onClose }) => {
             <input
               type="number"
               value={guests}
-              onChange={(e) => setGuests(e.target.value)}
+              onChange={(e) => setGuests(Number(e.target.value))}
               min="1"
               required
             />

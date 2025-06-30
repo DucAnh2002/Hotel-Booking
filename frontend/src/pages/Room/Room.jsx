@@ -1,8 +1,8 @@
 import React from "react";
 import hotels from "../../data/Hotels/Hotels.js";
 import HotelCard from "../../components/HotelsDisplay/HotelCard.jsx";
-
-const Room = () => {
+import FloatingCart from "../../components/FloatingCart/FloatingCart.jsx";
+const Room = (cart) => {
   return (
     <div className="hotels-display-container">
       <h2>Featured Destination</h2>
@@ -15,6 +15,7 @@ const Room = () => {
           <HotelCard key={hotel.id} hotel={hotel} />
         ))}
       </div>
+      <FloatingCart cart={cart} />
     </div>
   );
 };

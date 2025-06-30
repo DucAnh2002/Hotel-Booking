@@ -2,7 +2,10 @@ import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { assets } from "../../assets/assets";
 import { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+
 export default function Navbar() {
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
   const [menu, setMenu] = useState();
   return (
     <div className="navbar">
@@ -19,6 +22,7 @@ export default function Navbar() {
         <Link to="/rooms" className="navbar-link">
           Rooms
         </Link>
+
         <a
           href="#footer"
           onClick={() => setMenu("contact")}
@@ -28,8 +32,19 @@ export default function Navbar() {
         </a>
       </div>
       <div className="navbar-menu">
-        <button>Login</button>
-        <button>Logout</button>
+        {isAuthenticated ? (
+          <>
+            <span>Xin chào, {user.name}</span>
+            <img src={user.picture} alt="Avatar" className="avatar" />
+            <button
+              onClick={() => logout({ returnTo: window.location.origin })}
+            >
+              Đăng xuất
+            </button>
+          </>
+        ) : (
+          <button onClick={loginWithRedirect}>Đăng nhập</button>
+        )}
       </div>
     </div>
   );

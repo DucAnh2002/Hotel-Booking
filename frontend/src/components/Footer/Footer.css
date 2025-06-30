@@ -1,78 +1,84 @@
 .footer {
-  background-color: #1a1a1a;
+  background-color: #222;
   color: #fff;
-  padding: 40px 20px 20px;
-  font-family: 'Segoe UI', sans-serif;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
 }
+.footer img {
+  width: 250px;
+  height: 150px;
+ 
 
-.footer-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+
+}
+.footer-logo {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   max-width: 1200px;
   margin: auto;
-  border-bottom: 1px solid #444;
-  padding-bottom: 20px;
 }
 
-.footer-left,
-.footer-right {
-  flex: 1 1 300px;
-  margin: 10px;
-}
-
-.footer-title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.footer-title img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-}
-
-.footer-title h2 {
-  font-size: 22px;
-  margin: 0;
-}
-
-.footer-left p,
-.footer-right p {
-  margin: 8px 0;
-  font-size: 14px;
-}
-
-.footer-right h3 {
-  font-size: 18px;
+.footer-logo h2 {
+  font-size: 20px;
   margin-bottom: 10px;
-  color: #f0c040;
+  color: #ffcc00;
+}
+
+.footer-logo p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-right,
+.footer-title,
+.footer-social {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.social-icons svg {
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.social-icons svg:hover {
+  transform: scale(1.1);
+  color: #ffcc00;
 }
 
 .footer-bottom {
   text-align: center;
-  padding-top: 15px;
+  padding-top: 30px;
   font-size: 13px;
-  color: #bbb;
-  border-top: 1px solid #333;
-  margin-top: 20px;
+  border-top: 1px solid #444;
+  margin-top: 40px;
+  color: #aaa;
 }
 
-/* Responsive */
+/* Responsive: stack columns on small screens */
 @media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-    align-items: center;
+  .footer-logo {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-logo {
+    grid-template-columns: 1fr;
     text-align: center;
   }
 
-  .footer-left,
-  .footer-right {
-    margin: 10px 0;
-  }
-
-  .footer-title {
-    justify-content: center;
+  .footer-social svg {
+    margin: 5px;
   }
 }
