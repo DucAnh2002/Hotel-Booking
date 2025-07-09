@@ -1,0 +1,53 @@
+.add {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.add-form-group,
+.add-product-category,
+.add-product-name,
+.add-product-description,
+.add-product-price,
+.add-room-rating,
+.add-room-address {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-form-group img {
+  max-width: 100%;
+  border: 1px dashed #aaa;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.add-select,
+.add-form input,
+.add-form textarea {
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.add-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-btn:hover {
+  background-color: #1e7e34;
+}

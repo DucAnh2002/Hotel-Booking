@@ -1,0 +1,30 @@
+/* Reset khoảng trắng mặc định */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.app {
+  display: flex;
+  flex-direction: column; /* navbar trên */
+  height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex: 1; /* phần dưới navbar chiếm toàn bộ */
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+}

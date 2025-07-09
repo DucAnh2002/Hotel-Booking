@@ -1,94 +1,107 @@
 .food-order {
-    max-width: 100%;
-    padding: 20px;
-    font-family: sans-serif;
-  }
-  .food-order h2 {
-    font-size: 22px;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  .food-order p {
-    max-width: 1000px;
-    text-align: center;
-    margin: 0 auto;
-    font-size: 18px;
-    color: #666;
-  }
-  .food-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
-  
-  .food-card {
-    width: 250px;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .food-card img {
-    width: 100%;
-    height: 130px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-  
-  .food-card h3 {
-    margin: 10px 0 5px;
-  }
-  
-  .food-card p {
-    margin: 4px 0;
-  }
-  
-  .food-card .price {
-    font-weight: bold;
-    color: #e67e22;
-  }
-  
-  .food-card button {
-    margin-top: 10px;
-    padding: 8px 12px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  .food-card button:hover {
-    background-color: #2980b9;
-  }
+  background-color: rgba(121, 90, 90, 0.3);
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
 
-  .see-more {
-    color: #00bcd4;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-    padding: 10px;
-  }
-  .order-summary {
-    margin-top: 30px;
-    background: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-  }
-  .order-button {
-    margin-top: 10px;
-    padding: 10px 15px;
-    background-color: #2ecc71;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  .order-button:hover {
-    background-color: #064721;
-  }
-  
+.food-order h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.food-order p {
+  max-width: 800px;
+  margin: 0 auto 2rem auto;
+  color: #444;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.food-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 2rem;
+}
+
+.food-card {
+  background-color: rgba(255, 255, 255, 0.95); /* nền trắng gần như đục */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.food-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.food-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.food-card h3 {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  color: #222;
+}
+
+.food-card p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.food-card .price {
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 0.8rem;
+}
+
+.food-card button {
+  padding: 8px 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+}
+
+.food-card button:hover {
+  background-color: #222;
+}
+
+.see-more {
+  margin-top: 2rem;
+}
+
+.see-more button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.see-more button:hover {
+  background-color: #222;
+}
