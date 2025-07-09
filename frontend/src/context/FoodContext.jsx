@@ -3,6 +3,9 @@ import { FoodContext } from './index.js'
 import axios from 'axios'
 import { useAuth0 } from '@auth0/auth0-react'
 import { toast } from 'react-toastify'
+import 'react-confirm-alert/src/react-confirm-alert.css'
+import { confirmAlert } from 'react-confirm-alert'
+
 const FoodContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState({})
   const [foodList, setFoodList] = useState([])
@@ -15,7 +18,7 @@ const FoodContextProvider = ({ children }) => {
     try {
       // Kiểm tra dữ liệu đầu vào phía frontend
       if (!deliveryDate || !deliveryTime) {
-        toast.error('❌ Vui lòng nhập đầy đủ thông tin bắt buộc.')
+        toast.error(' Vui lòng nhập đầy đủ thông tin.')
         return
       }
 
@@ -37,7 +40,7 @@ const FoodContextProvider = ({ children }) => {
         }
       })
 
-      toast.success('✅ Đặt món thành công!')
+      toast.success('Đặt món thành công!')
       return response.data
     } catch (err) {
       console.error('❌ Lỗi khi đặt món ăn:', err?.response?.data || err.message)
@@ -79,27 +82,39 @@ const FoodContextProvider = ({ children }) => {
 
   // xóa food trong cart
   const removeFoodFromCart = async orderId => {
-    const confirmRemove = window.confirm('Bạn có chắc muốn hủy món này?')
-    if (!confirmRemove) return
-    try {
-      const token = await getAccessTokenSilently()
-      const res = await axios.delete(`${url}/api/food/remove/${orderId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
+    confirmAlert({
+      title: 'Xác nhận hủy món ăn',
+      message: 'Bạn có chắc muốn hủy món ăn này?',
+      buttons: [
+        {
+          label: 'Có',
+          onClick: async () => {
+            try {
+              const token = await getAccessTokenSilently()
+              const res = await axios.delete(`${url}/api/food/remove/${orderId}`, {
+                headers: {
+                  Authorization: `Bearer ${token}`
+                }
+              })
+              const data = res.data
+              if (data.success) {
+                toast.success('Đã hủy món ăn!')
+                getMyfoodOrders()
+              } else {
+                toast.error(data.message || 'Không thể hủy món ăn, vui lòng thử lại sau!')
+              }
+            } catch (error) {
+              console.error('Lỗi hủy món ăn', error)
+              toast.error('Lỗi kết nối khi hủy món ăn!')
+            }
+          }
+        },
+        {
+          label: 'Không',
+          onClick: () => {}
         }
-      })
-      const data = await res.data
-      // xóa thành công thì cập nhật lại danh sách đơn hàng
-      if (data.success) {
-        toast.success('Đã hủy món ăn!')
-        getMyfoodOrders() // cập nhật lại danh sách sau khi xóa.
-      } else {
-        toast.error(data.message || 'Không thể hủy món ăn, vui lòng thử lại sau!')
-      }
-    } catch (error) {
-      console.error('Lỗi hủy món ăn', error)
-      toast.error('Lỗi kết nối khi hủy món ăn!')
-    }
+      ]
+    })
   }
 
   const contextValue = {

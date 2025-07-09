@@ -3,6 +3,8 @@ import { RoomContext } from './index.js'
 import axios from 'axios'
 import { useAuth0 } from '@auth0/auth0-react'
 import { toast } from 'react-toastify'
+import 'react-confirm-alert/src/react-confirm-alert.css'
+import { confirmAlert } from 'react-confirm-alert'
 const RoomContextProvider = ({ children }) => {
   const [roomList, setRoomList] = useState([])
   const [bookingCart, setBookingCart] = useState({})
@@ -59,7 +61,7 @@ const RoomContextProvider = ({ children }) => {
         }
       )
       // await getMyBookings() // cập nhật danh sách đặt phòng sau khi đặt thành công
-      toast.success('✅ Đặt phòng thành công!')
+      toast.success('Đặt phòng thành công!')
     } catch (err) {
       console.error('Lỗi khi gửi yêu cầu đặt phòng:', err)
       toast.error('Không thể đặt phòng. Vui lòng thử lại!')
@@ -86,29 +88,40 @@ const RoomContextProvider = ({ children }) => {
     }
   }
 
-  // ✅ Xóa phòng khỏi giỏ
+  // ✅ Xóa phòng khỏi booking
   const removeFromBooking = async bookingId => {
-    const confirmRemove = window.confirm('Bạn có chắc muốn hủy đặt phòng này?')
-    if (!confirmRemove) return
-    try {
-      const token = await getAccessTokenSilently()
-      const res = await axios.delete(`${url}/api/booking/remove/${bookingId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
+    confirmAlert({
+      message: 'Bạn có chắc muốn hủy đặt phòng này?',
+      buttons: [
+        {
+          label: 'Có!',
+          onClick: async () => {
+            try {
+              const token = await getAccessTokenSilently()
+              const res = await axios.delete(`${url}/api/booking/remove/${bookingId}`, {
+                headers: {
+                  Authorization: `Bearer ${token}`
+                }
+              })
+              const data = await res.data
+              if (data.success) {
+                toast.success('Đã hủy đặt phòng!')
+                getMyBookings() // cập nhật lại danh sách sau khi xóa.
+              } else {
+                toast.error(data.message || 'Không thể hủy đặt phòng, vui lòng thử lại sau!')
+              }
+            } catch (error) {
+              console.error(' Lỗi hủy đặt phòng!', error)
+              toast.error('Lỗi kết nối khi hủy đặt phòng!')
+            }
+          }
+        },
+        {
+          label: 'Không!',
+          onClick: () => {}
         }
-      })
-      const data = await res.data
-      if (data.success) {
-        toast.success('Đã hủy đặt phòng!')
-        getMyBookings() // cập nhật lại danh sách sau khi xóa.
-      } else {
-        toast.error(data.message || 'Không thể hủy đặt phòng, vui lòng thử lại sau!')
-      }
-    } catch (error) {
-      console.error(' Lỗi hủy đặt phòng!', error)
-      toast.error('Lỗi kết nối khi hủy đặt phòng!')
-    }
-    // setBookingCart(updated)
+      ]
+    })
   }
 
   // ✅ Tính tổng tiền phòng
