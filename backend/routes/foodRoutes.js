@@ -7,7 +7,7 @@ const path = require("path");
 const {
   addFood,
   getFoods,
-  removeFood,
+  removeOrderItem,
   orderFood,
   getMyOrders,
 } = require("../controllers/foodController");
@@ -24,7 +24,7 @@ const upload = multer({ storage });
 router.post("/add", upload.single("image"), addFood);
 // cấu hình router lấy danh sách món ăn
 router.get("/list-food", getFoods);
-router.post("/remove", removeFood);
+router.delete("/remove/:orderId", checkJwt, removeOrderItem);
 
 // Cấu hình router Order
 router.post("/order", checkJwt, orderFood);

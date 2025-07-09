@@ -38,18 +38,6 @@ const getFoods = async (req, res) => {
   }
 };
 
-// remove food item
-const removeFood = async (req, res) => {
-  try {
-    const { id } = req.params;
-    await Food.findByIdAndDelete(id);
-    res.json({ success: true, message: "Đã xóa món ăn thành công!" });
-  } catch (err) {
-    console.error("❌ Food error:", err);
-    res.status(500).json({ success: false, message: "Lỗi khi xóa món ăn" });
-  }
-};
-
 // OrderFood
 const orderFood = async (req, res) => {
   console.log("📥 HEADERS:", req.headers);
@@ -105,4 +93,48 @@ const getMyOrders = async (req, res) => {
     });
   }
 };
-module.exports = { addFood, getFoods, removeFood, orderFood, getMyOrders };
+
+// remove food item from cart
+const removeOrderItem = async (req, res) => {
+  try {
+    const userId = req.auth.sub;
+    const { orderId } = req.params;
+    console.log("🧪 Params:", req.params);
+    console.log("🧪 orderId:", req.params.orderId);
+    if (!orderId) {
+      return res.status(400).json({ message: "Thiếu ID đơn hàng cần xóa." });
+    }
+
+    const order = await Order.findById(orderId);
+
+    if (!order) {
+      return res.status(404).json({ message: "Không tìm thấy đơn hàng." });
+    }
+
+    if (order.userId !== userId) {
+      return res
+        .status(403)
+        .json({ message: "Bạn không có quyền xóa đơn hàng này." });
+    }
+
+    await Order.findByIdAndDelete(orderId);
+
+    res
+      .status(200)
+      .json({ success: true, message: "✅ Đã xóa món ăn khỏi đơn hàng!" });
+  } catch (err) {
+    console.error("❌ Lỗi khi xóa món khỏi đơn hàng:", err);
+    res.status(500).json({
+      success: false,
+      message: "Lỗi server khi xóa món ăn khỏi đơn hàng.",
+    });
+  }
+};
+
+module.exports = {
+  addFood,
+  getFoods,
+  removeOrderItem,
+  orderFood,
+  getMyOrders,
+};

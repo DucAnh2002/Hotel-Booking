@@ -78,13 +78,28 @@ const FoodContextProvider = ({ children }) => {
   }, [])
 
   // xóa food trong cart
-  const removeFromCart = itemId => {
-    setCartItems(prev => {
-      const updated = { ...prev }
-      if (updated[itemId] > 1) updated[itemId] -= 1
-      else delete updated[itemId]
-      return updated
-    })
+  const removeFoodFromCart = async orderId => {
+    const confirmRemove = window.confirm('Bạn có chắc muốn hủy món này?')
+    if (!confirmRemove) return
+    try {
+      const token = await getAccessTokenSilently()
+      const res = await axios.delete(`${url}/api/food/remove/${orderId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      const data = await res.data
+      // xóa thành công thì cập nhật lại danh sách đơn hàng
+      if (data.success) {
+        toast.success('Đã hủy món ăn!')
+        getMyfoodOrders() // cập nhật lại danh sách sau khi xóa.
+      } else {
+        toast.error(data.message || 'Không thể hủy món ăn, vui lòng thử lại sau!')
+      }
+    } catch (error) {
+      console.error('Lỗi hủy món ăn', error)
+      toast.error('Lỗi kết nối khi hủy món ăn!')
+    }
   }
 
   const contextValue = {
@@ -93,7 +108,7 @@ const FoodContextProvider = ({ children }) => {
     setCartItems,
     foodList,
     orderFood,
-    removeFromCart,
+    removeFoodFromCart,
     getMyfoodOrders
   }
 
