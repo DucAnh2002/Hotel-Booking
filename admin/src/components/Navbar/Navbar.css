@@ -1,0 +1,23 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* cách đều 3 phần: logo - links - buttons */
+  padding: 20px;
+  background-color: #93d9eb; /* Màu nền của navbar */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ cho navbar */
+  margin: 0;
+  padding: 0;
+}
+.navbar .logo {
+  height: 100px;
+  width: 200px; /* hoặc tùy kích thước logo bạn muốn */
+}
+
+.navbar-menu button {
+  padding: 6px 12px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}

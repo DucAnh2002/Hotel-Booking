@@ -1,37 +1,19 @@
-import React from "react";
-import "./Header.css";
+import React from 'react'
+import './Header.css'
 
 const Header = () => {
   return (
     <div className="header">
       <div className="header-content">
-        <h2>The Ultimate Hotel Experience</h2>
-        <p>Discover Your Perfect Gateway Destination</p>
+        {/* <h2>Trải Nghiệm Khách Sạn Tuyệt Đỉnh</h2>
+        <p>Khám Phá Điểm Đến Nghỉ Dưỡng Hoàn Hảo Của Bạn</p>
         <p>
-          Unparalleled luxury and comfort await at the world's most exclusive
-          hotels and resorts. Start your journey today.
-        </p>
-        {/* <div className="search-form">
-          <div className="form-group">
-            <label>Check in</label>
-            <input type="date" />
-          </div>
-
-          <div className="form-group">
-            <label>Check out</label>
-            <input type="date" />
-          </div>
-
-          <div className="form-group">
-            <label>Guests</label>
-            <input type="number" min="1" defaultValue="1" />
-          </div>
-
-          <button className="search-button">🔍 Search</button>
-        </div> */}
+          Sự tinh tế và đẳng cấp vượt trội đang chờ đón bạn tại những khách sạn và khu nghỉ dưỡng danh giá nhất thế
+          giới. Bắt đầu hành trình tận hưởng của bạn ngay hôm nay.
+        </p> */}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

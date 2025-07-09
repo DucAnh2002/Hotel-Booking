@@ -1,0 +1,184 @@
+.cart-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.cart-container h2 {
+  font-size: 24px;
+  margin-bottom: 24px;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Room */
+.cart-booking {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  border: 1px solid #e0e0e0;
+}
+
+.cart-booking:hover {
+  transform: scale(1.01);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.cart-img {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.cart-booking p {
+  margin: 4px 0;
+  font-size: 15px;
+  color: #444;
+}
+
+.cart-booking p strong {
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .cart-booking {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-img {
+    width: 100%;
+    height: auto;
+  }
+}
+.cart-info {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.cart-info-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+}
+
+.cart-info-item .label {
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 4px;
+}
+.cart-delete-item button {
+  padding: 8px 16px;
+  display: flex;
+  justify-content: flex-end;
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 12px;
+}
+
+.cart-delete-item button:hover {
+  background-color: #770b10;
+}
+
+/* Food */
+
+.cart-foods {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-food-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.cart-food-item:hover {
+  transform: scale(1.01);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.cart-food-item img {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.cart-food-item p {
+  margin: 4px 0;
+  font-size: 15px;
+  color: #444;
+}
+
+@media (max-width: 768px) {
+  .cart-food-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-food-item img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Hiệu ứng fade khi render */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cart-booking,
+.cart-food-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+  background-color: #fafafa;
+  transition: box-shadow 0.3s ease;
+  animation: fadeIn 0.5s ease-out; /* Áp dụng hiệu ứng fade */
+}
+
+.cart-booking:hover,
+.cart-food-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}

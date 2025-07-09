@@ -27,4 +27,4 @@ dist-ssr
 .env
 frontend/.env
 backend/.env
-
+admnin/.env

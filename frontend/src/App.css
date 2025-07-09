@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  /* background-image: url('/public/background3.jpg');
+  background-size: cover;
+  /* background-repeat: no-repeat; */
+  /* background-position: center;
+  background-attachment: fixed; */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+/* Layout tổng thể */
+.app {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+/* Nội dung chính */
+.app-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+}

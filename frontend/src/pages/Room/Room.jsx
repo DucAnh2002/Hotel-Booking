@@ -1,23 +1,28 @@
-import React from "react";
-import hotels from "../../data/Hotels/Hotels.js";
-import HotelCard from "../../components/HotelsDisplay/HotelCard.jsx";
-import FloatingCart from "../../components/FloatingCart/FloatingCart.jsx";
-const Room = (cart) => {
+import { useContext } from 'react'
+import { RoomContext } from '../../context/index.js'
+import HotelCard from '../../components/HotelsDisplay/HotelCard.jsx'
+import FloatingCart from '../../components/FloatingCart/FloatingCart.jsx'
+const Room = () => {
+  const { roomList, bookingCart } = useContext(RoomContext)
+
   return (
     <div className="hotels-display-container">
-      <h2>Featured Destination</h2>
+      <h2>Lựa chọn không gian lưu trú lý tưởng dành riêng cho bạn</h2>
       <p>
-        Discover our handpicked selection of exceptional properties around the
-        world, offering unparalleled luxury and unforgettable experiences.
+        Trải nghiệm sự thoải mái và đẳng cấp qua các hạng phòng đa dạng – từ phòng tiêu chuẩn hiện đại đến suite sang
+        trọng với tầm nhìn tuyệt đẹp. Mỗi hạng phòng được thiết kế tinh tế, trang bị tiện nghi cao cấp, mang đến kỳ nghỉ
+        hoàn hảo cho mọi nhu cầu của bạn.
       </p>
       <div className="hotels-list">
-        {hotels.map((hotel) => (
-          <HotelCard key={hotel.id} hotel={hotel} />
-        ))}
+        {Array.isArray(roomList) && roomList.length > 0 ? (
+          roomList.map(room => <HotelCard key={room._id} hotel={room} />)
+        ) : (
+          <p> Đang tải danh sách phòng</p>
+        )}
       </div>
-      <FloatingCart cart={cart} />
+      <FloatingCart cart={bookingCart} />
     </div>
-  );
-};
+  )
+}
 
-export default Room;
+export default Room

@@ -2,14 +2,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between; /* cách đều 3 phần: logo - links - buttons */
-  padding: 10px 20px;
-  background-color: #f8f8f8;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 0px;
+  height: 150px;
+  background-color: #93d9eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-logo .logo {
-  height: 100px; 
-  width: 200px;/* hoặc tùy kích thước logo bạn muốn */
+  height: 160px;
+  width: auto; /* chiều rộng theo tỷ lệ navbar */
+  margin: 0;
+  padding: 0;
 }
 
 .navbar-links {
@@ -26,8 +29,7 @@
   font-weight: 500;
 }
 
-
-.navbar-link a{
+.navbar-link a {
   text-decoration: none;
 }
 
@@ -63,26 +65,25 @@
   background-color: #043569;
 }
 
-  /* Responsive */
-  @media (max-width: 768px) {
-    .navbar-links {
-      position: absolute;
-      top: 60px;
-      left: 0;
-      right: 0;
-      background-color: black;
-      flex-direction: column;
-      align-items: center;
-      display: none;
-    }
-  
-    .navbar-links.open {
-      display: flex;
-      padding: 20px 0;
-    }
-  
-    .navbar-toggle {
-      display: block;
-    }
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-links {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: black;
+    flex-direction: column;
+    align-items: center;
+    display: none;
   }
-  
+
+  .navbar-links.open {
+    display: flex;
+    padding: 20px 0;
+  }
+
+  .navbar-toggle {
+    display: block;
+  }
+}

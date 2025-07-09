@@ -4,23 +4,28 @@ const cors = require("cors");
 require("dotenv").config();
 
 const foodRoutes = require("./routes/foodRoutes");
-const hotelRoutes = require("./routes/hotelRoutes");
-
+const roomRoutes = require("./routes/roomRoutes");
+const bookingRoutes = require("./routes/bookingRoutes");
 // app config
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Routes
 app.use("/api/food", foodRoutes);
-app.use("/api/hotel", hotelRoutes);
+app.use("/api/room", roomRoutes);
+app.use("/api/booking", bookingRoutes);
+// Static files
+app.use("/upload", express.static("upload"));
 
 app.get("/", (req, res) => {
   res.send("Hello from server");
 });
+
 mongoose
   .connect(process.env.MONGO_URL)
-  .then(() => {
-    console.log("✅ Connected to MongoDB");
+  .then((conn) => {
+    console.log("✅ Connected to MongoDB", conn.connection.name);
     app.listen(5000, () =>
       console.log("🚀 Server running on http://localhost:5000")
     );
