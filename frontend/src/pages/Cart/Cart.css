@@ -15,24 +15,23 @@
   color: #333;
 }
 
-/* Room */
-.cart-booking {
+.cart-booking,
+.cart-food-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 20px;
-  padding: 16px;
+  padding: 15px;
   margin-bottom: 20px;
+  border: 1px solid #e3e3e3;
   border-radius: 10px;
-  background-color: #f9f9f9;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-  border: 1px solid #e0e0e0;
+  background-color: #fafafa;
+  transition: box-shadow 0.3s ease;
+  animation: fadeIn 0.5s ease-out;
 }
 
-.cart-booking:hover {
-  transform: scale(1.01);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+.cart-booking:hover,
+.cart-food-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .cart-img {
@@ -43,28 +42,15 @@
   flex-shrink: 0;
 }
 
-.cart-booking p {
-  margin: 4px 0;
-  font-size: 15px;
-  color: #444;
+.cart-info-with-delete {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
 }
 
-.cart-booking p strong {
-  font-weight: 600;
-}
-
-@media (max-width: 768px) {
-  .cart-booking {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .cart-img {
-    width: 100%;
-    height: auto;
-  }
-}
-.cart-info {
+.cart-info,
+.cart-food-info {
   display: flex;
   gap: 30px;
   flex-wrap: wrap;
@@ -81,78 +67,31 @@
   color: #666;
   margin-bottom: 4px;
 }
-.cart-delete-item button {
-  padding: 8px 16px;
+
+.cart-delete-item {
   display: flex;
+  align-items: flex-start;
   justify-content: flex-end;
-  background-color: #ff4d4f;
-  color: white;
+  min-width: 80px;
+  padding-top: 8px;
+}
+
+.cart-delete-item button {
+  background-color: #e74c3c;
   border: none;
+  color: white;
+  padding: 8px 16px;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 12px;
 }
 
 .cart-delete-item button:hover {
-  background-color: #770b10;
+  background-color: #c0392b;
 }
 
-/* Food */
-
-.cart-foods {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.cart-food-item {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 16px;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  border: 1px solid #e0e0e0;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-  animation: fadeIn 0.5s ease-out;
-}
-
-.cart-food-item:hover {
-  transform: scale(1.01);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.cart-food-item img {
-  width: 120px;
-  height: 90px;
-  object-fit: cover;
-  border-radius: 10px;
-  flex-shrink: 0;
-}
-
-.cart-food-item p {
-  margin: 4px 0;
-  font-size: 15px;
-  color: #444;
-}
-
-@media (max-width: 768px) {
-  .cart-food-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .cart-food-item img {
-    width: 100%;
-    height: auto;
-  }
-}
-
-/* Hiệu ứng fade khi render */
+/* Fade effect */
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -164,21 +103,27 @@
   }
 }
 
-.cart-booking,
-.cart-food-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid #e3e3e3;
-  border-radius: 10px;
-  background-color: #fafafa;
-  transition: box-shadow 0.3s ease;
-  animation: fadeIn 0.5s ease-out; /* Áp dụng hiệu ứng fade */
-}
+/* Responsive */
+@media (max-width: 768px) {
+  .cart-booking,
+  .cart-food-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-.cart-booking:hover,
-.cart-food-item:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  .cart-img {
+    width: 100%;
+    height: auto;
+  }
+
+  .cart-info-with-delete {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-delete-item {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 12px;
+  }
 }
