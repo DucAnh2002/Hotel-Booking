@@ -44,7 +44,8 @@ const orderFood = async (req, res) => {
   console.log("📥 AUTH:", req.auth); // xác minh token đã giải mã ra user chưa
   try {
     const userId = req.auth.sub;
-    const { name, image, deliveryDate, deliveryTime, note } = req.body;
+    const { name, price, image, deliveryDate, deliveryTime, note, quantity } =
+      req.body;
 
     // kiểm tra dữ liệu đầu vào.
     if (!name || !image || !deliveryDate || !deliveryTime) {
@@ -60,6 +61,7 @@ const orderFood = async (req, res) => {
     const order = new Order({
       userId,
       name,
+      price,
       quantity,
       image,
       deliveryDate,

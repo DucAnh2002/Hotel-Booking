@@ -33,7 +33,7 @@ const FoodContextProvider = ({ children }) => {
         deliveryTime,
         note: note || '' // cho phép note rỗng
       }
-
+      console.log('✅ Gửi dữ liệu order:', orderData)
       const response = await axios.post(`${url}/api/food/order`, orderData, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -80,7 +80,7 @@ const FoodContextProvider = ({ children }) => {
     fetchData()
   }, [])
 
-  // xóa food trong cart
+  // XÓA FOOD TRONG CART
   const removeFoodFromCart = async orderId => {
     confirmAlert({
       title: 'Xác nhận hủy món ăn',
@@ -116,6 +116,22 @@ const FoodContextProvider = ({ children }) => {
       ]
     })
   }
+  // Tính tiền cho 1 món
+
+  const getFoodPrice = item => {
+    const quantity = Number(item.quantity) || 0
+    const price = Number(item.price) || 0
+    return price * quantity
+  }
+  // TÍNH TỔNG TIỀN MÓN ĂN
+  const getFoodTotalPrice = () => {
+    if (!Array.isArray(myFoodOrders)) return 0
+    return myFoodOrders.reduce((total, item) => {
+      const quantity = Number(item.quantity) || 0
+      const price = Number(item.price) || 0
+      return total + price * quantity
+    }, 0)
+  }
 
   const contextValue = {
     cartItems,
@@ -124,7 +140,9 @@ const FoodContextProvider = ({ children }) => {
     foodList,
     orderFood,
     removeFoodFromCart,
-    getMyfoodOrders
+    getMyfoodOrders,
+    getFoodTotalPrice,
+    getFoodPrice
   }
 
   return <FoodContext.Provider value={contextValue}>{children}</FoodContext.Provider>

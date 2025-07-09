@@ -124,11 +124,22 @@ const RoomContextProvider = ({ children }) => {
     })
   }
 
-  // ✅ Tính tổng tiền phòng
-  const getRoomTotal = () => {
-    const roomId = Object.keys(bookingCart)[0]
-    const room = roomList.find(r => r._id === roomId)
-    return room ? room.price : 0
+  // Tính tiền phòng
+  // ✅ Tính tiền cho 1 đơn đặt phòng
+  const getRoomPrice = booking => {
+    const checkIn = new Date(booking.checkInDate)
+    const checkOut = new Date(booking.checkOutDate)
+    const days = Math.max((checkOut - checkIn) / (1000 * 60 * 60 * 24), 1)
+    return booking.roomId.price * days
+  }
+  // Tính tổng tiền phòng
+  const getRoomTotalPrice = () => {
+    return myBookings.reduce((total, booking) => {
+      const checkIn = new Date(booking.checkInDate)
+      const checkOut = new Date(booking.checkOutDate)
+      const days = Math.max((checkOut - checkIn) / (1000 * 60 * 60 * 24), 1)
+      return total + booking.roomId.price * days
+    }, 0)
   }
 
   return (
@@ -140,8 +151,9 @@ const RoomContextProvider = ({ children }) => {
         addToBookingCart,
         bookRoom,
         removeFromBooking,
-        getRoomTotal,
-        getMyBookings
+        getRoomTotalPrice,
+        getMyBookings,
+        getRoomPrice
       }}
     >
       {children}

@@ -5,8 +5,8 @@ import { RoomContext, FoodContext } from '../../context/index.js'
 
 const Cart = () => {
   const { isAuthenticated } = useAuth0()
-  const { myBookings, getMyBookings, removeFromBooking } = useContext(RoomContext)
-  const { myFoodOrders, getMyfoodOrders, removeFoodFromCart } = useContext(FoodContext)
+  const { myBookings, getMyBookings, removeFromBooking, getRoomTotalPrice, getRoomPrice } = useContext(RoomContext)
+  const { myFoodOrders, getMyfoodOrders, removeFoodFromCart, getFoodTotalPrice, getFoodPrice } = useContext(FoodContext)
   const url = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const Cart = () => {
               </div>
               <div className="cart-info-item">
                 <p className="label">Giá:</p>
-                <p>{booking.roomId.price.toLocaleString()}đ</p>
+                <p>{getRoomPrice(booking).toLocaleString()}đ</p>
               </div>
             </div>
             <div className="cart-delete-item">
@@ -76,6 +76,10 @@ const Cart = () => {
                   <p>
                     <strong>Ghi chú:</strong> {item.note}
                   </p>
+                  <p>
+                    <strong>Giá:</strong>
+                    {getFoodPrice(item).toLocaleString()}
+                  </p>
                 </div>
                 <div className="cart-delete-item">
                   <button onClick={() => removeFoodFromCart(item._id)}>Xóa</button>
@@ -87,7 +91,17 @@ const Cart = () => {
       )}
 
       <hr />
-      <div className="cart-total">{/* Tổng tiền nếu cần */}</div>
+      <div className="cart-total">
+        <div>
+          <h3>Tổng tiền thanh toán:</h3>
+          <p>
+            <strong>{(getRoomTotalPrice() + getFoodTotalPrice()).toLocaleString()}đ</strong>
+          </p>
+        </div>
+        <div>
+          <h2>Thanh toán</h2>
+        </div>
+      </div>
     </div>
   )
 }
