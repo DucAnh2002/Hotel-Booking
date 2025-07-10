@@ -9,6 +9,7 @@
 .food-order h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .food-order p {

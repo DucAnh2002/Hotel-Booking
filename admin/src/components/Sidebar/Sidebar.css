@@ -1,4 +1,7 @@
 .sidebar {
+  position: sticky; /* ✅ Cố định bên trái */
+  top: 0;
+  left: 0;
   width: 18%;
   min-height: 100vh;
   border: 1.5px solid #979696;
@@ -6,7 +9,10 @@
   margin: 0;
   padding: 0;
   font-size: max(1vw, 10px);
+  background-color: #fff; /* Đảm bảo không bị trong suốt */
+  overflow-y: auto;
 }
+
 .sidebar-options {
   padding-top: 50px;
   padding-left: 20%;
@@ -19,7 +25,6 @@
   display: flex;
   align-items: center;
   gap: 12px;
-
   text-decoration: none;
   border: 1px solid #a9a9a9;
   border-right: 0;
@@ -38,11 +43,12 @@
   border-color: tomato;
 }
 
-p {
+.sidebar-option p {
   color: #000;
   font-weight: 500;
   font-style: italic;
 }
+
 @media (max-width: 900px) {
   .sidebar-option p {
     display: none;

@@ -1,0 +1,31 @@
+.order-booking-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fefefe;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+}
+
+.user-info,
+.order-section,
+.booking-section {
+  margin-bottom: 40px;
+}
+
+.order-item,
+.booking-item {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 12px;
+}
+
+.order-img {
+  width: 160px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+}

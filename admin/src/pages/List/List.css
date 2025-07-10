@@ -1,0 +1,110 @@
+.list-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.list-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.list-search {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 30px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.list-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  background-color: #fafafa;
+}
+
+.list-img {
+  width: 180px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.list-details {
+  flex: 1;
+}
+
+.list-details p {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+.list-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.list-actions button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.list-actions button:first-child {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.list-actions button:first-child:hover {
+  background-color: #c0392b;
+}
+
+.list-actions button:last-child {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.list-actions button:last-child:hover {
+  background-color: #2980b9;
+}
+
+@media (max-width: 768px) {
+  .list-item {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .list-img {
+    width: 100%;
+    height: auto;
+  }
+
+  .list-details {
+    width: 100%;
+  }
+
+  .list-actions {
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+  }
+}

@@ -1,18 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { RoomContext, FoodContext } from '../../context/index.js'
+import './FloatingCart.css'
 
-const FloatingCart = ({ cart }) => {
-  const navigate = useNavigate();
+const FloatingCart = () => {
+  const navigate = useNavigate()
+  const { myBookings } = useContext(RoomContext)
+  const { myFoodOrders } = useContext(FoodContext)
+
+  const hasItems = myBookings.length > 0 || myFoodOrders.length > 0
 
   return (
-    <div className="floating-cart" onClick={() => navigate("/cart")}>
+    <div className="floating-cart" onClick={() => navigate('/cart')}>
       🏡
-      {Object.keys(cart).length > 0 && (
-        <span className="cart-badge">
-          {Object.values(cart).reduce((a, b) => a + b, 0)}
-        </span>
-      )}
+      {hasItems && <span className="cart-dot" />}
     </div>
-  );
-};
+  )
+}
 
-export default FloatingCart;
+export default FloatingCart
