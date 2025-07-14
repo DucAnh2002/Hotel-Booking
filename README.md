@@ -4,18 +4,21 @@ A full-stack hotel booking application built with **React + Vite + Node.js + Mon
 
 ---
 
+## 🛠 Technologies
+
+- Frontend: `React`, `Vite`, `Context API`, `CSS Modules`
+- Backend: `Express.js`, `MongoDB`, `Mongoose`
+- Auth: `Auth0`, `JWT`
+- Others: `axios`, `react-toastify`, `react-confirm-alert`, `multer`
+
+---
+
 ## 📁 Frontend Structure
 
 ```
 frontend/
 ├── public/                  # Static files (favicon, index.html)
 ├── src/
-│   ├── api/                # All API calls
-│   │   ├── bookingApi.js
-│   │   ├── roomApi.js
-│   │   ├── foodApi.js
-│   │   └── userApi.js
-│   │
 │   ├── assets/             # Images, icons
 │   │   ├── images/
 │   │   └── icons/
@@ -46,15 +49,11 @@ frontend/
 │   │   ├── BookingContext.jsx
 │   │   └── UserContext.jsx
 │   │
-│   ├── hooks/              # Custom hooks
-│   │   ├── useBooking.js
-│   │   └── useCart.js
 │   │
 │   ├── pages/              # Route-level pages
 │   │   ├── Home.jsx
 │   │   ├── Rooms.jsx
 │   │   ├── Foods.jsx
-│   │   ├── Checkout.jsx
 │   │   └── NotFound.jsx
 │   │
 │   ├── styles/             # Global styles and variables
@@ -62,7 +61,6 @@ frontend/
 │   │
 │   ├── App.jsx             # Root component with layout and routes
 │   ├── main.jsx            # Entry point
-│   └── routes.js           # Main route definitions
 │
 ├── .env
 ├── .gitignore
@@ -116,12 +114,19 @@ backend/
 
 ---
 
-## 🛠 Technologies
-
-- Frontend: `React`, `Vite`, `Context API`, `CSS Modules`
-- Backend: `Express.js`, `MongoDB`, `Mongoose`
-- Auth: `Auth0`, `JWT`
-- Others: `axios`, `react-toastify`, `react-confirm-alert`, `multer`
+admin/
+├── src/
+│ ├── components/
+│ │ ├── Navbar/
+│ │ └── Sidebar/
+│ ├── pages/
+│ │ ├── Add/ # Thêm món/phòng
+│ │ ├── List/ # Xem danh sách món/phòng
+│ │ └── OrdersAndBooking/ # Quản lý đơn đặt
+│ ├── App.jsx
+│ └── main.jsx
+├── .env
+└── vite.config.js
 
 ---
 
