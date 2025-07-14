@@ -1,9 +1,10 @@
-import React from "react";
 import "./Navbar.css";
 import { assets } from "../../assets/assets.js";
 import { useAuth0 } from "@auth0/auth0-react";
 const Navbar = () => {
   const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+  // const adminEmail = import.meta.env.VITE_ADMIN_EMAIL;
+  // if (!isAuthenticated || user?.email !== adminEmail) return null;
   return (
     <div className="navbar">
       <img className="logo" src={assets.logo} alt="logo" />

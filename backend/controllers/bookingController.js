@@ -1,5 +1,5 @@
 const Booking = require("../models/bookingModel");
-
+const Order = require("../models/foodModel");
 const bookRoom = async (req, res) => {
   console.log("HEADERS:", req.headers);
   console.log("USER CHECK", req.auth);
@@ -88,5 +88,35 @@ const getMyBookings = async (req, res) => {
       .json({ success: false, message: "Lỗi khi lấy danh sách phòng đã đặt" });
   }
 };
+const listAllBookings = async (req, res) => {
+  try {
+    const bookings = await Booking.find().populate("roomId");
+    res.status(200).json({ success: true, data: bookings });
+  } catch (error) {
+    console.error("Lỗi khi lấy danh sách tất cả booking: ", error);
+    res.status(500).json({
+      success: false,
+      message: "Lỗi server khi lấy danh sách booking",
+    });
+  }
+};
 
-module.exports = { bookRoom, getMyBookings, removeFromBookings };
+const ListAllOrders = async (req, res) => {
+  try {
+    const orders = await Order.find();
+    res.status(200).json({ success: true, data: orders });
+  } catch (error) {
+    console.error("Lỗi khi lấy danh sách tất cả order: ", error);
+    res.status(500).json({
+      success: false,
+      message: "Lỗi server khi lấy danh sách tất cả order",
+    });
+  }
+};
+module.exports = {
+  bookRoom,
+  getMyBookings,
+  removeFromBookings,
+  listAllBookings,
+  ListAllOrders,
+};

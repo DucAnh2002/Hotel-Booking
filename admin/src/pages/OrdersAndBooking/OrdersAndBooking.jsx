@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-// import "./OrderAndBooking.css";
+import "./OrdersAndBooking.css";
 const OrderAndBooking = () => {
   const [orders, setOrders] = useState([]);
   const [bookings, setBookings] = useState([]);
@@ -10,8 +10,8 @@ const OrderAndBooking = () => {
     const fetchData = async () => {
       try {
         const [orderRes, bookingRes] = await Promise.all([
-          axios.get(`${url}/api/food/my-orders`),
-          axios.get(`${url}/api/booking/my-bookings`),
+          axios.get(`${url}/api/booking/list-orders`),
+          axios.get(`${url}/api/booking/list-bookings`),
         ]);
         setOrders(orderRes.data.data || []);
         setBookings(bookingRes.data.data || []);

@@ -1,31 +1,67 @@
-.order-booking-container {
+.admin-container {
   max-width: 1000px;
-  margin: 40px auto;
+  margin: 30px auto;
   padding: 20px;
-  background: #fefefe;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  font-family: "Arial", sans-serif;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  font-family: Arial, sans-serif;
 }
 
-.user-info,
-.order-section,
-.booking-section {
-  margin-bottom: 40px;
-}
-
-.order-item,
-.booking-item {
-  display: flex;
-  gap: 20px;
+.admin-container h2 {
+  font-size: 22px;
+  font-weight: 600;
   margin-bottom: 20px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 12px;
+  color: #333;
+  border-left: 4px solid #007bff;
+  padding-left: 10px;
 }
 
-.order-img {
-  width: 160px;
-  height: 120px;
+.admin-order-item,
+.admin-booking-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}
+
+.admin-order-item:hover,
+.admin-booking-item:hover {
+  background-color: #f1f8ff;
+}
+
+.admin-img {
+  width: 140px;
+  height: 100px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.admin-order-item div,
+.admin-booking-item div {
+  flex: 1;
+}
+
+.admin-order-item p,
+.admin-booking-item p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #444;
+}
+
+.admin-order-item strong,
+.admin-booking-item strong {
+  color: #222;
+}
+
+hr {
+  margin: 40px 0;
+  border: none;
+  border-top: 2px dashed #ccc;
 }
