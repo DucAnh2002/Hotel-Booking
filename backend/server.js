@@ -8,12 +8,19 @@ const roomRoutes = require("./routes/roomRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 // app config
 const app = express();
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://hotel-booking-lac-seven.vercel.app",
+];
 app.use(
   cors({
-    origin: [
-      "https://hotel-booking-lac-seven.vercel.app/", // thay bằng URL thật
-      "https://your-admin.vercel.app", // thay bằng URL thật
-    ],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
