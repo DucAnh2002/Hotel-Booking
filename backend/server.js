@@ -8,7 +8,15 @@ const roomRoutes = require("./routes/roomRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 // app config
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://your-frontend.vercel.app", // thay bằng URL thật
+      "https://your-admin.vercel.app", // thay bằng URL thật
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Routes
@@ -19,15 +27,14 @@ app.use("/api/booking", bookingRoutes);
 app.use("/upload", express.static("upload"));
 
 app.get("/", (req, res) => {
-  res.send("Hello from server");
+  res.send("Server is working!");
 });
 
 mongoose
   .connect(process.env.MONGO_URL)
   .then((conn) => {
     console.log("✅ Connected to MongoDB", conn.connection.name);
-    app.listen(5000, () =>
-      console.log("🚀 Server running on http://localhost:5000")
-    );
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
   })
   .catch((err) => console.error("❌ MongoDB error:", err));
