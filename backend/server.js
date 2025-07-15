@@ -11,7 +11,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "https://your-frontend.vercel.app", // thay bằng URL thật
+      "https://hotel-booking-lac-seven.vercel.app/", // thay bằng URL thật
       "https://your-admin.vercel.app", // thay bằng URL thật
     ],
     credentials: true,
