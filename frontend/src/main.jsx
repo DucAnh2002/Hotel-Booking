@@ -16,13 +16,11 @@ createRoot(document.getElementById('root')).render(
     }}
   >
     <BrowserRouter>
-      {/* <BookingProvider> */}
       <RoomContext>
         <FoodContextProvider>
           <App />
         </FoodContextProvider>
       </RoomContext>
-      {/* </BookingProvider> */}
     </BrowserRouter>
   </Auth0Provider>
 )
