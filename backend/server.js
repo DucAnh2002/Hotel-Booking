@@ -10,6 +10,7 @@ const bookingRoutes = require("./routes/bookingRoutes");
 const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
+  "https://hotel-booking-admin-blush.vercel.app",
   "https://hotel-booking-lac-seven.vercel.app",
 ];
 app.use(
