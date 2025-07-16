@@ -9,10 +9,10 @@ const bookingRoutes = require("./routes/bookingRoutes");
 // app config
 const app = express();
 const allowedOrigins = [
-  "http://localhost:5174",
-  "http://localhost:5173",
-  "https://hotel-booking-admin-blush.vercel.app",
-  "https://hotel-booking-lac-seven.vercel.app",
+  "http://localhost:5174", // admin local
+  "http://localhost:5173", // home local
+  "https://hotel-booking-admin-blush.vercel.app", // admin
+  "https://hotel-booking-lac-seven.vercel.app", // home
 ];
 app.use(
   cors({
@@ -27,7 +27,7 @@ app.use(
   })
 );
 app.use(express.json());
-app.use(cors(corsOptions));
+
 // Routes
 app.use("/api/food", foodRoutes);
 app.use("/api/room", roomRoutes);
