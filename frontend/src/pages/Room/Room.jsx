@@ -2,6 +2,8 @@ import { useContext } from 'react'
 import { RoomContext } from '../../context/index.js'
 import HotelCard from '../../components/HotelsDisplay/HotelCard.jsx'
 import FloatingCart from '../../components/FloatingCart/FloatingCart.jsx'
+import './Room.css'
+
 const Room = () => {
   const { roomList, bookingCart } = useContext(RoomContext)
 

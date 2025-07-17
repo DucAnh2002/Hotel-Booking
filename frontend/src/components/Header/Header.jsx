@@ -1,16 +1,40 @@
-import React from 'react'
-import './Header.css'
+import React, { useEffect, useState } from 'react'
+import style from './Header.module.css'
+import Navbar from '../Navbar/Navbar.jsx'
+
+const images = ['/banner/banner1.jpg', '/banner/banner2.jpg', '/banner/banner4.jpg']
 
 const Header = () => {
+  const [index, setIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex(prev => (prev + 1) % images.length)
+    }, 2500)
+    return () => clearInterval(interval)
+  }, [])
+
+  const handlePrev = () => {
+    setIndex(prev => (prev - 1 + images.length) % images.length)
+  }
+
+  const handleNext = () => {
+    setIndex(prev => (prev + 1) % images.length)
+  }
+
   return (
-    <div className="header">
-      <div className="header-content">
-        {/* <h2>Trải Nghiệm Khách Sạn Tuyệt Đỉnh</h2>
-        <p>Khám Phá Điểm Đến Nghỉ Dưỡng Hoàn Hảo Của Bạn</p>
-        <p>
-          Sự tinh tế và đẳng cấp vượt trội đang chờ đón bạn tại những khách sạn và khu nghỉ dưỡng danh giá nhất thế
-          giới. Bắt đầu hành trình tận hưởng của bạn ngay hôm nay.
-        </p> */}
+    <div className={style.header}>
+      <Navbar />
+      <div className={style.slideshow}>
+        {images.map((img, i) => (
+          <img key={i} src={img} alt={`banner-${i}`} className={`${style.image} ${i === index ? style.active : ''}`} />
+        ))}
+        <button className={`${style.navButton} ${style.prev}`} onClick={handlePrev}>
+          ‹
+        </button>
+        <button className={`${style.navButton} ${style.next}`} onClick={handleNext}>
+          ›
+        </button>
       </div>
     </div>
   )
