@@ -1,8 +1,7 @@
 import { useEffect, useContext } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
-import './Cart.css'
 import { RoomContext, FoodContext } from '../../context/index.js'
-
+import './Cart.css'
 const Cart = () => {
   const { isAuthenticated } = useAuth0()
   const { myBookings, getMyBookings, removeFromBooking, getRoomTotalPrice, getRoomPrice } = useContext(RoomContext)
