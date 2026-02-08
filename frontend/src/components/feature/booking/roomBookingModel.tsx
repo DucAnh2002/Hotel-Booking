@@ -12,6 +12,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ hotel, onClose }) => {
   const [checkInDate, setCheckInDate] = useState('')
   const [checkOutDate, setCheckOutDate] = useState('')
   const [guests, setGuests] = useState(1)
+  const today = new Date().toISOString().split('T')[0]
 
   const { bookRoom, addToBookingCart } = useContext(RoomContext)
 
@@ -66,7 +67,11 @@ const BookingModal: React.FC<BookingModalProps> = ({ hotel, onClose }) => {
           <input
             type="date"
             value={checkInDate}
-            onChange={e => setCheckInDate(e.target.value)}
+            min={today} // Điều kiện chỉ chọn ngày từ hôm nay trở đi
+            onChange={e => {
+              setCheckInDate(e.target.value)
+              setCheckOutDate('') // Reset ngày trả phòng khi ngày nhận phòng thay đổi
+            }}
             className="
               w-full rounded-md border border-gray-300 px-3 py-2 
               outline-none focus:border-blue-500 
@@ -80,6 +85,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ hotel, onClose }) => {
           <input
             type="date"
             value={checkOutDate}
+            min={checkInDate || today} // Ngày trả phòng phải sau ngày nhận phòng
             onChange={e => setCheckOutDate(e.target.value)}
             className="
               w-full rounded-md border border-black-300 px-3 py-2 
