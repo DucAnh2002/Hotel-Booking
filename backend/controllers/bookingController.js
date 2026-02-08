@@ -1,5 +1,6 @@
 const Booking = require("../models/bookingModel");
 const Order = require("../models/foodModel");
+
 const bookRoom = async (req, res) => {
   console.log("HEADERS:", req.headers);
   console.log("USER CHECK", req.auth);
@@ -20,21 +21,40 @@ const bookRoom = async (req, res) => {
     if (isNaN(inDate) || isNaN(outDate))
       return res.status(400).json({ message: "Ngày không hợp lệ" });
 
-    if (inDate >= outDate) {
-      return res
-        .status(400)
-        .json({ message: "Ngày nhận phòng phải trước ngày trả phòng" });
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    inDate.setHours(0, 0, 0, 0);
+    outDate.setHours(0, 0, 0, 0);
+
+    if (inDate < today) {
+      return res.status(400).json({
+        message: "Ngày nhận phòng phải từ hôm nay trở đi",
+      });
     }
-    const existingBooking = await Booking.findOne({ userId, roomId });
+
+    if (inDate >= outDate) {
+      return res.status(400).json({
+        message: "Ngày trả phòng phải sau ngày nhận phòng",
+      });
+    }
+    // kiểm tra user đã đặt phòng chưa
+    const existingBooking = await Booking.findOne({
+      userId,
+      roomId,
+      checkInDate: inDate,
+      checkOutDate: outDate,
+    });
     if (existingBooking) {
-      return res.status(400).json({ message: "Bạn đã đặt phòng này rồi!" });
+      return res.status(400).json({
+        message: "Bạn đã đặt phòng này trong khoảng thời gian này rồi!",
+      });
     }
 
     const booking = new Booking({
       userId,
       roomId,
-      checkInDate,
-      checkOutDate,
+      checkInDate: inDate,
+      checkOutDate: outDate,
       guests,
       // bookingDate: new Date(),
     });
@@ -49,6 +69,7 @@ const bookRoom = async (req, res) => {
   }
 };
 
+// REMOVE BOOKING
 // remove room from user booking
 
 const removeFromBookings = async (req, res) => {
