@@ -54,7 +54,7 @@ const Cart: React.FC = () => {
                   onClick={() => removeFromBooking(booking._id)}
                   className="bg-red-500 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-lg transition self-start"
                 >
-                  Xóa
+                  Cancle
                 </button>
               </div>
             </div>
@@ -102,7 +102,7 @@ const Cart: React.FC = () => {
                   onClick={() => removeFoodFromCart(item._id)}
                   className="bg-red-500 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-lg transition self-start"
                 >
-                  Xóa
+                  Hủy
                 </button>
               </div>
             </div>
@@ -121,9 +121,9 @@ const Cart: React.FC = () => {
               </p>
             </div>
 
-            <button className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition">
+            {/* <button className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition">
               Thanh toán
-            </button>
+            </button> */}
           </div>
         </>
       )}

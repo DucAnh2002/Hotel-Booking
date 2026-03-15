@@ -81,8 +81,8 @@ const orderFood = async (req, res) => {
 
 // Lấy danh sách món ăn đã Order.
 const getMyOrders = async (req, res) => {
-  console.log("📥 HEADERS:", req.headers);
-  console.log("📥 AUTH:", req.auth); // xác minh token đã giải mã ra user chưa
+  console.log(" HEADERS:", req.headers);
+  console.log(" AUTH:", req.auth);
   try {
     const userId = req.auth.sub;
     const orders = await Order.find({ userId });
