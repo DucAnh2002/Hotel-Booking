@@ -1,11 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
 const cors = require("cors");
 require("dotenv").config();
 
 const foodRoutes = require("./routes/foodRoutes");
 const roomRoutes = require("./routes/roomRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
+
+const paymentRoutes = require("./routes/paymentRoutes");
 // app config
 const app = express();
 const allowedOrigins = [
@@ -24,7 +27,7 @@ app.use(
       }
     },
     credentials: true,
-  })
+  }),
 );
 app.use(express.json());
 
@@ -32,9 +35,10 @@ app.use(express.json());
 app.use("/api/food", foodRoutes);
 app.use("/api/room", roomRoutes);
 app.use("/api/booking", bookingRoutes);
+app.use("/api/payment", paymentRoutes);
 // Static files
 app.use("/upload", express.static("upload"));
-
+app.use("/uploads", express.static(path.join(__dirname, "upload")));
 app.get("/", (req, res) => {
   res.send("Server is working!");
 });

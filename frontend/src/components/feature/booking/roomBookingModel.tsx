@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 import { toast } from 'react-toastify'
 import { RoomContext } from '../../../context'
 import type { RoomType } from '../../../types/roomType'
-
+import { useNavigate } from 'react-router-dom'
 interface BookingModalProps {
   hotel: RoomType
   onClose: () => void
@@ -13,8 +13,8 @@ const BookingModal: React.FC<BookingModalProps> = ({ hotel, onClose }) => {
   const [checkOutDate, setCheckOutDate] = useState('')
   const [guests, setGuests] = useState(1)
   const today = new Date().toISOString().split('T')[0]
-
-  const { bookRoom, addToBookingCart } = useContext(RoomContext)
+  const navigate = useNavigate()
+  const { addToBookingCart } = useContext(RoomContext)
 
   const handleConfirmBooking = async () => {
     if (!checkInDate || !checkOutDate) {
@@ -28,11 +28,13 @@ const BookingModal: React.FC<BookingModalProps> = ({ hotel, onClose }) => {
     }
 
     try {
-      await bookRoom({
-        roomId: hotel._id,
-        checkInDate,
-        checkOutDate,
-        guests
+      navigate('/checkout', {
+        state: {
+          hotel,
+          checkInDate,
+          checkOutDate,
+          guests
+        }
       })
 
       addToBookingCart(hotel._id)

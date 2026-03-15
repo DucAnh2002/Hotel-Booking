@@ -25,12 +25,31 @@ const bookingSchema = new Schema(
       default: 1,
       min: 1,
     },
+    totalPrice: {
+      type: Number,
+      required: true,
+    },
     bookingDate: {
       type: Date,
       default: Date.now,
     },
+    transactionId: {
+      type: String,
+    },
+
+    paymentMethod: {
+      type: String,
+      enum: ["cash", "stripe", "bank_transfer"],
+      required: true,
+    },
+
+    paymentStatus: {
+      type: String,
+      enum: ["pending", "paid", "failed"],
+      default: "pending",
+    },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 module.exports = mongoose.model("Booking", bookingSchema);

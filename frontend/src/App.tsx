@@ -5,6 +5,7 @@ import Catering from './pages/Catering/Catering'
 import Footer from './components/Layout/Footer/Footer'
 import Room from './pages/Room/Room'
 import Cart from './pages/Cart/Cart'
+import CheckoutPage from './pages/checkoutPage'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
@@ -29,6 +30,7 @@ const App: React.FC = () => {
           <Route path="/rooms" element={<Room />} />
           <Route path="/catering" element={<Catering />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
         </Routes>
       </main>
 

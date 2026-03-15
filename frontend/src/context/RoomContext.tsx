@@ -47,10 +47,15 @@ const RoomContextProvider = ({ children }: RoomProviderProps) => {
   }, [isAuthenticated])
 
   // Thêm phòng vào giỏ
-  const addToBookingCart = async (roomId: string) => {
+  const addToBookingCart = (roomId: string) => {
+    if (bookingCart[roomId]) {
+      toast.info('Phòng này đã được đặt!')
+      return
+    }
+
     setBookingCart(prev => ({
       ...prev,
-      [roomId]: (prev[roomId] || 0) + 1
+      [roomId]: 1
     }))
   }
 
@@ -86,7 +91,53 @@ const RoomContextProvider = ({ children }: RoomProviderProps) => {
       throw err
     }
   }
+  const savePaymentBooking = async ({
+    roomId,
+    checkInDate,
+    checkOutDate,
+    guests,
+    totalPrice
+  }: {
+    roomId: string
+    checkInDate: string
+    checkOutDate: string
+    guests: number
+    totalPrice: number
+  }) => {
+    const token = await getAccessTokenSilently()
 
+    try {
+      const res = await axios.post(
+        `${url}/api/booking/payment-success`,
+        {
+          roomId,
+          checkInDate,
+          checkOutDate,
+          guests,
+          totalPrice
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+
+      if (res.data.success) {
+        toast.success('Thanh toán thành công!')
+
+        // cập nhật danh sách booking
+        await getMyBookings()
+
+        // clear cart
+        setBookingCart({})
+      }
+    } catch (error) {
+      console.error('Lỗi lưu payment booking:', error)
+
+      toast.error('Thanh toán thất bại')
+    }
+  }
   // Lấy danh sách booking
   const getMyBookings = async (): Promise<BookingType[] | []> => {
     try {
@@ -96,9 +147,10 @@ const RoomContextProvider = ({ children }: RoomProviderProps) => {
           Authorization: `Bearer ${token}`
         }
       })
+      const bookings = res.data.data || []
 
-      setMyBookings(res.data.data)
-      return res.data.data
+      setMyBookings(bookings)
+      return bookings
     } catch (error: any) {
       console.error('Lỗi khi lấy danh sách đặt phòng:', error.message)
       toast.error('Không thể lấy danh sách đặt phòng.')
@@ -125,7 +177,7 @@ const RoomContextProvider = ({ children }: RoomProviderProps) => {
 
               if (res.data.success) {
                 toast.success('Đã hủy đặt phòng!')
-                getMyBookings()
+                await getMyBookings()
               } else {
                 toast.error(res.data.message || 'Không thể hủy đặt phòng!')
               }
@@ -155,19 +207,31 @@ const RoomContextProvider = ({ children }: RoomProviderProps) => {
       return total + getRoomPrice(booking)
     }, 0)
   }
-
+  const clearBookingCart = () => {
+    setBookingCart({})
+  }
   return (
     <RoomContext.Provider
       value={{
         roomList,
         bookingCart,
         myBookings,
+
         addToBookingCart,
+
         bookRoom,
+
+        savePaymentBooking,
+
         removeFromBooking,
+
         getRoomTotalPrice,
+
         getMyBookings,
-        getRoomPrice
+
+        getRoomPrice,
+
+        clearBookingCart
       }}
     >
       {children}
