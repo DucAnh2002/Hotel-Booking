@@ -28,9 +28,8 @@ const BookingModal: React.FC<BookingModalProps> = ({ hotel, onClose }) => {
     }
 
     try {
-      navigate('/checkout', {
+      navigate(`/checkout/${hotel._id}`, {
         state: {
-          hotel,
           checkInDate,
           checkOutDate,
           guests
