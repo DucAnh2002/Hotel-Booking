@@ -3,20 +3,24 @@ const router = express.Router();
 const multer = require("multer");
 const path = require("path");
 
-const checkJwt = require("../middlewares/checkJwtSimple");
-const { getAllRooms, addRoom } = require("../controllers/roomController");
-const { bookRoom, getMyBookings } = require("../controllers/bookingController");
+const {
+  getAllRooms,
+  addRoom,
+  getRoomById,
+} = require("../controllers/roomController");
 
-// Cấu hình multer
+// cấu hình upload ảnh
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "upload/rooms"),
   filename: (req, file, cb) =>
     cb(null, Date.now() + path.extname(file.originalname)),
 });
+
 const upload = multer({ storage });
 
-// Route  phòng
+// routes
 router.get("/list-room", getAllRooms);
+router.get("/:id", getRoomById);
 router.post("/add", upload.single("image"), addRoom);
 
 module.exports = router;

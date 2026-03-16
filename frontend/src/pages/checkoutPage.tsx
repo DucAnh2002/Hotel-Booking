@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -7,6 +7,7 @@ const CheckoutPage = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
+  const { roomId } = useParams() // lấy id từ url
   const { user, getAccessTokenSilently, isAuthenticated } = useAuth0()
 
   const state = location.state
@@ -22,22 +23,41 @@ const CheckoutPage = () => {
     )
   }
 
-  const { hotel, checkInDate, checkOutDate, guests } = state
+  const { checkInDate, checkOutDate, guests } = state
 
+  const [hotel, setHotel] = useState<any>(null)
   const [totalPrice, setTotalPrice] = useState(0)
   const [showQR, setShowQR] = useState(false)
   const [timeLeft, setTimeLeft] = useState(600)
   const [isPaid, setIsPaid] = useState(false)
 
-  // tính tổng tiền
+  // fetch room từ server
   useEffect(() => {
+    const fetchRoom = async () => {
+      try {
+        const res = await fetch(`https://hotel-booking-server-eyeb.onrender.com/api/room/${roomId}`)
+
+        const data = await res.json()
+
+        setHotel(data)
+      } catch (err) {
+        console.error(err)
+      }
+    }
+
+    fetchRoom()
+  }, [roomId])
+
+  useEffect(() => {
+    if (!hotel) return
+
     const start = new Date(checkInDate)
     const end = new Date(checkOutDate)
 
     const nights = (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
 
     setTotalPrice(nights * hotel.price)
-  }, [checkInDate, checkOutDate, hotel.price])
+  }, [checkInDate, checkOutDate, hotel])
 
   // timer giữ phòng
   useEffect(() => {
@@ -54,29 +74,10 @@ const CheckoutPage = () => {
     return () => clearInterval(timer)
   }, [timeLeft, navigate])
 
-  // chặn refresh
-  useEffect(() => {
-    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-      if (!isPaid) {
-        e.preventDefault()
-        e.returnValue = ''
-      }
-    }
-
-    window.addEventListener('beforeunload', handleBeforeUnload)
-
-    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
-  }, [isPaid])
-
-  const handleCash = () => {
-    toast.info('Thanh toán tại khách sạn hiện chưa khả dụng. Vui lòng thanh toán online.')
-  }
-
   const handleOnline = () => {
     setShowQR(true)
   }
 
-  //  xử lý thanh toán thành công
   const handlePaymentSuccess = async () => {
     if (!isAuthenticated) {
       toast.error('Bạn cần đăng nhập')
@@ -88,7 +89,7 @@ const CheckoutPage = () => {
 
       const token = await getAccessTokenSilently()
 
-      const res = await fetch('http://localhost:5000/api/booking/book-room', {
+      const res = await fetch(`https://hotel-booking-server-eyeb.onrender.com/api/booking/book-room`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -110,13 +111,11 @@ const CheckoutPage = () => {
         throw new Error(data.message)
       }
 
-      toast.success('Đặt phòng thành công! Bạn sẽ được chuyển đến trang thông tin đặt phòng sau 2 giây.')
+      toast.success('Đặt phòng thành công!')
 
-      // Chuyển sang trang my-booking sau khi đặt phòng thành công.
       setTimeout(() => {
         navigate('/cart')
       }, 2000)
-      navigate('/payment-success')
     } catch (err) {
       console.error(err)
       toast.error('Không thể tạo booking')
@@ -124,10 +123,11 @@ const CheckoutPage = () => {
     }
   }
 
+  if (!hotel) return <div className="text-center mt-20">Loading...</div>
+
   const minutes = Math.floor(timeLeft / 60)
   const seconds = timeLeft % 60
 
-  // VietQR
   const vietQR = `https://img.vietqr.io/image/970436-1016800717-compact2.png?amount=${totalPrice}&addInfo=HotelBooking&accountName=HotelBooking`
 
   return (
@@ -139,24 +139,29 @@ const CheckoutPage = () => {
       </p>
 
       <div className="grid md:grid-cols-2 gap-6">
-        {/* ROOM INFO */}
         <div className="bg-white shadow-lg rounded-xl p-6">
           <h2 className="text-xl font-semibold mb-4">Thông tin phòng</h2>
 
+          {/*  hiển thị ảnh */}
           <img
-            src={hotel.images?.[0] ? `${import.meta.env.VITE_BACKEND_URL}${hotel.images[0]}` : '/room-demo.jpg'}
+            src={
+              hotel?.images?.[0] ? `https://hotel-booking-server-eyeb.onrender.com${hotel.images[0]}` : '/room-demo.jpg'
+            }
             className="rounded-lg mb-4 w-full h-[220px] object-cover"
           />
 
           <p>
             <b>Loại phòng:</b> {hotel.roomType}
           </p>
+
           <p>
             <b>Check-in:</b> {checkInDate}
           </p>
+
           <p>
             <b>Check-out:</b> {checkOutDate}
           </p>
+
           <p>
             <b>Số khách:</b> {guests}
           </p>
@@ -166,7 +171,6 @@ const CheckoutPage = () => {
           <p className="text-lg font-bold text-green-600">Tổng tiền: {totalPrice.toLocaleString()} VND</p>
         </div>
 
-        {/* PAYMENT */}
         <div className="bg-white shadow-lg rounded-xl p-6">
           <h2 className="text-xl font-semibold mb-4">Thông tin khách hàng</h2>
 
@@ -184,10 +188,6 @@ const CheckoutPage = () => {
             className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg w-full mb-3"
           >
             Thanh toán Online
-          </button>
-
-          <button onClick={handleCash} className="bg-gray-400 text-white px-6 py-3 rounded-lg w-full">
-            Thanh toán tại khách sạn
           </button>
 
           {showQR && (
