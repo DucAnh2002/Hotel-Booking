@@ -127,7 +127,7 @@ const bookRoom = async (req, res) => {
     try {
       console.log(" Sending booking email to:", userEmail);
 
-      const imageUrl = `${process.env.SERVER_URL}/upload/rooms/${room.image}`;
+      const imageUrl = `${process.env.SERVER_URL}/uploads/rooms/${room.image}`;
       console.log(" DATA EMAIL:", {
         bookingId: booking._id,
         roomName: room.roomType,
