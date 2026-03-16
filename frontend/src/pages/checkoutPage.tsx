@@ -143,7 +143,10 @@ const CheckoutPage = () => {
         <div className="bg-white shadow-lg rounded-xl p-6">
           <h2 className="text-xl font-semibold mb-4">Thông tin phòng</h2>
 
-          <img src={hotel.images?.[0] || '/room-demo.jpg'} className="rounded-lg mb-4 w-full h-[220px] object-cover" />
+          <img
+            src={hotel.images?.[0] ? `${import.meta.env.VITE_BACKEND_URL}${hotel.images[0]}` : '/room-demo.jpg'}
+            className="rounded-lg mb-4 w-full h-[220px] object-cover"
+          />
 
           <p>
             <b>Loại phòng:</b> {hotel.roomType}

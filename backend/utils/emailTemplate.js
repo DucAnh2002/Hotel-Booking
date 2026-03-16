@@ -78,7 +78,7 @@ const bookingEmailTemplate = ({
   <!-- BUTTON -->
   <div style="text-align:center;margin-top:30px">
 
-  <a href="http://localhost:5173/cart"
+  <a href="${process.env.CLIENT_URL}/cart"
      style="
      background:#0071c2;
      color:white;
@@ -87,7 +87,7 @@ const bookingEmailTemplate = ({
      border-radius:6px;
      font-size:14px;
      display:inline-block
-     ">
+     "
      View My Booking
   </a>
 

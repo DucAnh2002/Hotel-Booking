@@ -37,8 +37,7 @@ app.use("/api/room", roomRoutes);
 app.use("/api/booking", bookingRoutes);
 app.use("/api/payment", paymentRoutes);
 // Static files
-app.use("/upload", express.static("upload"));
-app.use("/uploads", express.static(path.join(__dirname, "upload")));
+app.use("/upload", express.static(path.join(__dirname, "upload")));
 app.get("/", (req, res) => {
   res.send("Server is working!");
 });
