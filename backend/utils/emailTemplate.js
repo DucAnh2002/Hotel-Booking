@@ -87,7 +87,7 @@ const bookingEmailTemplate = ({
      border-radius:6px;
      font-size:14px;
      display:inline-block
-     "
+     ">
      View My Booking
   </a>
 
