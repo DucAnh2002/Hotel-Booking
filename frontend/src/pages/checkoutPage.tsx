@@ -39,7 +39,7 @@ const CheckoutPage = () => {
 
         const data = await res.json()
 
-        setHotel(data)
+        setHotel(data.data)
       } catch (err) {
         console.error(err)
       }
@@ -145,7 +145,9 @@ const CheckoutPage = () => {
           {/*  hiển thị ảnh */}
           <img
             src={
-              hotel?.images?.[0] ? `https://hotel-booking-server-eyeb.onrender.com${hotel.images[0]}` : '/room-demo.jpg'
+              hotel?.image
+                ? `https://hotel-booking-server-eyeb.onrender.com/upload/rooms/${hotel.image}`
+                : '/room-demo.jpg'
             }
             className="rounded-lg mb-4 w-full h-[220px] object-cover"
           />
