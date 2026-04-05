@@ -9,14 +9,19 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendEmail = async (to, subject, html) => {
-  const mailOptions = {
-    from: `"Hotel Booking" <${process.env.EMAIL_USER}>`,
-    to,
-    subject,
-    html,
-  };
+  try {
+    const info = await transporter.sendMail({
+      from: `"Hotel Booking" <${process.env.EMAIL_USER}>`,
+      to,
+      subject,
+      html,
+    });
 
-  await transporter.sendMail(mailOptions);
+    console.log("✅ Email sent:", info.response);
+  } catch (error) {
+    console.error("❌ SEND EMAIL ERROR:", error);
+    throw error;
+  }
 };
 
 module.exports = sendEmail;

@@ -52,7 +52,7 @@ const Cart: React.FC = () => {
 
                 <button
                   onClick={() => removeFromBooking(booking._id)}
-                  className="bg-red-500 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-lg transition self-start"
+                  className="bg-red-500 hover:bg-red-900 text-white font-bold px-4 py-2 rounded-lg transition self-start cursor-pointer"
                 >
                   Cancle
                 </button>

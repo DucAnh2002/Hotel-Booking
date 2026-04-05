@@ -2,14 +2,13 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { useAuth0 } from '@auth0/auth0-react'
-
 const CheckoutPage = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
   const { roomId } = useParams() // lấy id từ url
   const { user, getAccessTokenSilently, isAuthenticated } = useAuth0()
-
+  const API_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
   const state = location.state
 
   if (!state) {
@@ -35,8 +34,9 @@ const CheckoutPage = () => {
   useEffect(() => {
     const fetchRoom = async () => {
       try {
-        const res = await fetch(`https://hotel-booking-server-eyeb.onrender.com/api/room/${roomId}`)
+        // const res = await fetch(`https://hotel-booking-server-eyeb.onrender.com/api/room/${roomId}`)
 
+        const res = await fetch(`${API_URL}/api/room/${roomId}`)
         const data = await res.json()
 
         setHotel(data.data)
@@ -73,7 +73,22 @@ const CheckoutPage = () => {
 
     return () => clearInterval(timer)
   }, [timeLeft, navigate])
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (!isPaid) {
+        e.preventDefault()
+        e.returnValue = ''
+      }
+    }
 
+    window.addEventListener('beforeunload', handleBeforeUnload)
+
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
+  }, [isPaid])
+
+  const handleCash = () => {
+    toast.info('Thanh toán tại khách sạn hiện chưa khả dụng. Vui lòng thanh toán online.')
+  }
   const handleOnline = () => {
     setShowQR(true)
   }
@@ -85,11 +100,10 @@ const CheckoutPage = () => {
     }
 
     try {
-      setIsPaid(true)
-
       const token = await getAccessTokenSilently()
 
-      const res = await fetch(`https://hotel-booking-server-eyeb.onrender.com/api/booking/book-room`, {
+      //   const res = await fetch(`https://hotel-booking-server-eyeb.onrender.com/api/booking/book-room`, {
+      const res = await fetch(`${API_URL}/api/booking/book-room`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -100,7 +114,6 @@ const CheckoutPage = () => {
           checkInDate,
           checkOutDate,
           guests,
-          totalPrice,
           paymentMethod: 'bank_transfer'
         })
       })
@@ -112,7 +125,7 @@ const CheckoutPage = () => {
       }
 
       toast.success('Đặt phòng thành công!')
-
+      setIsPaid(true)
       setTimeout(() => {
         navigate('/cart')
       }, 2000)
@@ -187,18 +200,26 @@ const CheckoutPage = () => {
 
           <button
             onClick={handleOnline}
-            className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg w-full mb-3"
+            className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg w-full mb-3 cursor-pointer"
           >
             Thanh toán Online
           </button>
-
+          <button
+            onClick={handleCash}
+            className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg w-full mb-3 cursor-pointer"
+          >
+            Thanh toán khi nhận phòng
+          </button>
           {showQR && (
             <div className="mt-6 text-center">
               <h3 className="font-semibold mb-3">Quét QR để thanh toán</h3>
 
               <img src={vietQR} className="w-64 mx-auto" />
 
-              <button onClick={handlePaymentSuccess} className="mt-4 bg-blue-600 text-white px-6 py-2 rounded">
+              <button
+                onClick={handlePaymentSuccess}
+                className="mt-4 bg-blue-600 hover:bg-blue-800 text-white px-6 py-2 rounded cursor-pointer"
+              >
                 Tôi đã thanh toán
               </button>
             </div>
