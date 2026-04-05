@@ -43,14 +43,8 @@ const bookRoom = async (req, res) => {
 
     console.log("USER EMAIL:", userEmail);
 
-    const {
-      roomId,
-      checkInDate,
-      checkOutDate,
-      guests,
-      totalPrice,
-      paymentMethod,
-    } = req.body;
+    const { roomId, checkInDate, checkOutDate, guests, paymentMethod } =
+      req.body;
 
     if (!roomId || !checkInDate || !checkOutDate) {
       return res.status(400).json({
@@ -101,6 +95,11 @@ const bookRoom = async (req, res) => {
 
     // lấy thông tin room (để gửi email)
     const room = await Room.findById(roomId);
+    const start = new Date(checkInDate);
+    const end = new Date(checkOutDate);
+
+    const nights = (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24);
+    const totalPrice = nights * room.price;
     console.log("ROOM DATA:", room);
     if (!room) {
       return res.status(404).json({
@@ -148,7 +147,11 @@ const bookRoom = async (req, res) => {
         totalPrice,
         paymentMethod,
       });
-      await sendEmail(userEmail, "Your booking is confirmed", html);
+      try {
+        await sendEmail(userEmail, "Your booking is confirmed", html);
+      } catch (err) {
+        console.error("SEND MAIL FAIL: ", err.message);
+      }
 
       console.log(" Email sent successfully");
     } catch (emailError) {
