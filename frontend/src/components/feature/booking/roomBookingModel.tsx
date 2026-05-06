@@ -56,15 +56,16 @@ const BookingModal: React.FC<BookingModalProps> = ({ hotel, onClose }) => {
     >
       <div
         className="
-          w-full max-w-fit h-full max-h-120
-          rounded-xl bg-white p-6 shadow-lg 
+          w-full max-w-md  max-h-[90vh] overflow-y-auto
+          rounded-2xl bg-white p-6 shadow-xl 
           animate-[fadeIn_0.3s_ease-in-out]
         "
       >
-        <h2 className="mb-2.5 bg-gray-400 text-[28px] text-center font-bold">Đặt phòng: {hotel?.roomType}</h2>
-
-        <div>
-          <label className=" mb-[15px]  block font-bold">Ngày nhận phòng</label>
+        {/* title */}
+        <h2 className="text-xl sm:text-2xl font-bold text-center mb-4">Đặt phòng: {hotel?.roomType}</h2>
+        {/* check-in */}
+        <div className="mb-4">
+          <label className="block font-medium mb-1">Ngày nhận phòng</label>
           <input
             type="date"
             value={checkInDate}
@@ -74,52 +75,43 @@ const BookingModal: React.FC<BookingModalProps> = ({ hotel, onClose }) => {
               setCheckOutDate('') // Reset ngày trả phòng khi ngày nhận phòng thay đổi
             }}
             className="
-              w-full rounded-md border border-gray-300 px-3 py-2 
-              outline-none focus:border-blue-500 
-              focus:ring-1 focus:ring-blue-300
+              w-full rounded-lg border px-3 py-2 
+              focus:ring-2 focus:ring-blue-400 outline-none
             "
           />
         </div>
-
-        <div>
-          <label className=" block font-bold">Ngày trả phòng</label>
+        {/* check-out */}
+        <div className="mb-4">
+          <label className=" block font-medium mb-1">Ngày trả phòng</label>
           <input
             type="date"
             value={checkOutDate}
             min={checkInDate || today} // Ngày trả phòng phải sau ngày nhận phòng
             onChange={e => setCheckOutDate(e.target.value)}
             className="
-              w-full rounded-md border border-black-300 px-3 py-2 
-              outline-none focus:border-blue-500 
-              focus:ring-1 focus:ring-blue-300
+              w-full rounded-lg border px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none
             "
           />
         </div>
 
         <div className="mb-6">
-          <label className="mb-2 block font-bold">Số khách</label>
+          <label className="block font-medium mb-1">Số khách</label>
           <input
             type="number"
             min="1"
             value={guests}
             onChange={e => setGuests(Number(e.target.value))}
             className="
-              w-full max-w-[120px] rounded-md border border-gray-300 
-              px-3 py-2 outline-none 
-              focus:border-blue-500 focus:ring-1 focus:ring-blue-300
+              w-full max-w-[120px] rounded-lg  border px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none
             "
           />
         </div>
-
-        <div className="flex items-center justify-between">
+        {/* button */}
+        <div className="flex gap-3">
           <button
             onClick={handleConfirmBooking}
             className="
-              rounded-lg bg-green-600 px-4 py-2 
-              text-sm font-medium text-white 
-              transition hover:bg-green-800 
-              focus:outline-none focus:ring-2 focus:ring-blue-300
-              hover:scale-120
+              flex-1 bg-green-600 text-white py-3 rounded-xl transition hover:bg-green-700 active:scale-95
             "
           >
             Xác nhận
@@ -128,11 +120,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ hotel, onClose }) => {
           <button
             onClick={onClose}
             className="
-              rounded-lg bg-red-600 px-4 py-2 
-              text-sm font-medium text-black 
-              transition hover:bg-red-900 
-              focus:outline-none focus:ring-2 focus:ring-red-900
-              hover:scale-120
+              flex-1 bg-red-500 text-white py-3 rounded-xl transition hover:bg-red-700 active-scale-95
             "
           >
             Huỷ

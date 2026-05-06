@@ -24,17 +24,26 @@ const FoodCard: React.FC<FoodCardProps> = ({ food }) => {
 
   return (
     <>
-      <div className="bg-[#fff] rounded-[16px] p-4 shadow-[0 8px 24px rgba(0, 0, 0, 0.1)] overflow-hidden transition-transform duration-300 ease-in-out flex flex-col text-left hover:-translate-y-1">
-        <img src={`${url}/upload/foods/${image}`} alt="image" className="w-full h-[180px] object-cover" />
-        <h3 className="text-[1.2rem] font-bold text-center mt-4 mx-4 text-[#222] ">{name}</h3>
-        <p className="mx-4 mb-3 text-[#666] text-center text-[0.95rem] leading-[1.4]">{description}</p>
-        <p className="font-bold mx-4 mb-4 text-[#e53935] text-center">{price.toLocaleString()} VND</p>
-        <button
-          className=" w-full py-2 bg-[#00a86b] cursor-pointer text-white rounded-lg transition-colors duration-300 hover:bg-[#007c50] "
-          onClick={handleAddToCart}
-        >
-          Chọn món
-        </button>
+      <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-duration-300 flex flex-col">
+        <div className="overflow-hidden">
+          <img
+            src={`${url}/upload/foods/${image}`}
+            alt="image"
+            className="w-full h-[180px] object-cover transition duration-300 hover:scale-105"
+          />
+        </div>
+        {/* content */}
+        <div className="p-4 flex flex-col flex-1">
+          <h3 className="font-semibold text-lg text-gray-800 mb-1 line-clamp-1">{name}</h3>
+          <p className="text-sm text-gray-500 line-clamp-2 mb-2">{description}</p>
+          <p className="font-bold text-red-500 mb-4">{price.toLocaleString()} VND</p>
+          <button
+            className=" mt-auto w-full py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 transition active:scale-95 "
+            onClick={handleAddToCart}
+          >
+            Chọn món
+          </button>
+        </div>
       </div>
 
       {/* Hiển thị modal khi isOrder = true */}

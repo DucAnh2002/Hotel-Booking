@@ -5,17 +5,15 @@ interface StarsProps {
 }
 
 const Stars: React.FC<StarsProps> = ({ count }) => {
-  const starsArray = []
-
-  for (let i = 0; i < 5; i++) {
-    starsArray.push(
-      <span key={i} className={`text-[1.1rem] ${i < count ? 'text-[#f5a623]' : 'text-[#ccc]'}`}>
-        &#9733;
-      </span>
-    )
-  }
-
-  return <div className="flex gap-1 mb-2.5">{starsArray}</div>
+  return (
+    <div className="flex gap-1 mb-2">
+      {[...Array(5)].map((_, i) => (
+        <span key={i} className={`text-sm ${i < count ? 'text-yellow-400' : 'text-gray-300'}`}>
+          ★
+        </span>
+      ))}
+    </div>
+  )
 }
 
 export default Stars
