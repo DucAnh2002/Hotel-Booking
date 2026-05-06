@@ -13,10 +13,10 @@ const CheckoutPage = () => {
 
   if (!state) {
     return (
-      <div className="text-center mt-20">
-        <p>Không có thông tin đặt phòng</p>
-        <button onClick={() => navigate('/')} className="mt-4 bg-blue-600 text-white px-4 py-2 rounded">
-          Quay về trang chủ
+      <div className="flex flex-col items-center justify-center h-[60vh] text-center">
+        <p className="text-gray-500">Không có thông tin đặt phòng</p>
+        <button onClick={() => navigate('/')} className="mt-4 px-5 py-2  bg-blue-600 text-white rounded-lg">
+          Về trang chủ
         </button>
       </div>
     )

@@ -44,76 +44,71 @@ const FoodOrderModal: React.FC<FoodOrderModalProps> = ({ food, onClose }) => {
   const foodTotalPrice = food.price * quantity
 
   return (
-    <div className="fixed top-0 left-0 w-screen h-screen  bg-black/50 flex items-center justify-center z-[999]">
-      <div className="bg-white p-2  rounded-[10px] w-[90%] max-w-[360px] h-[85%] max-h-[900px] shadow-[0_4px_10px_rgba(0,0,0,0.3)] text-[0.95rem] flex flex-col items-center animate-[fadeIn_0.3s_ease-in-out]">
-        <h2 className="!text-[1.2rem] font-bold !mb-2 text-center ">{food.name}</h2>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4" onClick={onClose}>
+      <div
+        className="bg-white w-full max-w-[380px] rounded-2xl shadow-xl max-h-[90vh] overflow-y-auto flex flex-col items-center animate-[fadeIn_0.3s_ease-in-out]"
+        onClick={e => e.stopPropagation()}
+      >
+        <h2 className="text-lg font-bold mb-2 text-center">{food.name}</h2>
 
         <img
           src={`${url}/upload/foods/${food.image}`}
           alt={food.name}
-          className="w-full rounded-lg mb-2 max-h-[150px] object-cover"
+          className="w-full h-[150px] object-cover rounded-xl mb-3"
         />
 
-        {food.description && <p className="!mb-0 text-center">{food.description}</p>}
+        {food.description && <p className="text-sm text-gray-600 text-center mb-2">{food.description}</p>}
 
-        <p className="!mb-0 text-center">Tổng giá: {foodTotalPrice.toLocaleString()} VND</p>
+        <p className="text-center font-semibold mb-4">Tổng giá: {foodTotalPrice.toLocaleString()} VND</p>
 
         {/* Form Group */}
-        <div className="!mb-1 w-full">
-          <label className="font-medium">Số lượng</label>
+        <div className="w-full space-y-3">
+          <label className="block text-sm font-medium mb-1">Số lượng</label>
           <input
             type="number"
             min={1}
             value={quantity}
             onChange={e => setQuantity(Number(e.target.value))}
-            className="w-full text-[0.9rem] p-2 border border-gray-300 rounded-md mt-1"
+            className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
           />
 
-          <label className="font-medium">Ngày giao</label>
+          <label className="block text-sm font-medium mb-1">Ngày giao</label>
           <input
             type="date"
             value={deliveryDate}
             onChange={e => setDeliveryDate(e.target.value)}
-            className="w-full text-[0.9rem] p-2 border border-gray-300 rounded-md mt-1"
+            className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
           />
 
-          <label className="font-medium">Thời gian giao</label>
+          <label className="block text-sm font-medium mb-1">Thời gian giao</label>
           <input
             type="time"
             value={deliveryTime}
             onChange={e => setDeliveryTime(e.target.value)}
-            className="w-full text-[0.9rem] p-2 border border-gray-300 rounded-md mt-1"
+            className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
           />
 
-          <label className="font-medium">Ghi chú</label>
+          <label className="block text-sm font-medium mb-1">Ghi chú</label>
           <textarea
             rows={2}
             value={note}
             onChange={e => setNote(e.target.value)}
-            className="w-full text-[0.9rem] p-2 border border-gray-300 rounded-md mt-1 resize-y min-h-[60px]"
+            className="w-full border rounded-lg px-3 py-2 resize-none focus:ring-2 focus:ring-blue-400 outline-none"
           />
         </div>
 
         {/* Button Group */}
-        <div className="flex justify-between w-full mt-1 gap-5">
+        <div className="flex w-full mt-5 gap-3">
           <button
             onClick={handleConfirmOrder}
-            className="rounded-lg bg-green-600 px-4 py-2 
-              text-sm font-medium text-white 
-              transition hover:bg-green-800 
-              focus:outline-none focus:ring-2 focus:ring-blue-300
-              hover:scale-120"
+            className="flex-1 bg-green-600 text-white py-3 rounded-xl transition hover:bg-green-700 active:scale-95 "
           >
             Xác nhận
           </button>
 
           <button
             onClick={onClose}
-            className="rounded-lg bg-red-600 px-4 py-2 
-              text-sm font-medium text-black 
-              transition hover:bg-red-900 
-              focus:outline-none focus:ring-2 focus:ring-red-900
-              hover:scale-120"
+            className="flex-1 bg-red-500 text-white py-3 rounded-xl transition hover:bg-red-700 active:scale-95"
           >
             Hủy
           </button>

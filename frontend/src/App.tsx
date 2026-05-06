@@ -9,6 +9,7 @@ import CheckoutPage from './pages/checkoutPage'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
+import ScrollToTop from './components/common/ScrollToTop'
 import 'react-toastify/dist/ReactToastify.css'
 
 const App: React.FC = () => {
@@ -23,6 +24,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
+      <ScrollToTop />
 
       <main className="flex-1">
         <Routes>
