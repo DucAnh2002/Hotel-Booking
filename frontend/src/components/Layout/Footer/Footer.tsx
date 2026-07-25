@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
         {/* Brand */}
         <div>
           <h2 className="text-lg sm:text-xl font-semibold text-[#ffcc00] mb-3">Nha Trang Hotel</h2>
-          <img src={assets.logo3} alt="Logo" className="w-[160px] sm:w-[220px]  object-contain mb-3" />
+          <img src={assets.logo4} alt="Logo" className="w-[160px] sm:w-[220px]  object-contain mb-3" />
           <p>Đặt phòng nhanh chóng - tiện lợi - an toàn.</p>
         </div>
 

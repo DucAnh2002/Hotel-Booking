@@ -30,40 +30,51 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between h-[70px] px-4 sm:px-6 relative">
         {/* Logo */}
-        <img src={assets.logo4} alt="Logo" className="h-12 object-contain" />
+        <img src={assets.logo4} alt="Logo" className="h-18  object-contain" />
 
         {/* Links; Desktop menu */}
-        <nav className="hidden md:flex gap-6 font-bold">
-          <Link to="/">Home</Link>
-          <Link to="/catering">Catering</Link>
-          <Link to="/rooms">Rooms</Link>
-          <a href="#footer">Contact</a>
+        <nav className="hidden md:flex gap-6 font-bold text-lg">
+          <Link to="/">Trang chủ</Link>
+          <Link to="/rooms">Phòng</Link>
+          <Link to="/catering">Ẩm thực</Link>
+          <Link to="/tienich">Tiện ích</Link>
+          <a href="#footer">Liên hệ</a>
         </nav>
 
         {/* Auth area */}
+
         <div className="hidden md:flex items-center gap-3">
-          {isAuthenticated ? (
-            <>
-              {/* <span className="text-[18px] text-gray-800 hidden sm:inline">Xin chào, {user?.name}</span> */}
-              <img src={user?.picture} alt="Avatar" className="w-8 h-8 rounded-full" />
+          <div>
+            {isAuthenticated ? (
+              <>
+                {/* <span className="text-[18px] text-gray-800 hidden sm:inline">Xin chào, {user?.name}</span> */}
+                <img src={user?.picture} alt="Avatar" className="w-8 h-8 rounded-full" />
+                <button
+                  onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
+                  className="px-3 py-1  bg-blue-600 text-white hover:bg-[#043569] transition-colors rounded"
+                  type="button"
+                >
+                  Đăng xuất
+                </button>
+              </>
+            ) : (
               <button
-                onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
-                className="px-3 py-1  bg-blue-600 text-white hover:bg-[#043569] transition-colors rounded"
+                onClick={() => loginWithRedirect()}
+                className="px-3 py-1  bg-[#007bff] text-white hover:bg-[#043569] transition-colors rounded-4xl"
                 type="button"
               >
-                Đăng xuất
+                Đăng nhập
               </button>
-            </>
-          ) : (
-            <button
-              onClick={() => loginWithRedirect()}
-              className="px-3 py-1  bg-[#007bff] text-white hover:bg-[#043569] transition-colors rounded"
-              type="button"
-            >
-              Đăng nhập
+            )}
+          </div>
+
+          <div className="gap-2">
+            <button className="px-3 py-1 bg-amber-500 text-white hover:bg-amber-600 transition-colors rounded-4xl">
+              Đặt phòng ngay
             </button>
-          )}
+          </div>
         </div>
+
         {/* Mobile menu button */}
         <button className="md:hidden text-2xl z-[999] relative" onClick={() => setOpen(!open)}>
           {open ? '✕' : '☰'}
