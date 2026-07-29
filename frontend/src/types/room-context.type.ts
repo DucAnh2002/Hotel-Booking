@@ -1,5 +1,5 @@
-import type { RoomType } from './roomType'
-import type { BookingType } from './bookingType'
+import type { RoomType } from './room.type'
+import type { BookingType } from './booking.type'
 import type { ReactNode } from 'react'
 
 export interface RoomContextType {

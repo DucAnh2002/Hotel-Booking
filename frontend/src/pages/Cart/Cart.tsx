@@ -1,8 +1,8 @@
 import { useEffect, useContext } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { RoomContext, FoodContext } from '../../context'
-import type { FoodOrder } from '../../types/foodTypes'
-import type { BookingType } from '../../types/bookingType'
+import type { FoodOrder } from '../../types/food.types'
+import type { BookingType } from '../../types/booking.type'
 
 const Cart: React.FC = () => {
   const { isAuthenticated } = useAuth0()

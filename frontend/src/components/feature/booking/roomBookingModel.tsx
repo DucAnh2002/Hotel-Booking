@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
 import { toast } from 'react-toastify'
 import { RoomContext } from '../../../context'
-import type { RoomType } from '../../../types/roomType'
+import type { RoomType } from '../../../types/room.type'
 import { useNavigate } from 'react-router-dom'
 interface BookingModalProps {
   hotel: RoomType

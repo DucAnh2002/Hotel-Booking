@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import FoodOrderModal from '../../feature/booking/foodOrderModel'
 import { useAuth0 } from '@auth0/auth0-react'
-import type { FoodItem } from '../../../types/foodTypes'
+import type { FoodItem } from '../../../types/food.types'
 
 // Định nghĩa interface cho props của FoodCard
 interface FoodCardProps {

@@ -5,4 +5,7 @@ export interface RoomType {
   rating: number
   address: string
   price: number
+  category: 'room'
+  createAt: string
+  updateAt: string
 }

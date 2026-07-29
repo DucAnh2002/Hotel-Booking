@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import HotelCard from './HotelCard'
 import { RoomContext } from '../../../context'
-import type { RoomType } from '../../../types/roomType'
+import type { RoomType } from '../../../types/room.type'
 
 const HotelsDisplay: React.FC = () => {
   const navigate = useNavigate()
@@ -22,7 +22,7 @@ const HotelsDisplay: React.FC = () => {
       {/* Grid convert */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg-grid-cols-4 gap-6 ">
         {Array.isArray(roomList) && roomList.length > 0 ? (
-          roomList.slice(0, 4).map((room: RoomType) => <HotelCard key={room._id} hotel={room} />)
+          roomList.slice(0, 4).map((room: RoomType) => <HotelCard key={room._id} room={room} />)
         ) : (
           <p className="text-gray-500 animate-pulse">Đang tải danh sách phòng...</p>
         )}
