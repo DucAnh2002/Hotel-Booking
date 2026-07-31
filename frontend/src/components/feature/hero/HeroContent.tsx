@@ -33,7 +33,7 @@ const HeroContent = () => {
             </div>
           </div>
 
-          <button
+          {/* <button
             className="
                         mt-10
                         flex
@@ -50,7 +50,7 @@ const HeroContent = () => {
           >
             Khám phá phòng
             <ArrowRight size={20} />
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

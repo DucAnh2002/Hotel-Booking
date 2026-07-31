@@ -1,4 +1,5 @@
 import Header from '../../components/Layout/Header/Header'
+import BookingSearch from '../../components/feature/search/BookingSearch'
 import HotelsDisplay from '../../components/feature/hotel/HotelsDisplay'
 import FoodsOrder from '../../components/feature/food/FoodsOrder'
 import FloatingCart from '../../components/feature/cart/FloatingCart'
@@ -8,6 +9,9 @@ const Home: React.FC = () => {
     <div>
       <Header />
       <HeroBanner />
+      <div className="relative z-40 -mt-20 lg:-mt-28">
+        <BookingSearch />
+      </div>
       <HotelsDisplay />
       <FoodsOrder />
       <FloatingCart />
