@@ -1,52 +1,34 @@
 import { useContext, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { BedDouble, CalendarDays, Search, Users } from 'lucide-react'
 
 import { RoomContext } from '../../../context'
 import type { RoomContextType } from '../../../types/room-context.type'
+import type { BookingSearchState } from './booking.types'
+import { MIN_GUESTS, MAX_GUESTS } from './booking.constants'
+import {
+  formatDate,
+  addDays,
+  isAfterDate,
+  getDefaultSearchState,
+  validateSearch,
+  buildSearchQuery
+} from './booking.utils'
 import { toast } from 'react-toastify'
 
 import { Minus, Plus } from 'lucide-react'
 
 const BookingSearch = () => {
   const { roomList } = useContext(RoomContext) as RoomContextType
+  const navigate = useNavigate()
 
-  interface BookingSearchState {
-    roomId: string
-    checkInDate: string
-    checkOutDate: string
-    guests: number
-  }
-
-  const formatDate = (date: Date): string => {
-    return date.toISOString().split('T')[0]
-  }
-
-  const today = new Date()
-  const tomorrow = new Date(today)
-  tomorrow.setDate(tomorrow.getDate() + 1)
-
-  const [searchData, setSearchData] = useState<BookingSearchState>({
-    roomId: '',
-    checkInDate: formatDate(today),
-    checkOutDate: formatDate(tomorrow),
-    guests: 2
-  })
+  const [searchData, setSearchData] = useState(getDefaultSearchState())
 
   const handleChange = <K extends keyof BookingSearchState>(field: K, value: BookingSearchState[K]) => {
     setSearchData(prev => ({
       ...prev,
       [field]: value
     }))
-  }
-
-  const addDays = (date: string, days: number) => {
-    const result = new Date(date)
-    result.setDate(result.getDate() + days)
-    return formatDate(result)
-  }
-
-  const isAfterDate = (start: string, end: string) => {
-    return new Date(start) < new Date(end)
   }
 
   const handleCheckInchange = (value: string) => {
@@ -89,8 +71,6 @@ const BookingSearch = () => {
     return [...map.values()]
   }, [roomList])
 
-  const MIN_GUESTS = 1
-  const MAX_GUESTS = 10
   const increaseGuests = () => {
     setSearchData(prev => ({
       ...prev,
@@ -105,33 +85,15 @@ const BookingSearch = () => {
     }))
   }
 
-  const validateSearch = () => {
-    if (!searchData.roomId) {
-      toast.warning('Vui lòng chọn loại phòng.')
-      return false
-    }
-
-    if (!searchData.checkInDate) {
-      toast.warning('Vui lòng chọn ngày nhận phòng.')
-      return false
-    }
-
-    if (!searchData.checkOutDate) {
-      toast.warning('Vui lòng chọn ngày trả phòng.')
-      return false
-    }
-
-    if (new Date(searchData.checkOutDate) <= new Date(searchData.checkInDate)) {
-      toast.warning('Ngày trả phòng phải sau ngày nhận phòng.')
-      return false
-    }
-
-    return true
-  }
   const handleSearch = () => {
-    if (!validateSearch()) return
+    const result = validateSearch(searchData)
+    if (!result.valid) {
+      toast.warning(result.message)
+      return
+    }
 
-    console.log('Booking Search:', searchData)
+    const query = buildSearchQuery(searchData)
+    navigate(`/rooms?${query}`)
   }
 
   return (
@@ -226,7 +188,7 @@ const BookingSearch = () => {
               <input
                 id="checkIn"
                 type="date"
-                min={formatDate(today)}
+                min={formatDate(new Date())}
                 value={searchData.checkInDate}
                 onChange={e => handleCheckInchange(e.target.value)}
                 className="
