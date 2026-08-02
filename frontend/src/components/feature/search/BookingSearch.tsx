@@ -3,15 +3,75 @@ import { BedDouble, CalendarDays, Search, Users } from 'lucide-react'
 
 import { RoomContext } from '../../../context'
 import type { RoomContextType } from '../../../types/room-context.type'
+import { toast } from 'react-toastify'
+
+import { Minus, Plus } from 'lucide-react'
 
 const BookingSearch = () => {
   const { roomList } = useContext(RoomContext) as RoomContextType
 
-  const [selectedRoom, setSelectedRoom] = useState('')
-  const [checkInDate, setCheckInDate] = useState('')
-  const [checkOutDate, setCheckOutDate] = useState('')
-  const [guests, setGuests] = useState(2)
+  interface BookingSearchState {
+    roomId: string
+    checkInDate: string
+    checkOutDate: string
+    guests: number
+  }
 
+  const formatDate = (date: Date): string => {
+    return date.toISOString().split('T')[0]
+  }
+
+  const today = new Date()
+  const tomorrow = new Date(today)
+  tomorrow.setDate(tomorrow.getDate() + 1)
+
+  const [searchData, setSearchData] = useState<BookingSearchState>({
+    roomId: '',
+    checkInDate: formatDate(today),
+    checkOutDate: formatDate(tomorrow),
+    guests: 2
+  })
+
+  const handleChange = <K extends keyof BookingSearchState>(field: K, value: BookingSearchState[K]) => {
+    setSearchData(prev => ({
+      ...prev,
+      [field]: value
+    }))
+  }
+
+  const addDays = (date: string, days: number) => {
+    const result = new Date(date)
+    result.setDate(result.getDate() + days)
+    return formatDate(result)
+  }
+
+  const isAfterDate = (start: string, end: string) => {
+    return new Date(start) < new Date(end)
+  }
+
+  const handleCheckInchange = (value: string) => {
+    setSearchData(prev => {
+      let nextCheckOut = prev.checkInDate
+
+      // Nếu checkout <= checkin thì tự động chuyển checkout sang ngày tiếp theo
+      if (!isAfterDate(value, prev.checkOutDate)) {
+        nextCheckOut = addDays(value, 1)
+      }
+      return {
+        ...prev,
+        checkInDate: value,
+        checkOutDate: nextCheckOut
+      }
+    })
+  }
+
+  const handleCheckoutChange = (value: string) => {
+    if (!isAfterDate(searchData.checkInDate, value)) {
+      toast.warning('Ngày trả phòng phải sau ngày nhận phòng!')
+      return
+    }
+    handleChange('checkOutDate', value)
+  }
   /**
    * Loại bỏ room trùng nhau.
    * Nếu backend có nhiều Deluxe Room
@@ -28,6 +88,51 @@ const BookingSearch = () => {
 
     return [...map.values()]
   }, [roomList])
+
+  const MIN_GUESTS = 1
+  const MAX_GUESTS = 10
+  const increaseGuests = () => {
+    setSearchData(prev => ({
+      ...prev,
+      guests: Math.min(prev.guests + 1, MAX_GUESTS)
+    }))
+  }
+
+  const decreaseGuests = () => {
+    setSearchData(prev => ({
+      ...prev,
+      guests: Math.max(prev.guests - 1, MIN_GUESTS)
+    }))
+  }
+
+  const validateSearch = () => {
+    if (!searchData.roomId) {
+      toast.warning('Vui lòng chọn loại phòng.')
+      return false
+    }
+
+    if (!searchData.checkInDate) {
+      toast.warning('Vui lòng chọn ngày nhận phòng.')
+      return false
+    }
+
+    if (!searchData.checkOutDate) {
+      toast.warning('Vui lòng chọn ngày trả phòng.')
+      return false
+    }
+
+    if (new Date(searchData.checkOutDate) <= new Date(searchData.checkInDate)) {
+      toast.warning('Ngày trả phòng phải sau ngày nhận phòng.')
+      return false
+    }
+
+    return true
+  }
+  const handleSearch = () => {
+    if (!validateSearch()) return
+
+    console.log('Booking Search:', searchData)
+  }
 
   return (
     <section className="relative z-40 mx-auto w-full max-w-7xl px-5">
@@ -77,8 +182,8 @@ const BookingSearch = () => {
 
               <select
                 id="room"
-                value={selectedRoom}
-                onChange={e => setSelectedRoom(e.target.value)}
+                value={searchData.roomId}
+                onChange={e => handleChange('roomId', e.target.value)}
                 className="
                   w-full
                   bg-transparent
@@ -121,8 +226,9 @@ const BookingSearch = () => {
               <input
                 id="checkIn"
                 type="date"
-                value={checkInDate}
-                onChange={e => setCheckInDate(e.target.value)}
+                min={formatDate(today)}
+                value={searchData.checkInDate}
+                onChange={e => handleCheckInchange(e.target.value)}
                 className="
                   w-full
                   bg-transparent
@@ -158,8 +264,9 @@ const BookingSearch = () => {
               <input
                 id="checkOut"
                 type="date"
-                value={checkOutDate}
-                onChange={e => setCheckOutDate(e.target.value)}
+                min={addDays(searchData.checkInDate, 1)}
+                value={searchData.checkOutDate}
+                onChange={e => handleCheckoutChange(e.target.value)}
                 className="
                   w-full
                   bg-transparent
@@ -190,22 +297,29 @@ const BookingSearch = () => {
                 focus-within:border-amber-500
               "
             >
-              <Users size={20} className="text-amber-500" />
+              <Users size={18} className="text-amber-500" />
 
-              <input
-                id="guests"
-                type="number"
-                min={1}
-                max={10}
-                value={guests}
-                onChange={e => setGuests(Number(e.target.value))}
-                className="
-                  w-full
-                  bg-transparent
-                  outline-none
-                  text-gray-700
-                "
-              />
+              {/* <div className="flex items-center justify-between rounded-xl border border-gray-200 px-3 py-2"> */}
+              <button
+                type="button"
+                onClick={decreaseGuests}
+                disabled={searchData.guests <= MIN_GUESTS}
+                className="rounded-lg p-2 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                <Minus size={10} />
+              </button>
+
+              <span className="text-lg font-semibold">{searchData.guests}</span>
+
+              <button
+                type="button"
+                onClick={increaseGuests}
+                disabled={searchData.guests >= MAX_GUESTS}
+                className="rounded-lg p-2 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                <Plus size={10} />
+              </button>
+              {/* </div> */}
             </div>
           </div>
 
@@ -213,6 +327,7 @@ const BookingSearch = () => {
           <div className="flex items-end">
             <button
               type="button"
+              onClick={handleSearch}
               className="
                 flex
                 h-[56px]
