@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import FoodCard from './FoodCard'
 import { FoodContext } from '../../../context'
 
-import type { FoodItem, FoodContextType } from '../../../types/foodTypes'
+import type { FoodItem, FoodContextType } from '../../../types/food.types'
 
 const FoodsOrder: React.FC = () => {
   const navigate = useNavigate()

@@ -6,9 +6,9 @@ import { toast } from 'react-toastify'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 
-import type { RoomType } from '../types/roomType'
-import type { BookingType } from '../types/bookingType'
-import type { RoomProviderProps } from '../types/roomContextType'
+import type { RoomType } from '../types/room.type.ts'
+import type { BookingType } from '../types/booking.type.ts'
+import type { RoomProviderProps } from '../types/room-context.type.ts'
 
 const RoomContextProvider = ({ children }: RoomProviderProps) => {
   const [roomList, setRoomList] = useState<RoomType[]>([])

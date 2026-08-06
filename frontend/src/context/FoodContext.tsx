@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 
-import type { FoodOrder, FoodItem, FoodContextType, OrderFoodInput } from '../types/foodTypes'
+import type { FoodOrder, FoodItem, FoodContextType, OrderFoodInput } from '../types/food.types'
 
 interface ProviderProps {
   children: React.ReactNode

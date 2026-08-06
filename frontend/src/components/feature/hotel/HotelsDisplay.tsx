@@ -1,44 +1,72 @@
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import HotelCard from './HotelCard'
-import { RoomContext } from '../../../context'
-import type { RoomType } from '../../../types/roomType'
 
-const HotelsDisplay: React.FC = () => {
+import HotelCard from './HotelCard'
+
+import { RoomContext } from '../../../context'
+
+import type { RoomType } from '../../../types/room.type'
+
+const FEATURE_ROOM_LIMIT = 4
+
+const HotelsDisplay = () => {
   const navigate = useNavigate()
+
   const { roomList } = useContext(RoomContext) as { roomList: RoomType[] }
 
-  return (
-    <div
-      className="
-  py-12 px-4 max-w-6xl mx-auto text-center 
-      "
-    >
-      <h2 className="text-2xl sm:text-3xl font-bold mb-3">Không gian lưu trú lý tưởng</h2>
+  const featuredRooms = roomList.slice(0, FEATURE_ROOM_LIMIT)
 
-      <p className="max-w-xl mx-auto mb-8 text-gray-600 text-sm sm:text-base">
-        Trải nghiệm phòng nghỉ cao cấp với đầy đủ tiện nghi và thiết kế hiện đại.
-      </p>
+  const handleViewMore = () => {
+    navigate('/rooms')
+  }
+  return (
+    <section className="mx-auto max-w-6xl px-4 py-12">
+      <header className="mb-8 text-center">
+        <h2 className="mb-3 text-2xl font-bold sm:text-3xl">Không gian lưu trú lý tưởng</h2>
+        <p className="mx-auto max-w-xl text-sm text-gray-600 sm:text-base">
+          Trải nghiệm phòng nghỉ cao cấp với đầy đủ tiện nghi và thiết kế hiện đại.
+        </p>
+      </header>
+
       {/* Grid convert */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg-grid-cols-4 gap-6 ">
+      {featuredRooms.length > 0 ? (
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {featuredRooms.map(room => (
+            <HotelCard key={room._id} hotel={room} />
+          ))}
+        </div>
+      ) : (
+        <div className="py-16 text-center">
+          <p className="text-gray-500 animate-pulse">Đang tải danh sách phòng...</p>
+        </div>
+      )}
+
+      {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg-grid-cols-4 gap-6 ">
         {Array.isArray(roomList) && roomList.length > 0 ? (
-          roomList.slice(0, 4).map((room: RoomType) => <HotelCard key={room._id} hotel={room} />)
+          roomList.slice(0, 4).map((room: RoomType) => <HotelCard key={room._id} room={room} />)
         ) : (
           <p className="text-gray-500 animate-pulse">Đang tải danh sách phòng...</p>
         )}
-      </div>
+      </div> */}
 
-      <div className="mt-8 text-center">
+      <div className="mt-10 flex  justify-center">
         <button
-          onClick={() => navigate('/rooms')}
+          type="button"
+          onClick={handleViewMore}
           className="
-            mt-10 px-6 bg-black text-white rounded-xl hover:bg-gray-800 transition
-          "
+            rounded-xl
+            bg-black
+            px-6
+            py-3
+            text-white
+            transition-colors
+            duration-300
+            hover:bg-gray-800"
         >
-          Xem thêm khách sạn &raquo;
+          Xem thêm phòng &raquo;
         </button>
       </div>
-    </div>
+    </section>
   )
 }
 

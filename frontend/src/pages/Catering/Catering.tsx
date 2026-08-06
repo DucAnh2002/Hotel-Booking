@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { FoodContext } from '../../context'
 import FloatingCart from '../../components/feature/cart/FloatingCart'
 import FoodCard from '../../components/feature/food/FoodCard'
-import type { FoodItem, FoodContextType } from '../../types/foodTypes'
+import type { FoodItem, FoodContextType } from '../../types/food.types'
 
 const Catering: React.FC = () => {
   const { foodList } = useContext(FoodContext) as FoodContextType

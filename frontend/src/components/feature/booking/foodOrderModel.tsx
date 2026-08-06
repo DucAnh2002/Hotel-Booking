@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 import { FoodContext } from '../../../context'
 
 // Import type đã khai báo
-import type { FoodItem, FoodContextType, OrderFoodInput } from '../../../types/foodTypes'
+import type { FoodItem, FoodContextType, OrderFoodInput } from '../../../types/food.types'
 
 interface FoodOrderModalProps {
   food: FoodItem
