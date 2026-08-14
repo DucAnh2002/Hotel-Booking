@@ -1,5 +1,5 @@
 import type { RoomType } from '../../../types/room.type'
-import type { RoomFilterState } from './room.type'
+import type { RoomFilterState } from './room.types'
 import { DEFAULT_MAX_PRICE, DEFAULT_MIN_PRICE } from './room.constants'
 
 export const getDefaultRoomFilter = (): RoomFilterState => ({
