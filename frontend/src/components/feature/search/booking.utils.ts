@@ -112,8 +112,8 @@ export const buildRoomSearchParams = ({
 export const getRoomSearchParams = (searchParams: URLSearchParams) => {
   return {
     roomType: searchParams.get('roomType') ?? '',
-    checkIn: searchParams.get('checkIn') ?? '',
-    checkOut: searchParams.get('checkOut') ?? '',
+    checkInDate: searchParams.get('checkInDate') ?? '',
+    checkOutDate: searchParams.get('checkOutDate') ?? '',
     guests: Number(searchParams.get('guests') ?? 1)
   }
 }

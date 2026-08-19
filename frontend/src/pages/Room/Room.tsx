@@ -9,34 +9,37 @@ import { RoomFilter, RoomHeader, RoomList, RoomPagination, RoomSort } from '../.
 
 import type { RoomFilterState, RoomSortOption } from '../../components/feature/room/room.types'
 
-import { filterRooms, getDefaultRoomFilter, sortRooms } from '../../components/feature/room/room.utils'
+import {
+  filterRooms,
+  getDefaultRoomFilter,
+  getRoomFilterFromSearchParams,
+  buildRoomFilterSearchParams,
+  isValidPriceRange,
+  sortRooms
+} from '../../components/feature/room/room.utils'
 
 import { ROOMS_PER_PAGE } from '../../components/feature/room/room.constants'
-
-import { getRoomSearchParams } from '../../components/feature/search/booking.utils'
 
 const Room = () => {
   const { roomList } = useContext(RoomContext)
 
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const searchData = useMemo(() => getRoomSearchParams(searchParams), [searchParams])
-
-  const [filters, setFilters] = useState<RoomFilterState>(() => ({
-    ...getDefaultRoomFilter(),
-    roomType: searchData.roomType
-  }))
+  const [filters, setFilters] = useState<RoomFilterState>(() => getRoomFilterFromSearchParams(searchParams))
 
   const [sortBy, setSortBy] = useState<RoomSortOption>('default')
 
   const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
-    setFilters(prev => ({
-      ...prev,
-      roomType: searchData.roomType
-    }))
-  }, [searchData.roomType])
+    const nextParams = buildRoomFilterSearchParams(filters, searchParams)
+
+    if (nextParams.toString() !== searchParams.toString()) {
+      setSearchParams(nextParams, {
+        replace: true
+      })
+    }
+  }, [filters, searchParams, setSearchParams])
 
   const handleFilterChange = <K extends keyof RoomFilterState>(field: K, value: RoomFilterState[K]) => {
     setFilters(prev => ({
@@ -57,6 +60,10 @@ const Room = () => {
     setCurrentPage(1)
   }
 
+  const hasValidPriceRange = useMemo(() => {
+    return isValidPriceRange(filters.minPrice, filters.maxPrice)
+  }, [filters.minPrice, filters.maxPrice])
+
   const roomTypes = useMemo(() => {
     const uniqueRoomTypes = new Set(roomList.map(room => room.roomType))
 
@@ -64,8 +71,12 @@ const Room = () => {
   }, [roomList])
 
   const filteredRooms = useMemo(() => {
+    if (!hasValidPriceRange) {
+      return []
+    }
+
     return filterRooms(roomList, filters)
-  }, [roomList, filters])
+  }, [roomList, filters, hasValidPriceRange])
 
   const sortedRooms = useMemo(() => {
     return sortRooms(filteredRooms, sortBy)
@@ -90,11 +101,18 @@ const Room = () => {
     }
   }, [currentPage, totalPages])
 
+  const priceError = hasValidPriceRange ? undefined : 'Khoảng giá không hợp lệ'
   return (
     <div className="min-h-screen bg-gray-50 pt-24 pb-16">
       <RoomHeader />
 
-      <RoomFilter filters={filters} roomTypes={roomTypes} onChange={handleFilterChange} onReset={resetFilters} />
+      <RoomFilter
+        filters={filters}
+        roomTypes={roomTypes}
+        onChange={handleFilterChange}
+        onReset={resetFilters}
+        priceError={priceError}
+      />
 
       <main className="mx-auto w-full max-w-7xl px-6">
         <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

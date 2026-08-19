@@ -7,9 +7,10 @@ interface RoomFilterProps {
   roomTypes: string[]
   onChange: <K extends keyof RoomFilterState>(field: K, value: RoomFilterState[K]) => void
   onReset: () => void
+  priceError?: string
 }
 
-const RoomFilter = ({ filters, roomTypes, onChange, onReset }: RoomFilterProps) => {
+const RoomFilter = ({ filters, roomTypes, onChange, onReset, priceError }: RoomFilterProps) => {
   return (
     <section className="mx-auto mb-8 max-w-7xl px-6">
       <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
@@ -135,7 +136,7 @@ const RoomFilter = ({ filters, roomTypes, onChange, onReset }: RoomFilterProps) 
               "
             />
           </div>
-
+          {priceError && <p className="mt-4 text-sm font-medium text-red-500">{priceError}</p>}
           {/* Maximum Price */}
           <div className="space-y-2">
             <label htmlFor="maxPrice" className="text-sm font-medium text-gray-700">
@@ -163,6 +164,7 @@ const RoomFilter = ({ filters, roomTypes, onChange, onReset }: RoomFilterProps) 
               "
             />
           </div>
+          {priceError && <p className="mt-4 text-sm font-medium text-red-500">{priceError}</p>}
         </div>
       </div>
     </section>
