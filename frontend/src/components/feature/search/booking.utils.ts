@@ -77,3 +77,43 @@ export const buildSearchQuery = (searchData: BookingSearchState) => {
   params.set('guests', searchData.guests.toString())
   return params.toString()
 }
+
+export const buildRoomSearchParams = ({
+  roomType,
+  checkInDate,
+  checkOutDate,
+  guests
+}: {
+  roomType: string
+  checkInDate: string
+  checkOutDate: string
+  guests: number
+}) => {
+  const params = new URLSearchParams()
+
+  if (roomType) {
+    params.set('roomType', roomType)
+  }
+
+  if (checkInDate) {
+    params.set('checkInDate', checkInDate)
+  }
+
+  if (checkOutDate) {
+    params.set('checkOutDate', checkOutDate)
+  }
+
+  if (guests) {
+    params.set('guests', String(guests))
+  }
+  return params.toString()
+}
+
+export const getRoomSearchParams = (searchParams: URLSearchParams) => {
+  return {
+    roomType: searchParams.get('roomType') ?? '',
+    checkInDate: searchParams.get('checkInDate') ?? '',
+    checkOutDate: searchParams.get('checkOutDate') ?? '',
+    guests: Number(searchParams.get('guests') ?? 1)
+  }
+}

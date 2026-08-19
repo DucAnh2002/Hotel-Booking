@@ -12,7 +12,8 @@ import {
   isAfterDate,
   getDefaultSearchState,
   validateSearch,
-  buildSearchQuery
+  buildSearchQuery,
+  buildRoomSearchParams
 } from './booking.utils'
 import { toast } from 'react-toastify'
 
@@ -86,11 +87,16 @@ const BookingSearch = () => {
   }
 
   const handleSearch = () => {
-    const result = validateSearch(searchData)
-    if (!result.valid) {
-      toast.warning(result.message)
-      return
-    }
+    if (!validateSearch(searchData)) return
+
+    const params = buildRoomSearchParams({
+      roomType: searchData.roomId ? (roomTypes.find(room => room._id === searchData.roomId)?.roomType ?? '') : '',
+      checkInDate: searchData.checkInDate,
+      checkOutDate: searchData.checkOutDate,
+      guests: searchData.guests
+    })
+
+    navigate(`/rooms?${params.toString()}`)
 
     const query = buildSearchQuery(searchData)
     navigate(`/rooms?${query}`)

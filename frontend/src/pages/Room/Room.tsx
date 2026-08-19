@@ -1,33 +1,132 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+
 import { RoomContext } from '../../context'
-import HotelCard from '../../components/feature/hotel/HotelCard'
+
 import FloatingCart from '../../components/feature/cart/FloatingCart'
 
-// import type { RoomType } from '../../types/roomType'
-// import type { BookingType } from '../../types/bookingType'
+import { RoomFilter, RoomHeader, RoomList, RoomPagination, RoomSort } from '../../components/feature/room'
 
-const Room: React.FC = () => {
+import type { RoomFilterState, RoomSortOption } from '../../components/feature/room/room.types'
+
+import {
+  filterRooms,
+  getDefaultRoomFilter,
+  getRoomFilterFromSearchParams,
+  buildRoomFilterSearchParams,
+  isValidPriceRange,
+  sortRooms
+} from '../../components/feature/room/room.utils'
+
+import { ROOMS_PER_PAGE } from '../../components/feature/room/room.constants'
+
+const Room = () => {
   const { roomList } = useContext(RoomContext)
 
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const [filters, setFilters] = useState<RoomFilterState>(() => getRoomFilterFromSearchParams(searchParams))
+
+  const [sortBy, setSortBy] = useState<RoomSortOption>('default')
+
+  const [currentPage, setCurrentPage] = useState(1)
+
+  useEffect(() => {
+    const nextParams = buildRoomFilterSearchParams(filters, searchParams)
+
+    if (nextParams.toString() !== searchParams.toString()) {
+      setSearchParams(nextParams, {
+        replace: true
+      })
+    }
+  }, [filters, searchParams, setSearchParams])
+
+  const handleFilterChange = <K extends keyof RoomFilterState>(field: K, value: RoomFilterState[K]) => {
+    setFilters(prev => ({
+      ...prev,
+      [field]: value
+    }))
+  }
+
+  const resetFilters = () => {
+    setFilters(getDefaultRoomFilter())
+    setSortBy('default')
+    setCurrentPage(1)
+    setSearchParams({})
+  }
+
+  const handleSortChange = (value: RoomSortOption) => {
+    setSortBy(value)
+    setCurrentPage(1)
+  }
+
+  const hasValidPriceRange = useMemo(() => {
+    return isValidPriceRange(filters.minPrice, filters.maxPrice)
+  }, [filters.minPrice, filters.maxPrice])
+
+  const roomTypes = useMemo(() => {
+    const uniqueRoomTypes = new Set(roomList.map(room => room.roomType))
+
+    return Array.from(uniqueRoomTypes)
+  }, [roomList])
+
+  const filteredRooms = useMemo(() => {
+    if (!hasValidPriceRange) {
+      return []
+    }
+
+    return filterRooms(roomList, filters)
+  }, [roomList, filters, hasValidPriceRange])
+
+  const sortedRooms = useMemo(() => {
+    return sortRooms(filteredRooms, sortBy)
+  }, [filteredRooms, sortBy])
+
+  const totalPages = Math.ceil(sortedRooms.length / ROOMS_PER_PAGE)
+
+  const paginatedRooms = useMemo(() => {
+    const startIndex = (currentPage - 1) * ROOMS_PER_PAGE
+    const endIndex = startIndex + ROOMS_PER_PAGE
+
+    return sortedRooms.slice(startIndex, endIndex)
+  }, [sortedRooms, currentPage])
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [filters, sortBy])
+
+  useEffect(() => {
+    if (totalPages > 0 && currentPage > totalPages) {
+      setCurrentPage(totalPages)
+    }
+  }, [currentPage, totalPages])
+
+  const priceError = hasValidPriceRange ? undefined : 'Khoảng giá không hợp lệ'
   return (
-    <div className="pt-25 ">
-      <h2 className="text-center text-[28px] font-bold mb-1.5 text-[#333]">
-        Lựa chọn không gian lưu trú lý tưởng dành riêng cho bạn
-      </h2>
+    <div className="min-h-screen bg-gray-50 pt-24 pb-16">
+      <RoomHeader />
 
-      <p className="text-center font-semibold mx-6 mb-[30px] text-[20px] text-[#555] leading-[1.6]  ">
-        Trải nghiệm sự thoải mái và đẳng cấp qua các hạng phòng đa dạng – từ phòng tiêu chuẩn hiện đại đến suite sang
-        trọng với tầm nhìn tuyệt đẹp. Mỗi hạng phòng được thiết kế tinh tế, trang bị tiện nghi cao cấp, mang đến kỳ nghỉ
-        hoàn hảo cho mọi nhu cầu của bạn.
-      </p>
+      <RoomFilter
+        filters={filters}
+        roomTypes={roomTypes}
+        onChange={handleFilterChange}
+        onReset={resetFilters}
+        priceError={priceError}
+      />
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-5">
-        {Array.isArray(roomList) && roomList.length > 0 ? (
-          roomList.map(room => <HotelCard key={room._id} hotel={room} />)
-        ) : (
-          <p>Đang tải danh sách phòng...</p>
-        )}
-      </div>
+      <main className="mx-auto w-full max-w-7xl px-6">
+        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-gray-500">
+            Tìm thấy <span className="font-semibold text-gray-800">{sortedRooms.length}</span> phòng
+          </p>
+
+          <RoomSort value={sortBy} onChange={handleSortChange} />
+        </div>
+
+        <RoomList rooms={paginatedRooms} />
+
+        <RoomPagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+      </main>
 
       <FloatingCart />
     </div>
