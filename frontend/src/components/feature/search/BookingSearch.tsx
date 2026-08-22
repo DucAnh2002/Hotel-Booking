@@ -103,13 +103,13 @@ const BookingSearch = () => {
   }
 
   return (
-    <section className="relative z-40 mx-auto w-full max-w-7xl px-5">
+    <section className="relative z-40 mx-auto w-full max-w-7xl px-5 py-2 sm:px-6 lg:px-8 lg:py-4">
       <div
         className="
           rounded-3xl
           border
           border-white/40
-          bg-white
+          bg-blue-50/40
           p-6
           shadow-2xl
           backdrop-blur-xl
@@ -127,7 +127,7 @@ const BookingSearch = () => {
           "
         >
           {/* Room Type */}
-          <div className="space-y-2">
+          <div className="space-y-3 border-amber-500">
             <label htmlFor="room" className="text-sm font-semibold text-gray-700">
               Loại phòng
             </label>

@@ -4,6 +4,7 @@ import HotelsDisplay from '../../components/feature/hotel/HotelsDisplay'
 import FoodsOrder from '../../components/feature/food/FoodsOrder'
 import FloatingCart from '../../components/feature/cart/FloatingCart'
 import HeroBanner from '../../components/feature/hero/HeroBanner'
+import HotelHighlight from '../../components/feature/hotel/HotelHighlight'
 const Home: React.FC = () => {
   return (
     <div>
@@ -14,6 +15,7 @@ const Home: React.FC = () => {
       </div>
       <HotelsDisplay />
       <FoodsOrder />
+      <HotelHighlight />
       <FloatingCart />
     </div>
   )

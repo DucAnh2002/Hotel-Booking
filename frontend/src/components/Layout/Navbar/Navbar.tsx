@@ -25,7 +25,7 @@ const Navbar = () => {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow text-gray-800' : 'bg-transparent text-white'
+        scrolled ? 'bg-gray-800 shadow text-white' : 'bg-transparent text-white'
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between h-[70px] px-4 sm:px-6 relative">
@@ -66,12 +66,6 @@ const Navbar = () => {
                 Đăng nhập
               </button>
             )}
-          </div>
-
-          <div className="gap-2">
-            <button className="px-3 py-1 bg-amber-500 text-white hover:bg-amber-600 transition-colors rounded-4xl">
-              Đặt phòng ngay
-            </button>
           </div>
         </div>
 

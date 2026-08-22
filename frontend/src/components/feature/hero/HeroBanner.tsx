@@ -8,7 +8,7 @@ const HeroBanner = () => {
             relative
             h-[560px]
             overflow-hidden
-            lg:h-[780px]"
+            lg:h-[580px]"
     >
       <HeroSlider />
 
