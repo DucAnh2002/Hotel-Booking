@@ -12,40 +12,22 @@ interface RoomFilterProps {
 
 const RoomFilter = ({ filters, roomTypes, onChange, onReset, priceError }: RoomFilterProps) => {
   return (
-    <section className="mx-auto mb-8 max-w-7xl px-6">
-      <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-        <div className="mb-5 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Filter size={20} className="text-amber-500" />
-
-            <h2 className="text-lg font-semibold text-gray-800">Lọc phòng</h2>
-          </div>
-
-          <button
-            type="button"
-            onClick={onReset}
-            className="
-              flex
-              items-center
-              gap-2
-              text-sm
-              font-medium
-              text-gray-500
-              transition
-              hover:text-amber-600
-            "
-          >
-            <RotateCcw size={16} />
-            Xóa bộ lọc
-          </button>
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <section className="relative z-40 mx-auto w-full max-w-5xl px-2 py-2 sm:px-4 lg:px-16 lg:py-0.5">
+      <div
+        className="rounded-xl
+          border
+          border-white/40
+          bg-blue-50/40
+          p-2
+          shadow-2xl
+          backdrop-blur-xl
+          lg:p-2'
+          "
+      >
+        <div className="grid gap-0 sm:grid-cols-2 lg:grid-cols-4">
           {/* Room Type */}
-          <div className="space-y-2">
-            <label htmlFor="roomType" className="text-sm font-medium text-gray-700">
-              Loại phòng
-            </label>
+          <div className="space-y-2 ">
+            <label htmlFor="roomType" className="text-sm font-medium text-gray-700"></label>
 
             <select
               id="roomType"
@@ -53,9 +35,9 @@ const RoomFilter = ({ filters, roomTypes, onChange, onReset, priceError }: RoomF
               onChange={event => onChange('roomType', event.target.value)}
               className="
                 w-full
-                rounded-xl
+                
                 border
-                border-gray-200
+                border-amber-600
                 bg-white
                 px-4
                 py-3
@@ -63,6 +45,7 @@ const RoomFilter = ({ filters, roomTypes, onChange, onReset, priceError }: RoomF
                 text-gray-700
                 outline-none
                 transition
+                hover:bg-gray-300
                 focus:border-amber-500
               "
             >
@@ -78,19 +61,15 @@ const RoomFilter = ({ filters, roomTypes, onChange, onReset, priceError }: RoomF
 
           {/* Rating */}
           <div className="space-y-2">
-            <label htmlFor="rating" className="text-sm font-medium text-gray-700">
-              Đánh giá
-            </label>
-
             <select
               id="rating"
               value={filters.rating}
               onChange={event => onChange('rating', event.target.value as RoomFilterState['rating'])}
               className="
                 w-full
-                rounded-xl
+                
                 border
-                border-gray-200
+                border-amber-600
                 bg-white
                 px-4
                 py-3
@@ -98,6 +77,7 @@ const RoomFilter = ({ filters, roomTypes, onChange, onReset, priceError }: RoomF
                 text-gray-700
                 outline-none
                 transition
+                 hover:bg-gray-300
                 focus:border-amber-500
               "
             >
@@ -111,10 +91,6 @@ const RoomFilter = ({ filters, roomTypes, onChange, onReset, priceError }: RoomF
 
           {/* Minimum Price */}
           <div className="space-y-2">
-            <label htmlFor="minPrice" className="text-sm font-medium text-gray-700">
-              Giá từ
-            </label>
-
             <input
               id="minPrice"
               type="number"
@@ -123,15 +99,17 @@ const RoomFilter = ({ filters, roomTypes, onChange, onReset, priceError }: RoomF
               onChange={event => onChange('minPrice', Number(event.target.value))}
               className="
                 w-full
-                rounded-xl
+                
                 border
-                border-gray-200
+                border-amber-600
+                 bg-white
                 px-4
                 py-3
                 text-sm
                 text-gray-700
                 outline-none
                 transition
+                 hover:bg-gray-300
                 focus:border-amber-500
               "
             />
@@ -139,10 +117,6 @@ const RoomFilter = ({ filters, roomTypes, onChange, onReset, priceError }: RoomF
           {priceError && <p className="mt-4 text-sm font-medium text-red-500">{priceError}</p>}
           {/* Maximum Price */}
           <div className="space-y-2">
-            <label htmlFor="maxPrice" className="text-sm font-medium text-gray-700">
-              Giá đến
-            </label>
-
             <input
               id="maxPrice"
               type="number"
@@ -151,18 +125,42 @@ const RoomFilter = ({ filters, roomTypes, onChange, onReset, priceError }: RoomF
               onChange={event => onChange('maxPrice', Number(event.target.value))}
               className="
                 w-full
-                rounded-xl
+                
                 border
-                border-gray-200
+                border-amber-600
+                 bg-white
                 px-4
                 py-3
                 text-sm
                 text-gray-700
                 outline-none
                 transition
+                 hover:bg-gray-300
                 focus:border-amber-500
               "
             />
+
+            <button
+              type="button"
+              onClick={onReset}
+              className="
+              flex
+                items-center
+                gap-1
+                rounded-xl
+                border
+                border-gray-200
+                px-4
+                py-2
+                text-0.2xl
+                transition
+                focus-within:border-amber-500
+                hover:bg-gray-300
+            "
+            >
+              <RotateCcw size={13} />
+              Xóa bộ lọc
+            </button>
           </div>
           {priceError && <p className="mt-4 text-sm font-medium text-red-500">{priceError}</p>}
         </div>

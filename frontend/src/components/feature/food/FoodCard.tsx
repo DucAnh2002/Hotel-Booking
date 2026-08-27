@@ -36,9 +36,9 @@ const FoodCard: React.FC<FoodCardProps> = ({ food }) => {
         <div className="p-4 flex flex-col flex-1">
           <h3 className="font-semibold text-lg text-gray-800 mb-1 line-clamp-1">{name}</h3>
           <p className="text-sm text-gray-500 line-clamp-2 mb-2">{description}</p>
-          <p className="font-bold text-red-500 mb-4">{price.toLocaleString()} VND</p>
+          <p className="font-bold text-green-600 mb-4">{price.toLocaleString()} VND</p>
           <button
-            className=" mt-auto w-full py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 transition active:scale-95 "
+            className=" mt-auto w-full py-2 bg-amber-500 text-white rounded-xl hover:bg-amber-700 transition active:scale-95 "
             onClick={handleAddToCart}
           >
             Chọn món

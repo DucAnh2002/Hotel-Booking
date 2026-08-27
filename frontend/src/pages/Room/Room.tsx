@@ -103,17 +103,17 @@ const Room = () => {
 
   const priceError = hasValidPriceRange ? undefined : 'Khoảng giá không hợp lệ'
   return (
-    <div className="min-h-screen bg-gray-50 pt-24 pb-16">
+    <div className="min-h-screen bg-gray-50 pt-8 pb-16">
       <RoomHeader />
-
-      <RoomFilter
-        filters={filters}
-        roomTypes={roomTypes}
-        onChange={handleFilterChange}
-        onReset={resetFilters}
-        priceError={priceError}
-      />
-
+      <div className="relative z-40 -mt-20 lg:-mt-20">
+        <RoomFilter
+          filters={filters}
+          roomTypes={roomTypes}
+          onChange={handleFilterChange}
+          onReset={resetFilters}
+          priceError={priceError}
+        />
+      </div>
       <main className="mx-auto w-full max-w-7xl px-6">
         <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-gray-500">

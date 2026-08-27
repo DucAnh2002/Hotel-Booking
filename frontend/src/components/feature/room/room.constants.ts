@@ -1,3 +1,5 @@
+export const ROOMS_IMAGE = '/banner/banner5.jpg'
+
 export const DEFAULT_MIN_PRICE = 0
 
 export const DEFAULT_MAX_PRICE = 10000000
