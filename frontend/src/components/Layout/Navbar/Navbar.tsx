@@ -37,7 +37,7 @@ const Navbar = () => {
           <Link to="/">Trang chủ</Link>
           <Link to="/rooms">Phòng</Link>
           <Link to="/catering">Ẩm thực</Link>
-          <Link to="/tienich">Tiện ích</Link>
+          <Link to="/amenities">Tiện ích</Link>
           <a href="#footer">Liên hệ</a>
         </nav>
 
