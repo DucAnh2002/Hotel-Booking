@@ -20,8 +20,8 @@ const Catering: React.FC = () => {
       {/* Food list (Grid)*/}
       <FoodHeader />
       <div
-        className="grid grid-cols-1
-      sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-30 py-10"
+        className="grid grid-cols-2
+      sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:px-26 gap-4 px-4 py-8"
       >
         {Array.isArray(foodList) && foodList.length > 0 ? (
           foodList.map((food: FoodItem) => <FoodCard key={food._id} food={food} />)
