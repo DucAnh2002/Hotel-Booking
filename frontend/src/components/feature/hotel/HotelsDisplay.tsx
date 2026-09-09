@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-
 import HotelCard from './HotelCard'
 
 import { RoomContext } from '../../../context'
@@ -20,9 +19,10 @@ const HotelsDisplay = () => {
     navigate('/rooms')
   }
   return (
-    <section className="mx-auto max-w-6xl px-4 py-12">
+    <section className="mx-auto max-w-6xl px-4 py-8">
       <header className="mb-8 text-center">
         <h2 className="mb-3 text-2xl font-bold sm:text-3xl">Không gian lưu trú lý tưởng</h2>
+
         <p className="mx-auto max-w-xl text-sm text-gray-600 sm:text-base">
           Trải nghiệm phòng nghỉ cao cấp với đầy đủ tiện nghi và thiết kế hiện đại.
         </p>
@@ -30,7 +30,7 @@ const HotelsDisplay = () => {
 
       {/* Grid convert */}
       {featuredRooms.length > 0 ? (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {featuredRooms.map(room => (
             <HotelCard key={room._id} hotel={room} />
           ))}
@@ -55,13 +55,14 @@ const HotelsDisplay = () => {
           onClick={handleViewMore}
           className="
             rounded-xl
-            bg-black
+            bg-gray-800
             px-6
             py-3
             text-white
             transition-colors
             duration-300
-            hover:bg-gray-800"
+           hover:border-[#C9A227]
+                hover:bg-[#C9A227]"
         >
           Xem thêm phòng &raquo;
         </button>

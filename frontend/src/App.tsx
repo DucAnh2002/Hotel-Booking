@@ -4,6 +4,7 @@ import Home from './pages/Home/Home'
 import Catering from './pages/Catering/Catering'
 import Footer from './components/Layout/Footer/Footer'
 import Room from './pages/Room/Room'
+import Amenities from './pages/Amenities/Amenities'
 import Cart from './pages/Cart/Cart'
 import CheckoutPage from './pages/checkoutPage'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -33,6 +34,7 @@ const App: React.FC = () => {
           <Route path="/catering" element={<Catering />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout/:roomId" element={<CheckoutPage />} />
+          <Route path="/amenities" element={<Amenities />} />
         </Routes>
       </main>
 

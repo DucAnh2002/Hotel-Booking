@@ -18,7 +18,7 @@ const RoomList = ({ rooms }: RoomListProps) => {
     <div
       className="
         grid
-        grid-cols-1
+        grid-cols-2
         gap-6
         px-6
         sm:grid-cols-2

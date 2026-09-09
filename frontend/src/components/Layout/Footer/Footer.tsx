@@ -4,14 +4,13 @@ import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa'
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#222] text-white pt-10 pb-6 px-4 sm:px-6">
+    <footer className="bg-gray-800 text-white pt-10 pb-4 px-2 sm:px-4 lg:px-8">
       {/* Top */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {/* Brand */}
         <div>
-          <h2 className="text-lg sm:text-xl font-semibold text-[#ffcc00] mb-3">Nha Trang Hotel</h2>
-          <img src={assets.logo4} alt="Logo" className="w-[160px] sm:w-[220px]  object-contain mb-3" />
-          <p>Đặt phòng nhanh chóng - tiện lợi - an toàn.</p>
+          <img src={assets.logo4} alt="Logo" className="w-[110px] sm:w-[110px]  object-contain mb-3" />
+          <p className="text-sm text-gray-400 leading-relaxed">Đặt phòng nhanh chóng - tiện lợi - an toàn.</p>
         </div>
 
         {/* Contact */}

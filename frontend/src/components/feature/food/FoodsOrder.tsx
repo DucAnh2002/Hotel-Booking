@@ -10,32 +10,72 @@ const FoodsOrder: React.FC = () => {
 
   const { foodList } = useContext(FoodContext) as FoodContextType
 
+  const featuredFoods = Array.isArray(foodList) ? foodList.slice(0, 4) : []
+
   return (
-    <div className="py-12 px-4 max-w-6xl mx-auto text-center">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-3">Thực đơn khách sạn</h2>
+    <section className="bg-[#fcf3d2] px-4 py-20 sm:px-6 lg:py-1">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid items-center gap-12 lg:grid-cols-[0.6fr_1.4fr] lg:gap-20">
+          {/* Left-Content */}
+          <div className="text-left">
+            {/* Label */}
+            <div className="mb-5 flex items-center gap-3">
+              <span className="h-px w-10 bg-[#C9A227]" />
 
-      <p className="max-w-xl mx-auto mb-8 text-gray-600 text-sm sm:text-base">
-        Các món ăn tại khách sạn mang đến một bầu không khí sang trọng và một loạt các trải nghiệm ẩm thực đa dạng.
-        Khách hàng có thể thưởng thức nhiều món ăn khác nhau...
-      </p>
+              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-[#C9A227]">Hotel Restaurant</span>
+            </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
-        {Array.isArray(foodList) && foodList.length > 0 ? (
-          foodList.slice(0, 4).map((food: FoodItem) => <FoodCard key={food._id} food={food} />)
-        ) : (
-          <p className="text-gray-500">Đang tải danh sách món ăn...</p>
-        )}
+            {/* Title */}
+            <h2 className="font-serif text-3xl font-medium leading-tight text-[#0B1F33] sm:text-4xl lg:text-5xl">
+              Thực đơn
+              <span className="block text-[#C9A227]">khách sạn</span>
+            </h2>
+
+            {/* Description */}
+            <p className="mt-6 max-w-lg text-sm leading-7 text-gray-600 sm:text-base">
+              Khám phá những món ăn đặc trưng được chế biến từ những nguyên liệu tươi ngon, mang đến trải nghiệm ẩm thực
+              tinh tế và đáng nhớ trong suốt kỳ nghỉ của bạn.
+            </p>
+
+            {/* Button */}
+            <button
+              type="button"
+              onClick={() => navigate('/catering')}
+              className="
+                
+            rounded-xl
+            bg-gray-800
+            px-6
+            py-3
+            text-white
+            transition-colors
+            duration-300
+           
+                hover:border-[#C9A227]
+                hover:bg-[#C9A227]
+              "
+            >
+              Xem thực đơn &raquo;
+            </button>
+          </div>
+
+          {/* Right-FoodCard */}
+          <div>
+            {featuredFoods.length > 0 ? (
+              <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4 py-10">
+                {featuredFoods.map((food: FoodItem) => (
+                  <FoodCard key={food._id} food={food} />
+                ))}
+              </div>
+            ) : (
+              <div className="flex min-h-[300px] items-center justify-center">
+                <p className="text-sm text-gray-500">Đang tải danh sách món ăn...</p>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
-
-      <div className="mt-8">
-        <button
-          onClick={() => navigate('/catering')}
-          className="mt-10 px-6 bg-black text-white rounded-xl hover:bg-gray-800 transistion"
-        >
-          Xem thêm món ăn »
-        </button>
-      </div>
-    </div>
+    </section>
   )
 }
 

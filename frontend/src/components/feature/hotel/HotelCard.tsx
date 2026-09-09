@@ -68,10 +68,10 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
             type="button"
             onClick={handleBookNow}
             className="
-           mt-auto w-full py-2 bg-red-500 text-white rounded-xl hover:bg-red-700 transition active:scale-95
+           mt-auto w-full py-2 bg-amber-500 text-white rounded-xl hover:bg-amber-700 transition active:scale-95
           "
           >
-            Book Now
+            Đặt ngay
           </button>
         </div>
       </article>
