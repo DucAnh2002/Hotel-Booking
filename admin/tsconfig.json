@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Cấu hình Bundler & Module */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "types": ["vite/client"],
+
+    /* QUAN TRỌNG: Các dòng cho phép chạy song song JS & TS */
+    "allowJs": true /* Cho phép đọc và biên dịch file .js / .jsx */,
+    "checkJs": false /* KHÔNG kiểm tra lỗi Type trên file .js / .jsx cũ */,
+    "strict": false /* Tắt chế độ kiểm tra nghiêm ngặt để xóa lỗi hàng loạt */,
+    "noImplicitAny": false /* Cho phép dùng biến không khai báo type */
+  },
+  "include": ["src"]
+}
