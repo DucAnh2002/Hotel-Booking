@@ -7,20 +7,20 @@ import Room from './pages/Room/Room'
 import Amenities from './pages/Amenities/Amenities'
 import Cart from './pages/Cart/Cart'
 import CheckoutPage from './pages/checkoutPage'
-import { useAuth0 } from '@auth0/auth0-react'
-import { useEffect } from 'react'
+// import { useAuth0 } from '@auth0/auth0-react'
+// import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
 import ScrollToTop from './components/common/ScrollToTop'
 import 'react-toastify/dist/ReactToastify.css'
 
 const App: React.FC = () => {
-  const { getAccessTokenSilently } = useAuth0()
+  //   const { getAccessTokenSilently } = useAuth0()
 
-  useEffect(() => {
-    getAccessTokenSilently().then(token => {
-      console.log('Access Token:', token)
-    })
-  }, [getAccessTokenSilently])
+  //   useEffect(() => {
+  //     getAccessTokenSilently().then(token => {
+  //       console.log('Access Token:', token)
+  //     })
+  //   }, [getAccessTokenSilently])
 
   return (
     <div className="min-h-screen flex flex-col bg-white">

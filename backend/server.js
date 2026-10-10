@@ -1,4 +1,7 @@
 const express = require("express");
+const http = require("http");
+
+const socket = require("./config/socket");
 const mongoose = require("mongoose");
 const path = require("path");
 const cors = require("cors");
@@ -11,6 +14,11 @@ const bookingRoutes = require("./routes/bookingRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
 // app config
 const app = express();
+const server = http.createServer(app);
+
+// socket config
+socket.init(server);
+
 const allowedOrigins = [
   "http://localhost:5174", // admin local
   "http://localhost:5173", // home local

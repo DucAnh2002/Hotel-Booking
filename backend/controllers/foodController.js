@@ -4,6 +4,8 @@ const Food = require("../models/foodModel");
 const Order = require("../models/orderModel");
 const multer = require("multer");
 
+const { getIO } = require("../config/socket");
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "upload/foods"),
   filename: (req, file, cb) =>
@@ -38,7 +40,7 @@ const getFoods = async (req, res) => {
   }
 };
 
-// OrderFood
+// Đặt món ăn (order food) và lưu vào cơ sở dữ liệu.
 const orderFood = async (req, res) => {
   console.log("📥 HEADERS:", req.headers);
   console.log("📥 AUTH:", req.auth); // xác minh token đã giải mã ra user chưa
@@ -58,17 +60,26 @@ const orderFood = async (req, res) => {
     if (isNaN(date)) {
       return res.status(400).json({ message: "Ngày giao không hợp lệ" });
     }
-    const order = new Order({
-      userId,
-      name,
-      price,
-      quantity,
-      image,
-      deliveryDate,
-      deliveryTime,
-      note,
+    const newOrder = await Order.create(req.body);
+    // const order = new Order({
+    //   userId,
+    //   name,
+    //   price,
+    //   quantity,
+    //   image,
+    //   deliveryDate,
+    //   deliveryTime,
+    //   note,
+    // });
+
+    // Bắn sự kiện "NEW_FOOD_ORDER" đến phòng BẾP
+    const io = getIO();
+    io.to("kitchen").emit("NEW_FOOD_ORDER", {
+      message: "Có đơn hàng F&B mới!",
+      order: newOrder, // gửi thông tin đơn hàng mới
     });
-    await order.save();
+
+    await newOrder.save();
     res.status(200).json({ success: true, message: "Đặt món ăn thành công!" });
   } catch (err) {
     console.error("❌ Order food error:", err);
@@ -96,7 +107,7 @@ const getMyOrders = async (req, res) => {
   }
 };
 
-// remove food item from cart
+// xóa đơn food trong danh sách order của user
 const removeOrderItem = async (req, res) => {
   try {
     const userId = req.auth.sub;
