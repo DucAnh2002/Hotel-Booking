@@ -32,7 +32,7 @@ const RoomContextProvider = ({ children }: RoomProviderProps) => {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const res = await axios.get(`${url}/api/room/list-room`)
+        const res = await axios.get(`${url}/api/v1/rooms/list-room`)
         setRoomList(res.data.data)
       } catch (err) {
         console.error('Lỗi khi lấy danh sách phòng:', err)
@@ -84,7 +84,7 @@ const RoomContextProvider = ({ children }: RoomProviderProps) => {
 
     try {
       await axios.post(
-        `${url}/api/booking/book-room`,
+        `${url}/api/v1/bookings/book-room`,
         { roomId, checkInDate, checkOutDate, guests },
         {
           headers: {
@@ -117,7 +117,7 @@ const RoomContextProvider = ({ children }: RoomProviderProps) => {
 
     try {
       const res = await axios.post(
-        `${url}/api/booking/payment-success`,
+        `${url}/api/v1/bookings/payment-success`,
         {
           roomId,
           checkInDate,
@@ -172,7 +172,7 @@ const RoomContextProvider = ({ children }: RoomProviderProps) => {
     try {
       const token = await getApiToken()
 
-      const res = await axios.get(`${url}/api/booking/my-bookings`, {
+      const res = await axios.get(`${url}/api/v1/bookings/my-bookings`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -201,7 +201,7 @@ const RoomContextProvider = ({ children }: RoomProviderProps) => {
             try {
               const token = await getApiToken()
 
-              const res = await axios.delete(`${url}/api/booking/remove/${bookingId}`, {
+              const res = await axios.delete(`${url}/api/v1/bookings/remove/${bookingId}`, {
                 headers: {
                   Authorization: `Bearer ${token}`
                 }

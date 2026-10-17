@@ -7,9 +7,10 @@ module.exports = {
     io = new Server(httpServer, {
       cors: {
         origin: ["http://localhost:3000"], // cấu hình domain FE
-        methods: ["GET", "POST"],
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
       },
     });
+
     io.on("connection", (socket) => {
       console.log("✅ New client connected:", socket.id);
 
@@ -17,6 +18,10 @@ module.exports = {
       socket.on("join_room", (room) => {
         socket.join(room);
         console.log(`✅ Client ${socket.id} joined room: ${room}`);
+      });
+
+      socket.on("disconnect", () => {
+        console.log("❌ Client disconnected:", socket.id);
       });
     });
     return io;
