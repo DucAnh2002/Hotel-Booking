@@ -2,108 +2,147 @@ import type { RoomType } from '../../types/room.type'
 
 const Hotels: RoomType[] = [
   {
-    _id: 3,
+    _id: '3',
     image: '/img/hotels/3.jpg',
     roomType: 'Phòng Standard',
     rating: 3,
     address: '12 Trần Phú, Nha Trang',
-    price: 1200000
+    price: 1200000,
+    category: 'room',
+    createAt: '',
+    updateAt: ''
   },
   {
-    _id: 4,
+    _id: '4',
     image: '/img/hotels/4.jpg',
     roomType: 'Phòng Suite Hướng Biển',
     rating: 5,
     address: '12 Trần Phú, Nha Trang',
-    price: 3200000
+    price: 3200000,
+    category: 'room',
+    createAt: '',
+    updateAt: ''
   },
   {
-    _id: 5,
+    _id: '5',
     image: '/img/hotels/5.jpg',
     roomType: 'Phòng Gia Đình',
     rating: 4,
     address: '12 Trần Phú, Nha Trang',
-    price: 2700000
+    price: 2700000,
+    category: 'room',
+    createAt: '',
+    updateAt: ''
   },
   {
-    _id: 6,
+    _id: '6',
     image: '/img/hotels/6.jpg',
     roomType: 'Phòng Studio View Phố',
     rating: 4,
     address: '12 Trần Phú, Nha Trang',
-    price: 2300000
+    price: 2300000,
+    category: 'room',
+    createAt: '',
+    updateAt: ''
   },
   {
-    _id: 7,
+    _id: '7',
     image: '/img/hotels/7.jpg',
     roomType: 'Phòng Hạng Sang',
     rating: 5,
     address: '12 Trần Phú, Nha Trang',
-    price: 3500000
+    price: 3500000,
+    category: 'room',
+    createAt: '',
+    updateAt: ''
   },
   {
-    _id: 8,
+    _id: '8',
     image: '/img/hotels/8.jpg',
     roomType: 'Phòng Twin',
     rating: 3,
     address: '12 Trần Phú, Nha Trang',
-    price: 1500000
+    price: 1500000,
+    category: 'room',
+    createAt: '',
+    updateAt: ''
   },
   {
-    _id: 9,
+    _id: '9',
     image: '/img/hotels/9.jpg',
     roomType: 'Phòng King',
     rating: 4,
     address: '12 Trần Phú, Nha Trang',
-    price: 2800000
+    price: 2800000,
+    category: 'room',
+    createAt: '',
+    updateAt: ''
   },
   {
-    _id: 10,
+    _id: '10',
     image: '/img/hotels/10.jpg',
     roomType: 'Phòng View Hồ Bơi',
     rating: 4,
     address: '12 Trần Phú, Nha Trang',
-    price: 2100000
+    price: 2100000,
+    category: 'room',
+    createAt: '',
+    updateAt: ''
   },
   {
-    _id: 11,
+    _id: '11',
     image: '/img/hotels/11.jpg',
     roomType: 'Phòng Luxury',
     rating: 5,
     address: '12 Trần Phú, Nha Trang',
-    price: 3900000
+    price: 3900000,
+    category: 'room',
+    createAt: '',
+    updateAt: ''
   },
   {
-    _id: 12,
+    _id: '12',
     image: '/img/hotels/12.jpg',
     roomType: 'Phòng Tiêu Chuẩn ',
     rating: 3,
     address: '12 Trần Phú, Nha Trang',
-    price: 1100000
+    price: 1100000,
+    category: 'room',
+    createAt: '',
+    updateAt: ''
   },
   {
-    _id: 13,
+    _id: '13',
     image: '/img/hotels/13.jpg',
     roomType: 'Phòng Grand Suite',
     rating: 5,
     address: '12 Trần Phú, Nha Trang',
-    price: 4200000
+    price: 4200000,
+    category: 'room',
+    createAt: '',
+    updateAt: ''
   },
   {
-    _id: 14,
+    _id: '14',
     image: '/img/hotels/14.jpg',
     roomType: 'Phòng Nghỉ Dưỡng',
     rating: 4,
     address: '12 Trần Phú, Nha Trang',
-    price: 2600000
+    price: 2600000,
+    category: 'room',
+    createAt: '',
+    updateAt: ''
   },
   {
-    _id: 15,
+    _id: '15',
     image: '/img/hotels/15.jpg',
     roomType: 'Phòng Eco',
     rating: 3,
     address: '12 Trần Phú, Nha Trang',
-    price: 900000
+    price: 900000,
+    category: 'room',
+    createAt: '',
+    updateAt: ''
   }
 ]
 

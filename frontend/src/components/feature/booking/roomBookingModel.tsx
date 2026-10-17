@@ -17,12 +17,15 @@ const BookingModal: React.FC<BookingModalProps> = ({ hotel, onClose }) => {
   const { addToBookingCart } = useContext(RoomContext)
 
   const handleConfirmBooking = async () => {
+    console.log('phòng nhận được', hotel)
+    console.log('room_id', hotel._id)
     if (!checkInDate || !checkOutDate) {
       toast.error('Vui lòng chọn ngày nhận và trả phòng.')
       return
     }
 
     if (!hotel || !hotel._id) {
+      console.error('Dữ liệu phòng không hợp lệ.', hotel)
       toast.error('Không có phòng để đặt.')
       return
     }

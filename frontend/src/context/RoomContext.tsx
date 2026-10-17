@@ -15,7 +15,16 @@ const RoomContextProvider = ({ children }: RoomProviderProps) => {
   const [bookingCart, setBookingCart] = useState<Record<string, number>>({})
   const [myBookings, setMyBookings] = useState<BookingType[]>([])
 
-  const { getAccessTokenSilently, isAuthenticated } = useAuth0()
+  const { getAccessTokenSilently, isAuthenticated, getAccessTokenWithPopup } = useAuth0()
+
+  const getApiToken = async (): Promise<string> => {
+    return await getAccessTokenSilently({
+      authorizationParams: {
+        audience: 'https://hotel-api',
+        scope: 'openid profile email'
+      }
+    })
+  }
 
   const url = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
@@ -23,7 +32,7 @@ const RoomContextProvider = ({ children }: RoomProviderProps) => {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const res = await axios.get(`${url}/api/room/list-room`)
+        const res = await axios.get(`${url}/api/v1/rooms/list-room`)
         setRoomList(res.data.data)
       } catch (err) {
         console.error('Lỗi khi lấy danh sách phòng:', err)
@@ -71,11 +80,11 @@ const RoomContextProvider = ({ children }: RoomProviderProps) => {
     checkOutDate: string
     guests: number
   }) => {
-    const token = await getAccessTokenSilently()
+    const token = await getApiToken()
 
     try {
       await axios.post(
-        `${url}/api/booking/book-room`,
+        `${url}/api/v1/bookings/book-room`,
         { roomId, checkInDate, checkOutDate, guests },
         {
           headers: {
@@ -104,11 +113,11 @@ const RoomContextProvider = ({ children }: RoomProviderProps) => {
     guests: number
     totalPrice: number
   }) => {
-    const token = await getAccessTokenSilently()
+    const token = await getApiToken()
 
     try {
       const res = await axios.post(
-        `${url}/api/booking/payment-success`,
+        `${url}/api/v1/bookings/payment-success`,
         {
           roomId,
           checkInDate,
@@ -139,20 +148,43 @@ const RoomContextProvider = ({ children }: RoomProviderProps) => {
     }
   }
   // Lấy danh sách booking
-  const getMyBookings = async (): Promise<BookingType[] | []> => {
+
+  //   const getMyBookings = async (): Promise<BookingType[] | []> => {
+  //     try {
+  //       const token = await getAccessTokenSilently()
+  //       const res = await axios.get(`${url}/api/booking/my-bookings`, {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`
+  //         }
+  //       })
+  //       const bookings = res.data.data || []
+
+  //       setMyBookings(bookings)
+  //       return bookings
+  //     } catch (error: any) {
+  //       console.error('Lỗi khi lấy danh sách đặt phòng:', error.message)
+  //       toast.error('Không thể lấy danh sách đặt phòng.')
+  //       return []
+  //     }
+  //   }
+
+  const getMyBookings = async (): Promise<BookingType[]> => {
     try {
-      const token = await getAccessTokenSilently()
-      const res = await axios.get(`${url}/api/booking/my-bookings`, {
+      const token = await getApiToken()
+
+      const res = await axios.get(`${url}/api/v1/bookings/my-bookings`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
-      const bookings = res.data.data || []
+
+      const bookings: BookingType[] = res.data.data || []
 
       setMyBookings(bookings)
+
       return bookings
-    } catch (error: any) {
-      console.error('Lỗi khi lấy danh sách đặt phòng:', error.message)
+    } catch (error) {
+      console.error('Lỗi khi lấy danh sách đặt phòng:', error)
       toast.error('Không thể lấy danh sách đặt phòng.')
       return []
     }
@@ -167,9 +199,9 @@ const RoomContextProvider = ({ children }: RoomProviderProps) => {
           label: 'Có!',
           onClick: async () => {
             try {
-              const token = await getAccessTokenSilently()
+              const token = await getApiToken()
 
-              const res = await axios.delete(`${url}/api/booking/remove/${bookingId}`, {
+              const res = await axios.delete(`${url}/api/v1/bookings/remove/${bookingId}`, {
                 headers: {
                   Authorization: `Bearer ${token}`
                 }

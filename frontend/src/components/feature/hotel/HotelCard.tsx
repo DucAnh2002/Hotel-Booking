@@ -20,7 +20,6 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
 
   const imageSrc = getRoomImage(hotel)
   //   const backendURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
-  const BookingModalAny = BookingModal as React.ComponentType<any>
 
   // Xử lý đường dẫn ảnh backend/local
   //   const imageSrc = room.image.startsWith('http') ? room.image : `${backendURL}/upload/rooms/${room.image}`
@@ -75,7 +74,7 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
           </button>
         </div>
       </article>
-      {isBooking && <BookingModalAny room={hotel} onClose={() => setIsBooking(false)} />}
+      {isBooking && <BookingModal hotel={hotel} onClose={() => setIsBooking(false)} />}
     </>
   )
 }

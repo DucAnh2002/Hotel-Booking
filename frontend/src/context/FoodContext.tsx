@@ -34,7 +34,7 @@ const FoodContextProvider: React.FC<ProviderProps> = ({ children }) => {
 
       const token = await getAccessTokenSilently()
 
-      const response = await axios.post(`${url}/api/food/order`, data, {
+      const response = await axios.post(`${url}/api/v1/foods/order`, data, {
         headers: { Authorization: `Bearer ${token}` }
       })
 
@@ -54,7 +54,7 @@ const FoodContextProvider: React.FC<ProviderProps> = ({ children }) => {
     try {
       const token = await getAccessTokenSilently()
 
-      const res = await axios.get(`${url}/api/food/my-orders`, {
+      const res = await axios.get(`${url}/api/v1/foods/my-orders`, {
         headers: { Authorization: `Bearer ${token}` }
       })
 
@@ -73,7 +73,7 @@ const FoodContextProvider: React.FC<ProviderProps> = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(url + '/api/food/list-food')
+        const res = await axios.get(url + '/api/v1/foods/list-food')
         setFoodList(res.data.data)
       } catch (err) {
         console.error('Lỗi khi lấy dữ liệu món ăn:', err)
@@ -97,7 +97,7 @@ const FoodContextProvider: React.FC<ProviderProps> = ({ children }) => {
             try {
               const token = await getAccessTokenSilently()
 
-              const res = await axios.delete(`${url}/api/food/remove/${orderId}`, {
+              const res = await axios.delete(`${url}/api/v1/foods/remove/${orderId}`, {
                 headers: { Authorization: `Bearer ${token}` }
               })
 
