@@ -45,32 +45,39 @@ const orderFood = async (req, res) => {
   console.log("📥 HEADERS:", req.headers);
   console.log("📥 AUTH:", req.auth); // xác minh token đã giải mã ra user chưa
   try {
-    const userId = req.auth.sub;
+    const userId = req.auth?.sub;
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Không xác định được người dùng, vui lòng đăng nhập lại!",
+      });
+    }
     const { name, price, image, deliveryDate, deliveryTime, note, quantity } =
-      req.body;
+      req.body || {};
 
     // kiểm tra dữ liệu đầu vào.
-    if (!name || !image || !deliveryDate || !deliveryTime) {
+    if (!name || !image || !deliveryDate || !deliveryTime || quantity == null) {
       return res
         .status(400)
-        .json({ message: "Vui lòng nhập đầy đủ thông tin" });
+        .json({ message: "Vui lòng nhập đầy đủ thông tin đặt món" });
     }
     const date = new Date(deliveryDate);
 
-    if (isNaN(date)) {
-      return res.status(400).json({ message: "Ngày giao không hợp lệ" });
+    if (Number.isNaN(date.getTime())) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Ngày giao không hợp lệ" });
     }
-    const newOrder = await Order.create(req.body);
-    // const order = new Order({
-    //   userId,
-    //   name,
-    //   price,
-    //   quantity,
-    //   image,
-    //   deliveryDate,
-    //   deliveryTime,
-    //   note,
-    // });
+    const newOrder = await Order.create({
+      userId,
+      name,
+      price,
+      quantity,
+      image,
+      deliveryDate,
+      deliveryTime,
+      note,
+    });
 
     // Bắn sự kiện "NEW_FOOD_ORDER" đến phòng BẾP
     const io = getIO();
@@ -79,8 +86,11 @@ const orderFood = async (req, res) => {
       order: newOrder, // gửi thông tin đơn hàng mới
     });
 
-    await newOrder.save();
-    res.status(200).json({ success: true, message: "Đặt món ăn thành công!" });
+    return res.status(201).json({
+      success: true,
+      message: " Đặt món ăn thành công!",
+      data: newOrder,
+    });
   } catch (err) {
     console.error("❌ Order food error:", err);
     res.status(500).json({

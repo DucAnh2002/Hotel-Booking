@@ -21,7 +21,7 @@ export interface RoomContextType {
 
   getRoomTotalPrice: () => number
 
-  getMyBookings: () => Promise<BookingType[] | []>
+  getMyBooking: () => Promise<BookingType[] | []>
 
   getRoomPrice: (booking: BookingType) => number
   clearBookingCart: () => void

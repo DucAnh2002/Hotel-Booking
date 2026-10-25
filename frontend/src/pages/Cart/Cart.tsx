@@ -7,7 +7,7 @@ import type { BookingType } from '../../types/booking.type'
 const Cart: React.FC = () => {
   const { isAuthenticated } = useAuth0()
 
-  const { myBookings, getMyBookings, removeFromBooking, getRoomTotalPrice, getRoomPrice } = useContext(RoomContext)
+  const { myBookings, getMyBooking, removeFromBooking, getRoomTotalPrice, getRoomPrice } = useContext(RoomContext)
 
   const { myFoodOrders, getMyfoodOrders, removeFoodFromCart, getFoodTotalPrice, getFoodPrice } = useContext(FoodContext)
 
@@ -15,7 +15,7 @@ const Cart: React.FC = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      getMyBookings()
+      getMyBooking()
       getMyfoodOrders()
     }
   }, [isAuthenticated])

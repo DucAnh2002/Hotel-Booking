@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { FoodContext } from './index'
-import axios from 'axios'
+import { useAuthApi } from '../hooks/useAuth'
+import { foodApi } from '../api/food.api'
 import { useAuth0 } from '@auth0/auth0-react'
 import { toast } from 'react-toastify'
 import { confirmAlert } from 'react-confirm-alert'
@@ -17,12 +18,10 @@ const FoodContextProvider: React.FC<ProviderProps> = ({ children }) => {
   const [foodList, setFoodList] = useState<FoodItem[]>([])
   const [myFoodOrders, setMyFoodOrders] = useState<FoodOrder[]>([])
 
-  const url = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
-  const { getAccessTokenSilently } = useAuth0()
+  const { isAuthenticated } = useAuth0()
+  const { apiClient } = useAuthApi()
 
-  // =======================
-  //  ĐẶT MÓN ĂN
-  // =======================
+  // 1. Đặt món ăn
   const orderFood: FoodContextType['orderFood'] = async (data: OrderFoodInput) => {
     try {
       const { deliveryDate, deliveryTime } = data
@@ -32,14 +31,10 @@ const FoodContextProvider: React.FC<ProviderProps> = ({ children }) => {
         return
       }
 
-      const token = await getAccessTokenSilently()
-
-      const response = await axios.post(`${url}/api/v1/foods/order`, data, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-
+      const res = await foodApi.orderFood(apiClient, data)
       toast.success('Đặt món thành công!')
-      return response.data
+      await getMyfoodOrders() // Cập nhật lại danh sách sau khi đặt
+      return res
     } catch (err: any) {
       console.error('Lỗi khi đặt món ăn:', err?.response?.data || err.message)
       toast.error(err?.response?.data?.message || 'Không thể đặt món!')
@@ -47,45 +42,34 @@ const FoodContextProvider: React.FC<ProviderProps> = ({ children }) => {
     }
   }
 
-  // =======================
-  //  LẤY DANH SÁCH ORDER
-  // =======================
-  const getMyfoodOrders: FoodContextType['getMyfoodOrders'] = async () => {
+  // 2. Lấy danh sách order của user
+  const getMyfoodOrders = useCallback(async () => {
     try {
-      const token = await getAccessTokenSilently()
-
-      const res = await axios.get(`${url}/api/v1/foods/my-orders`, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-
-      setMyFoodOrders(res.data.data)
-      return res.data
+      const orders = await foodApi.getMyFoodOrder(apiClient)
+      setMyFoodOrders(orders || [])
+      return orders || []
     } catch (error: any) {
       console.error('Lỗi khi lấy danh sách Order', error.message)
       toast.error('Không thể lấy danh sách Order!')
       return []
     }
-  }
+  }, [apiClient])
 
-  // =======================
-  //  LẤY LIST FOOD
-  // =======================
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(url + '/api/v1/foods/list-food')
-        setFoodList(res.data.data)
-      } catch (err) {
-        console.error('Lỗi khi lấy dữ liệu món ăn:', err)
-      }
+    if (isAuthenticated) {
+      getMyfoodOrders()
     }
+  }, [isAuthenticated, getMyfoodOrders])
 
-    fetchData()
-  }, [])
+  // 3. Lấy danh sách món ăn
+  useEffect(() => {
+    foodApi
+      .getFoodList(apiClient)
+      .then(data => setFoodList(data || []))
+      .catch(err => console.error('Lỗi khi lấy dữ liệu món ăn:', err))
+  }, [apiClient])
 
-  // =======================
-  //  HỦY ORDER
-  // =======================
+  // 4. Hủy/Xóa đơn món ăn
   const removeFoodFromCart: FoodContextType['removeFoodFromCart'] = async (orderId: string) => {
     confirmAlert({
       title: 'Xác nhận hủy món ăn',
@@ -95,17 +79,13 @@ const FoodContextProvider: React.FC<ProviderProps> = ({ children }) => {
           label: 'Có',
           onClick: async () => {
             try {
-              const token = await getAccessTokenSilently()
+              const res = await foodApi.removeFoodOrder(apiClient, orderId)
 
-              const res = await axios.delete(`${url}/api/v1/foods/remove/${orderId}`, {
-                headers: { Authorization: `Bearer ${token}` }
-              })
-
-              if (res.data.success) {
+              if (res.success) {
                 toast.success('Đã hủy món ăn!')
-                getMyfoodOrders()
+                await getMyfoodOrders()
               } else {
-                toast.error(res.data.message || 'Không thể hủy món ăn!')
+                toast.error(res.message || 'Không thể hủy món ăn!')
               }
             } catch (error) {
               console.error('Lỗi hủy món ăn', error)
@@ -118,9 +98,7 @@ const FoodContextProvider: React.FC<ProviderProps> = ({ children }) => {
     })
   }
 
-  // =======================
-  //  TÍNH GIÁ TIỀN
-  // =======================
+  // 5. Các hàm tính giá tiền
   const getFoodPrice: FoodContextType['getFoodPrice'] = item => {
     return Number(item.price) * Number(item.quantity)
   }
@@ -131,9 +109,6 @@ const FoodContextProvider: React.FC<ProviderProps> = ({ children }) => {
     }, 0)
   }
 
-  // =======================
-  //  GIÁ TRỊ CONTEXT
-  // =======================
   const contextValue: FoodContextType = {
     cartItems,
     myFoodOrders,
