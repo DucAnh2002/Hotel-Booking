@@ -21,6 +21,6 @@ const upload = multer({ storage });
 // routes
 router.get("/list-room", getAllRooms);
 router.get("/:id", getRoomById);
-router.post("/add", upload.single("image"), addRoom);
+router.post("/add", upload.single("image"), addRoom); // dùng cho admin
 
 module.exports = router;

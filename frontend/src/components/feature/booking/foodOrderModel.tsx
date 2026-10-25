@@ -3,6 +3,7 @@ import { FoodContext } from '../../../context'
 
 // Import type đã khai báo
 import type { FoodItem, FoodContextType, OrderFoodInput } from '../../../types/food.types'
+import { useNavigate } from 'react-router-dom'
 
 interface FoodOrderModalProps {
   food: FoodItem
@@ -14,7 +15,7 @@ const FoodOrderModal: React.FC<FoodOrderModalProps> = ({ food, onClose }) => {
   const [deliveryDate, setDeliveryDate] = useState<string>('')
   const [deliveryTime, setDeliveryTime] = useState<string>('')
   const [note, setNote] = useState<string>('')
-
+  const navigate = useNavigate()
   // ép context theo type đúng
   const { orderFood } = useContext(FoodContext) as FoodContextType
 
@@ -35,7 +36,9 @@ const FoodOrderModal: React.FC<FoodOrderModalProps> = ({ food, onClose }) => {
 
     try {
       await orderFood(orderData)
-      onClose()
+      window.setTimeout(() => {
+        navigate('/cart')
+      }, 2000)
     } catch (err) {
       console.error('❌ Lỗi khi đặt món ăn:', err)
     }

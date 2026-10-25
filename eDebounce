@@ -1,0 +1,456 @@
+[33mcommit 547430c3bcaaef1660cdc644b7667afe827623cc[m[33m ([m[1;36mHEAD -> [m[1;32mfeat/frontend-api-architecture[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Merge: 8101868 06c983a
+Author: Hà Đức Anh <90268245+DucAnh2002@users.noreply.github.com>
+Date:   Sat Oct 17 12:53:14 2026 +0700
+
+    Merge pull request #20 from DucAnh2002/feat/backend-structure
+    
+    Feat/backend structure
+
+[33mcommit 06c983a2ea04dedede2590bec2f38a989c1f79e3[m[33m ([m[1;31morigin/feat/backend-structure[m[33m, [m[1;32mfeat/backend-structure[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Sat Oct 17 12:41:04 2026 +0700
+
+    feat: complete backend auth0 and employee management integration
+
+[33mcommit eb558285c77cb582cfa2baf009132032306eb402[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Sat Oct 10 14:34:01 2026 +0700
+
+    feat: backend-structure, Socket.io configuration , Add permissions, controller-dashboard
+
+[33mcommit 81018687977e857260c3d011989e4b9359b0d8ca[m
+Merge: a944375 6b1e42a
+Author: Hà Đức Anh <90268245+DucAnh2002@users.noreply.github.com>
+Date:   Mon Oct 5 20:52:23 2026 +0700
+
+    Merge pull request #19 from DucAnh2002/fix/lucide-react
+    
+    fix: add lucide-react dependency
+
+[33mcommit 6b1e42a2ba903afed2f8c1baac9f6bd6c930c20e[m[33m ([m[1;31morigin/fix/lucide-react[m[33m, [m[1;32mfix/lucide-react[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Mon Oct 5 20:26:11 2026 +0700
+
+    fix: add lucide-react dependency
+
+[33mcommit a944375f727c7b7cc812527427ae5ac4b232867f[m[33m ([m[1;31morigin/Refactor_Admin[m[33m, [m[1;32mfix/fixlucide-react[m[33m, [m[1;32mRefactor_Admin[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Fri Oct 2 13:14:37 2026 +0700
+
+    Refactor admin interface
+
+[33mcommit 458c16bfb30a6739d603fedb2d1024b3d91163cf[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Fri Sep 18 19:22:53 2026 +0700
+
+    restructure the admin system
+
+[33mcommit 78c1135691ea733f6e2f7c1334177d5fc058e566[m
+Merge: 55905a8 d6f4270
+Author: Hà Đức Anh <90268245+DucAnh2002@users.noreply.github.com>
+Date:   Wed Sep 9 09:49:41 2026 +0700
+
+    Merge pull request #18 from DucAnh2002/feature/ui-redesign
+    
+    Feature/UI redesign
+
+[33mcommit d6f4270e87edec7b827d3223299b641a6230a5af[m[33m ([m[1;31morigin/feature/ui-redesign[m[33m, [m[1;32mfeature/ui-redesign[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Wed Sep 9 09:46:38 2026 +0700
+
+    add amenity-Page, fix layout navbar and reponsive mobile
+
+[33mcommit 6f62337761ce13e95c3f2ea3fb01fe0cd4cdec2e[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Mon Sep 7 13:20:11 2026 +0700
+
+    fix layout and redesign Catering-Page
+
+[33mcommit 131fcf8eebeff660193d57e71611e2979655f585[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Thu Aug 27 11:24:04 2026 +0700
+
+    fix layout and redesign RoomPage
+
+[33mcommit 628c3a9a7e9b499f7030754615b6171036b01e2f[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Sat Aug 22 11:02:21 2026 +0700
+
+    redesign (home-page): fix layout and redesign homepage
+
+[33mcommit 55905a82b9a4eca1ea6542e28080991c07704c5e[m
+Merge: ae427a5 544593e
+Author: Hà Đức Anh <90268245+DucAnh2002@users.noreply.github.com>
+Date:   Wed Aug 19 11:17:10 2026 +0700
+
+    Merge pull request #17 from DucAnh2002/rooms-module
+    
+    Rooms Search & Filtering
+
+[33mcommit 544593ee9f7f4fa69109b1576a910c2934e51fbe[m[33m ([m[1;31morigin/rooms-module[m[33m, [m[1;32mrooms-module[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Wed Aug 19 11:10:44 2026 +0700
+
+    feat(room): improve filter validation and URL sync
+
+[33mcommit b4ae1eb021e31bca5d55a833f32cbc6eda949017[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Sun Aug 16 00:23:40 2026 +0700
+
+    feat(room): add sorting and pagination
+
+[33mcommit 173ecc86ce65224d2be99a4522076369a82131c9[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Fri Aug 14 13:11:30 2026 +0700
+
+    feat(rooms): sync booking search with room filters
+
+[33mcommit 33e11193603aa6d34fae065144b30fab7f2f3e4e[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Thu Aug 13 17:27:04 2026 +0700
+
+    feat(rooms): implement room filtering
+
+[33mcommit 11ec52ed049309f6387163afd845d9e3ed2d2126[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Thu Aug 13 14:12:56 2026 +0700
+
+    refactor(rooms): optimize rooms page architecture
+
+[33mcommit ae427a5ba9e8a4a8e856665f154a0340e93438d7[m
+Merge: 4846897 4a2b145
+Author: Hà Đức Anh <90268245+DucAnh2002@users.noreply.github.com>
+Date:   Thu Aug 6 10:53:21 2026 +0700
+
+    Merge pull request #16 from DucAnh2002/booking-search
+    
+    feat(search): implement booking search module and refactor search architecture
+
+[33mcommit 4a2b1454fa2792ec1efb8035e93cf3b6271613d7[m[33m ([m[1;31morigin/booking-search[m[33m, [m[1;32mbooking-search[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Sun Aug 2 18:41:24 2026 +0700
+
+    refactor(search): extract reusable search module
+
+[33mcommit dbeb32e812e0ec595bfc683f8d92cedc528c0d0a[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Sun Aug 2 11:48:25 2026 +0700
+
+    feat(search): implement booking search logic
+
+[33mcommit 2cff76c1fd912961b256afaff8d41e9afa4d564f[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Fri Jul 31 12:46:41 2026 +0700
+
+    feat(search): build booking search ui, fix some header ui
+
+[33mcommit 81b4383d94ad18cb82dcdcf687c2633386ebd9a1[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Wed Jul 29 17:33:32 2026 +0700
+
+    refactor(hotel): improve HotelsDisplay component
+
+[33mcommit 64a8a06fe720dfe0be3a83e7311f4f4aacc94c7b[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Wed Jul 29 16:38:06 2026 +0700
+
+    refactor(hotel): extract shared room utilities
+
+[33mcommit 48468970df03feddef8f9d7831a1247588068afb[m
+Merge: a101b5b df0821b
+Author: Hà Đức Anh <90268245+DucAnh2002@users.noreply.github.com>
+Date:   Sun Jul 26 10:46:10 2026 +0700
+
+    Merge pull request #15 from DucAnh2002/feature/hero-banner
+    
+    feat(hero): refactor header and create hero banner
+
+[33mcommit df0821bfee4a96ea50f0fce80441f39dc31cd962[m[33m ([m[1;31morigin/feature/hero-banner[m[33m, [m[1;32mfeature/hero-banner[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Sat Jul 25 23:40:16 2026 +0700
+
+    feat(hero): refactor header and create hero banner
+
+[33mcommit a101b5be54e0f91894dd863b8c37635b13a8376b[m[33m ([m[1;32mfeature/booking-search[m[33m)[m
+Merge: 28efea2 6812e75
+Author: Hà Đức Anh <90268245+DucAnh2002@users.noreply.github.com>
+Date:   Wed May 6 20:12:12 2026 +0700
+
+    Merge pull request #14 from DucAnh2002/feature/improve-mobile-ux
+    
+    refactor(frontend): optimize UI components with Tailwind, improve res…
+
+[33mcommit 6812e75270eb03596faf8c60290c4989794cef73[m[33m ([m[1;31morigin/feature/improve-mobile-ux[m[33m, [m[1;32mfeature/improve-mobile-ux[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Wed May 6 17:45:21 2026 +0700
+
+    refactor(frontend): optimize UI components with Tailwind, improve responsiveness and overall UX
+    
+    Co-authored-by: Copilot <copilot@github.com>
+
+[33mcommit 28efea235ea5282e2c257abd3b37de5558e5154d[m
+Merge: 1206903 523a7fc
+Author: Hà Đức Anh <90268245+DucAnh2002@users.noreply.github.com>
+Date:   Sun Apr 5 09:26:22 2026 +0700
+
+    Merge pull request #13 from DucAnh2002/fix/booking-email-toast
+    
+    fix-booking-toast-email
+
+[33mcommit 523a7fc3a9ab94b9c410a748432d0d0aa4466404[m[33m ([m[1;31morigin/fix/booking-email-toast[m[33m, [m[1;32mfix/booking-email-toast[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Sun Apr 5 09:13:28 2026 +0700
+
+    fix-booking-toast-email
+
+[33mcommit 120690374779302d12abcd281488c6e59ef5b384[m
+Merge: 4d5c2bd 30dafd0
+Author: Hà Đức Anh <90268245+DucAnh2002@users.noreply.github.com>
+Date:   Tue Mar 17 12:18:19 2026 +0700
+
+    Merge pull request #12 from DucAnh2002/fix/Url-img
+    
+    fix Url image
+
+[33mcommit 30dafd0fd137b26f0538066349ec8f7ff5eea2b1[m[33m ([m[1;31morigin/fix/Url-img[m[33m, [m[1;32mfix/Url-img[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Tue Mar 17 12:13:49 2026 +0700
+
+    fix Url image
+
+[33mcommit 4d5c2bdcc50ed3ed39e4fa37ac5cc96238aa00ab[m
+Merge: 96e2e75 aa80c61
+Author: Hà Đức Anh <90268245+DucAnh2002@users.noreply.github.com>
+Date:   Mon Mar 16 19:14:28 2026 +0700
+
+    Merge pull request #11 from DucAnh2002/refactor/checkoutPage
+    
+    refactor checkoutPage
+
+[33mcommit aa80c6181b28ad2fef89f01ffad02d39addffd67[m[33m ([m[1;31morigin/refactor/checkoutPage[m[33m, [m[1;32mrefactor/checkoutPage[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Mon Mar 16 19:13:48 2026 +0700
+
+    refactor checkoutPage
+
+[33mcommit 96e2e752f02fb926d523613e557d312c0afd30a0[m
+Merge: 3300796 93edc51
+Author: Hà Đức Anh <90268245+DucAnh2002@users.noreply.github.com>
+Date:   Mon Mar 16 17:46:14 2026 +0700
+
+    Merge pull request #10 from DucAnh2002/fix/bug-sendEmail
+    
+    fix url and button sendEmail
+
+[33mcommit 93edc519e64113d28325430c8e7a889224e41ef6[m[33m ([m[1;31morigin/fix/bug-sendEmail[m[33m, [m[1;32mfix/bug-sendEmail[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Mon Mar 16 17:45:24 2026 +0700
+
+    fix url and button sendEmail
+
+[33mcommit 330079644eccc0a3c04bd6515e482530ac7b5a7a[m
+Merge: 1924c99 1d1650a
+Author: Hà Đức Anh <90268245+DucAnh2002@users.noreply.github.com>
+Date:   Mon Mar 16 17:27:38 2026 +0700
+
+    Merge pull request #9 from DucAnh2002/fix/checkoutpage-sendEmail
+    
+    fix img in checkoutPage and sendEmail
+
+[33mcommit 1d1650aca62660b58f43fb0526291c97a6977b99[m[33m ([m[1;31morigin/fix/checkoutpage-sendEmail[m[33m, [m[1;32mfix/checkoutpage-sendEmail[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Mon Mar 16 12:19:26 2026 +0700
+
+    fix img in checkoutPage and sendEmail
+
+[33mcommit 1924c999c52a34fa7f7d3fdf4b4a3ded6303f3a2[m
+Merge: bf53328 e996b1f
+Author: Hà Đức Anh <90268245+DucAnh2002@users.noreply.github.com>
+Date:   Sun Mar 15 15:53:43 2026 +0700
+
+    feat: merge payment integration feature
+    
+    Add payment integration feature including:
+    - QR payment checkout page
+    - paymentController for handling bank transfer flow
+    - booking payment status (pending, paid, failed)
+    - email confirmation after successful payment
+    - booking model updated with transactionId and paymentMethod
+
+[33mcommit e996b1f3c41135ab40285f05f4502c35747e8d6d[m[33m ([m[1;31morigin/feature/payment-integration[m[33m, [m[1;32mfeature/payment-integration[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Sun Mar 15 12:37:25 2026 +0700
+
+    Add payment-integration
+
+[33mcommit bf53328b27a662923f3b8f5b4a821f25ae44ed54[m
+Merge: e13516c 9d639e4
+Author: Hà Đức Anh <90268245+DucAnh2002@users.noreply.github.com>
+Date:   Mon Feb 9 17:31:32 2026 +0700
+
+    Merge pull request #7 from DucAnh2002/fix/vercel-node-version
+    
+    lock Node.js and pnpm version for stable builds
+
+[33mcommit 9d639e443bd21db361687c531ff08c53e7829c4c[m[33m ([m[1;31morigin/fix/vercel-node-version[m[33m, [m[1;32mfix/vercel-node-version[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Mon Feb 9 17:26:28 2026 +0700
+
+    lock Node.js and pnpm version for stable builds
+
+[33mcommit e13516cffc3b8e44b4f1bfe2dd60ec6712e9a350[m
+Merge: 930d95f 8ebe43f
+Author: Hà Đức Anh <90268245+DucAnh2002@users.noreply.github.com>
+Date:   Sun Feb 8 18:21:32 2026 +0700
+
+    Merge pull request #6 from DucAnh2002/fix-bookingModel
+    
+    Fix invalid booking date handling across frontend and backend
+
+[33mcommit 8ebe43fb2740e67c6c57c7de7dc9ac92b3f0d25b[m[33m ([m[1;31morigin/fix-bookingModel[m[33m, [m[1;32mfix-bookingModel[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Sun Feb 8 17:34:24 2026 +0700
+
+    harden backend booking date validation
+
+[33mcommit 1f54b7f0eed9bae155fbcff969f022ad28002af2[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Sun Feb 8 17:11:39 2026 +0700
+
+    restrict invalid check-in and check-out dates
+
+[33mcommit 930d95f480ba2080d01ec10a066d7a01b7335ab9[m
+Merge: 4e1e653 b27b291
+Author: Hà Đức Anh <90268245+DucAnh2002@users.noreply.github.com>
+Date:   Fri Feb 6 15:00:22 2026 +0700
+
+    Merge pull request #5 from DucAnh2002/feature-refactor
+    
+    refactor!: migrate project from JavaScript to TypeScript
+
+[33mcommit b27b291fb626b80cb2fc4f8c0410fdff59bcf2f7[m[33m ([m[1;31morigin/feature-refactor[m[33m, [m[1;32mfeature-refactor[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Sun Jan 11 23:47:39 2026 +0700
+
+    refactor!: migrate project from JavaScript to TypeScript
+
+[33mcommit 4e1e653350b0e1d23aa374fa75ab49629ffb9d6b[m[33m ([m[1;32mV2[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Fri Jul 18 12:27:52 2025 +0700
+
+    fix cart & edit readme
+
+[33mcommit 9e7e2797834f4b59301174dd29527552fc5a3323[m
+Merge: a71771f 3e0b129
+Author: Hà Đức Anh <90268245+DucAnh2002@users.noreply.github.com>
+Date:   Thu Jul 17 19:03:05 2025 +0700
+
+    Merge pull request #4 from DucAnh2002/feature/homepage-panner
+    
+    fix home panner, edit logo, edit navbar.
+
+[33mcommit 3e0b129e9fd60173f1f6c82b2091bde4ed027d3a[m[33m ([m[1;31morigin/feature/homepage-panner[m[33m, [m[1;32mfeature/homepage-panner[m[33m)[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Thu Jul 17 19:01:24 2025 +0700
+
+    fix home panner, edit logo, edit navbar.
+
+[33mcommit a71771f23e9141d54e6fc0b4627024ead39cbea3[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Wed Jul 16 17:46:22 2025 +0700
+
+    .
+
+[33mcommit 0f992fda4aa96eeecc2bfa7a79407e2f4c7af998[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Wed Jul 16 17:32:13 2025 +0700
+
+    fix bug
+
+[33mcommit 7db2be4896307d4e847c2e0a3ca1d37bfaaebade[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Wed Jul 16 12:45:54 2025 +0700
+
+    fix bug
+
+[33mcommit 6358bab9f8791588b3f0850087246caf81e44f31[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Wed Jul 16 12:35:06 2025 +0700
+
+    edit vercel deploy
+
+[33mcommit 0f089bbb4284b1d947da9fbe0e53d67a6e5938cd[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Wed Jul 16 03:34:54 2025 +0700
+
+    config vercel
+
+[33mcommit 04a1490b026e973a4e9ffd8768a3ce93b51d81dd[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Wed Jul 16 03:11:40 2025 +0700
+
+    .
+
+[33mcommit d918388fe2477470a362ea752f4b7571c1e51191[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Wed Jul 16 03:08:49 2025 +0700
+
+    .
+
+[33mcommit 1658ee3543e6f1d632e8af1263f11c2dbade98e7[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Wed Jul 16 02:55:15 2025 +0700
+
+    .
+
+[33mcommit cad81fc7d8d32f46b68e3c458bff065ad3d59b65[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Wed Jul 16 02:34:40 2025 +0700
+
+    .
+
+[33mcommit 2f7219eaeb284a95120fc8964c9c0b6913ba4e97[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Wed Jul 16 02:28:28 2025 +0700
+
+    .
+
+[33mcommit 1e841c176a9d4a74e0b6f15e742f6774210b17ad[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Wed Jul 16 02:21:10 2025 +0700
+
+    fix cors url Frontend
+
+[33mcommit a69287cfeb72af583863d0a5eb0295b74ed006bc[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Wed Jul 16 01:50:32 2025 +0700
+
+    fix to deploy v1
+
+[33mcommit eec2d7466a399538f3b9ffb1a89dde3ec38f70ef[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Tue Jul 15 01:29:47 2025 +0700
+
+    edit Readme
+
+[33mcommit 4c79ea169100635d08822aaacef34b77f9d42036[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Tue Jul 15 01:16:18 2025 +0700
+
+    fix bugs
+
+[33mcommit 7e2ebb45149b43f4fdc35f7258d18c8d49780b4b[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Fri Jul 11 03:33:16 2025 +0700
+
+    Update Admin/get list items.
+
+[33mcommit fd69fa35a0d3744843b14ae3d8feb46936eba7be[m
+Author: DucAnh2002 <haducanh02012002@gmail.com>
+Date:   Thu Jul 10 04:16:30 2025 +0700
+
+    Update README
+
+[33mcommit 196c630d00d2bfa602d90c6460eb61b77a2140e2[m
+Author: DucAnh2002 <haducanh0

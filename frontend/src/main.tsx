@@ -15,10 +15,11 @@ root.render(
     clientId="HCtBqNk3DrvLaxJRcz2Kc72jVRYh7oUq"
     authorizationParams={{
       audience: 'https://hotel-api',
-      scope: 'openid profile email',
+      scope: 'openid profile email offline_access',
       redirect_uri: window.location.origin
     }}
     useRefreshTokens={true}
+    cacheLocation="localstorage"
   >
     <BrowserRouter>
       <RoomContextProvider>
