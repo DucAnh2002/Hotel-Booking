@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import {
   ChartColumn,
   BedDouble,
@@ -22,6 +23,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
   activeTab,
   setActiveTab,
 }) => {
+  const { user, logout } = useAuth0();
+  const userRole =
+    user?.["https://dev-cnnu3x7aqtaw1ayk.us.auth0.com/roles"]?.[0] ||
+    user?.role ||
+    "Lễ tân";
   const navItems = [
     { path: "dashboard", label: "Bảng điều khiển", icon: ChartColumn },
     { path: "room", label: "Quản lý phòng", icon: BedDouble },
@@ -80,14 +86,33 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
       <div className="p-4 border-t border-slate-800">
         <div className="flex items-center gap-3 p-2 bg-slate-800/50 rounded-lg">
-          <div className="w-9 h-9 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-sm">
-            LT
-          </div>
+          {user?.picture ? (
+            <img
+              src={user.picture}
+              alt={user.name || "Avatar"}
+              className="w-9 h-9 rounded-full object-cover border border-blue-500/30 shrink-0"
+            />
+          ) : (
+            <div className="w-9 h-9 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-sm shrink-0">
+              {user?.name ? user.name.charAt(0).toUpperCase() : "LT"}
+            </div>
+          )}
+
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-white truncate">Lễ Tân</p>
-            <p className="text-xs text-slate-500 truncate"> Shift #1(Day)</p>
+            <p className="text-sm font-medium text-white truncate">
+              {user?.name || user?.email || "Lễ Tân"}
+            </p>
+            <p className="text-xs text-slate-400 truncate capitalize">
+              {userRole}
+            </p>
           </div>
-          <button className="text-slate-400 hover:text-rose-400 p-1">
+          <button
+            onClick={() =>
+              logout({ logoutParams: { returnTo: window.location.origin } })
+            }
+            title="Đăng xuất"
+            className="text-slate-400 hover:text-rose-400 p-1.5 hover:bg-rose-500/10 rounded-lg transition-colors shrink-0"
+          >
             <LogOut size={16} />
           </button>
         </div>
