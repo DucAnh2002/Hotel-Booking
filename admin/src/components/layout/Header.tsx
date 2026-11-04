@@ -12,6 +12,11 @@ export const Header: React.FC<HeaderProps> = ({
   onPrimaryAction,
   primaryActionLabel,
 }) => {
+  const curentDate = new Date().toLocaleDateString("vi-VN", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
   return (
     <header className="h-16 bg-white ">
       <h1 className="text-xl font-bold text-slate-800">{title}</h1>
@@ -29,7 +34,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
         <div className="flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600">
           <Calendar size={14} />
-          <span>18/09/2026</span>
+          <span>{curentDate}</span>
         </div>
         <button className="relative p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition">
           <Bell size={18} />

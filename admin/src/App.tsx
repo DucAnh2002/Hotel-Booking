@@ -10,6 +10,7 @@ import { SettingsPage } from "./pages/SettingPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { RevenuePage } from "./pages/RevenuePage";
 import { WelcomePage } from "./pages/WelcomePage";
+import StaffManagerment from "./pages/StaffManagerment";
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = React.useState<string>("/dashboard");
@@ -39,6 +40,7 @@ const App: React.FC = () => {
           <Route path="/revenue" element={<RevenuePage />} />
           <Route path="/guests" element={<GuestsPage />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/staff" element={<StaffManagerment />} />
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </main>
