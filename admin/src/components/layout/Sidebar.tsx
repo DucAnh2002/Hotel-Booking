@@ -27,13 +27,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const userRole =
     user?.["https://dev-cnnu3x7aqtaw1ayk.us.auth0.com/roles"]?.[0] ||
     user?.role ||
-    "Lễ tân";
+    "Lễ Tân";
   const navItems = [
     { path: "dashboard", label: "Bảng điều khiển", icon: ChartColumn },
     { path: "room", label: "Quản lý phòng", icon: BedDouble },
     { path: "food", label: "Quản lý đơn món (F&B)", icon: UtensilsCrossed },
     { path: "amenities", label: "Đặt tiện ích & Spa", icon: Dumbbell },
     { path: "guests", label: "Quản lý khách hàng", icon: Users },
+    { path: "staff", label: "Quản lý nhân sự", icon: Users },
     {
       path: "revenue",
       label: "Thanh toán & Doanh thu",
@@ -100,8 +101,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium text-white truncate">
-              {user?.name || user?.email || "Lễ Tân"}
+              {user?.name || user?.email || ""}
             </p>
+
             <p className="text-xs text-slate-400 truncate capitalize">
               {userRole}
             </p>

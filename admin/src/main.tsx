@@ -4,7 +4,7 @@ import App from "./App";
 import "./index.css";
 import { BrowserRouter, useNavigate } from "react-router-dom";
 import { Auth0Provider, AppState } from "@auth0/auth0-react";
-
+import { UserProvider } from "./context/UserContext";
 const Auth0ProviderWithNavigate = ({
   children,
 }: {
@@ -13,7 +13,7 @@ const Auth0ProviderWithNavigate = ({
   const navigate = useNavigate();
   const domain = import.meta.env.VITE_AUTH0_DOMAIN;
   const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
-
+  const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
   // Xử lý chuyển hướng khi admin đăng nhập thành công.
   const onDirectCallback = (appState?: AppState) => {
     navigate(appState?.returnTo || window.location.pathname);
@@ -28,6 +28,7 @@ const Auth0ProviderWithNavigate = ({
       clientId={clientId}
       authorizationParams={{
         redirect_uri: window.location.origin,
+        audience: audience,
       }}
       onRedirectCallback={onDirectCallback}
       useRefreshTokens={true}
@@ -42,7 +43,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <Auth0ProviderWithNavigate>
-        <App />
+        <UserProvider>
+          <App />
+        </UserProvider>
       </Auth0ProviderWithNavigate>
     </BrowserRouter>
   </React.StrictMode>,

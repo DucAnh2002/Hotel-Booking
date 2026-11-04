@@ -12,8 +12,22 @@ const checkJwt = expressjwt({
   }),
   audience: process.env.AUTH0_AUDIENCE,
   issuer: `https://${process.env.AUTH0_DOMAIN}/`,
+
   algorithms: ["RS256"],
   credentialsRequired: true,
 });
 
-module.exports = checkJwt;
+const debugToken = (req, res, next) => {
+  const authHeader = req.headers.authorization || "";
+
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
+
+  console.log("Authorization exists:", Boolean(authHeader));
+  console.log("Bearer format:", authHeader.startsWith("Bearer "));
+  console.log("JWT segments:", token.split(".").length);
+  console.log("JWT length:", token.length);
+
+  next();
+};
+
+((module.exports = checkJwt), debugToken);
